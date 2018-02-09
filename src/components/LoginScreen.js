@@ -19,7 +19,6 @@ export default class LoginScreen extends Component {
       <FullHeightGrid centered verticalAlign="middle">
         <Grid.Column style={{ width: '280px' }}>
           <Segment stacked textAlign="center" padded="very">
-            <Header as="h1">로그인</Header>
             <Button color="google plus" fluid onClick={this.props.onGoogleLogin}>
               <Icon name="google plus" /> 구글로 로그인
             </Button>
