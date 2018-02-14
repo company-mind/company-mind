@@ -1,0 +1,28 @@
+{
+  "company": {
+    "company0": {
+      "name": "샌드박스네트워크스튜디오",
+      "address": "서울특별시 강남구 삼성로 554",
+      "group": "IT서비스",
+      "emotionScore": 5,
+      "scrapScore": 120,
+      "reviewScore": 96
+    },
+    "company1": {
+      "name": "넷마블",
+      "address": "서울특별시 구로구 디지털로 300",
+      "group": "게임",
+      "emotionScore": 4,
+      "scrapScore": 100,
+      "reviewScore": 112
+    },
+    "company2": {
+      "name": "컴투스",
+      "address": "서울특별시 금천구 가산디지털 1로",
+      "group": "IT서비스",
+      "emotionScore": 3,
+      "scrapScore": 120,
+      "reviewScore": 96
+    }
+  }
+}
