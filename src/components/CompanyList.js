@@ -12,16 +12,16 @@ export default class CompanyList extends Component {
       <Grid columns={3}>
         {
           companies.map(({
-        id, companyName, companyGroup, companyAddress, scrapScore, reviewScore, emotionScore,
+        id, name, group, address, scrapScore, reviewScore, emotionScore,
          }) => (
               <Grid.Row stretched>
                 <Grid.Column>
-                  <div>{companyName}</div>
-                  <div>{companyAddress}</div>
+                  <div>{name}</div>
+                  <div>{address}</div>
                   <div>{scrapScore}</div>
                 </Grid.Column>
                 <Grid.Column>
-                  <div>{companyGroup}</div>
+                  <div>{group}</div>
                   <div></div>
                   <div>{reviewScore}</div>
                 </Grid.Column>
