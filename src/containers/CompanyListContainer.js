@@ -18,7 +18,7 @@ class CompanyListContainer extends Component {
   render(){
     const { onMount, ...rest } = this.props;
     return(
-      <LoadingcompanyList {...rest} />
+      <LoadingcompanyList {...rest}/>
     )
   }
 }

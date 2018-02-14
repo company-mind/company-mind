@@ -44,7 +44,11 @@ export const fetchCompanyList = () => async (dispatch) => {
   const companyObj = snapshot.val();
   const companies = Object.entries(companyObj).map(([id, company]) => ({
     ...company,
-    id,
+    id
   }));
-  dispatch(companyListSuccess(companies));
+  const newCompanies = companies.map(({address, ...rest}) => ({
+    ...rest,
+    address: address.split(' ')[1] + "/" + address.split(' ')[2]
+  }));
+  dispatch(companyListSuccess(newCompanies));
 };
