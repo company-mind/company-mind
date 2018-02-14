@@ -40,7 +40,7 @@ export default function (state = initialState, action) {
 
 export const fetchCompanyList = () => async (dispatch) => {
   dispatch(companyListLoading());
-  const snapshot = await firebase.database().ref('company').once('value');
+  const snapshot = await firebase.database().ref('company').orderByChild('reviewScore').once('value');
   const companyObj = snapshot.val();
   const companies = Object.entries(companyObj).map(([id, company]) => ({
     ...company,

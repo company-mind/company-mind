@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 
 import CompanyList from '../components/CompanyList';
 import { fetchCompanyList } from '../ducks/companyList';
+import withLoading from '../hocs/withLoading';
+
+const LoadingcompanyList = withLoading(CompanyList)
 
 class CompanyListContainer extends Component {
   static defaultProps = {
@@ -15,7 +18,7 @@ class CompanyListContainer extends Component {
   render(){
     const { onMount, ...rest } = this.props;
     return(
-      <CompanyList {...rest} />
+      <LoadingcompanyList {...rest} />
     )
   }
 }
