@@ -54,7 +54,7 @@ const emotion = (score) => {
 
 export const fetchCompanyList = () => async (dispatch) => {
   dispatch(companyListLoading());
-  const snapshot = await firebase.database().ref('company').orderByChild('reviewScore').once('value');
+  const snapshot = await firebase.database().ref('company').once('value');
   const companyObj = snapshot.val();
   const companies = Object.entries(companyObj).map(([id, company]) => ({
     ...company,
@@ -65,6 +65,7 @@ export const fetchCompanyList = () => async (dispatch) => {
     address: address.split(' ')[1] + "/" + address.split(' ')[2],
     emotionScore: emotion(emotionScore)
   }));
-  const reviewSort = newCompanies.sort((x, y) => y.reviewScore - x.reviewScore)
+  const scrapScore = newCompanies.sort((x, y) => x.scrapScore - y.scrapScore)
+  const reviewSort = scrapScore.sort((x, y) => y.reviewScore - x.reviewScore)
   dispatch(companyListSuccess(reviewSort));
 };
