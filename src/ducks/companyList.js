@@ -65,5 +65,6 @@ export const fetchCompanyList = () => async (dispatch) => {
     address: address.split(' ')[1] + "/" + address.split(' ')[2],
     emotionScore: emotion(emotionScore)
   }));
-  dispatch(companyListSuccess(newCompanies));
+  const reviewSort = newCompanies.sort((x, y) => y.reviewScore - x.reviewScore)
+  dispatch(companyListSuccess(reviewSort));
 };
