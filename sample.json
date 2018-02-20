@@ -2,27 +2,155 @@
   "company": {
     "company0": {
       "name": "샌드박스네트워크스튜디오",
-      "address": "서울특별시 강남구 삼성로 554",
+      "address": "서울특별시 강남구 삼성동 554",
       "group": "IT서비스",
-      "emotionScore": 5,
-      "scrapScore": 120,
+      "emotionScore": 4,
+      "scrapScore": 132,
       "reviewScore": 96
     },
     "company1": {
-      "name": "넷마블",
-      "address": "서울특별시 구로구 디지털로 300",
+      "name": "넷마블컴패니",
+      "address": "서울특별시 구로구 구로동 188-25",
       "group": "게임",
-      "emotionScore": 4,
+      "emotionScore": 3,
       "scrapScore": 100,
       "reviewScore": 112
     },
     "company2": {
-      "name": "컴투스",
-      "address": "서울특별시 금천구 가산디지털 1로",
+      "name": "배달의민족",
+      "address": "서울 송파구 방이동 44-2 장은빌딩 18층",
       "group": "IT서비스",
-      "emotionScore": 3,
-      "scrapScore": 120,
+      "emotionScore": 5,
+      "scrapScore": 42,
+      "reviewScore": 72
+    },
+    "company3": {
+      "name": "컴투스1",
+      "address": "서울시 금천구 가상동 371-17",
+      "group": "IT서비스",
+      "emotionScore": 4,
+      "scrapScore": 30,
       "reviewScore": 96
+    },
+    "company4": {
+      "name": "한빛소프트(주)",
+      "address": "서울 구로구 신도림동 413-9, 코리아빌딩",
+      "group": "IT/통신",
+      "emotionScore": 2,
+      "scrapScore": 88,
+      "reviewScore": 123
+    },
+    "company5": {
+      "name": "샌드박스네트워크스튜디오",
+      "address": "서울특별시 강남구 삼성동 554",
+      "group": "IT서비스",
+      "emotionScore": 4,
+      "scrapScore": 132,
+      "reviewScore": 96
+    },
+    "company6": {
+      "name": "넷마블컴패니",
+      "address": "서울특별시 구로구 구로동 188-25",
+      "group": "게임",
+      "emotionScore": 3,
+      "scrapScore": 100,
+      "reviewScore": 112
+    },
+    "company7": {
+      "name": "배달의민족",
+      "address": "서울 송파구 방이동 44-2 장은빌딩 18층",
+      "group": "IT서비스",
+      "emotionScore": 5,
+      "scrapScore": 42,
+      "reviewScore": 72
+    },
+    "company8": {
+      "name": "컴투스1",
+      "address": "서울시 금천구 가상동 371-17",
+      "group": "IT서비스",
+      "emotionScore": 4,
+      "scrapScore": 30,
+      "reviewScore": 96
+    },
+    "company9": {
+      "name": "한빛소프트(주)",
+      "address": "서울 구로구 신도림동 413-9, 코리아빌딩",
+      "group": "IT/통신",
+      "emotionScore": 2,
+      "scrapScore": 88,
+      "reviewScore": 123
+    },
+    "company10": {
+      "name": "넷마블컴패니",
+      "address": "서울특별시 구로구 구로동 188-25",
+      "group": "게임",
+      "emotionScore": 3,
+      "scrapScore": 100,
+      "reviewScore": 112
+    },
+    "company11": {
+      "name": "배달의민족",
+      "address": "서울 송파구 방이동 44-2 장은빌딩 18층",
+      "group": "IT서비스",
+      "emotionScore": 5,
+      "scrapScore": 42,
+      "reviewScore": 72
+    },
+    "company12": {
+      "name": "컴투스1",
+      "address": "서울시 금천구 가상동 371-17",
+      "group": "IT서비스",
+      "emotionScore": 4,
+      "scrapScore": 30,
+      "reviewScore": 96
+    },
+    "company13": {
+      "name": "한빛소프트(주)",
+      "address": "서울 구로구 신도림동 413-9, 코리아빌딩",
+      "group": "IT/통신",
+      "emotionScore": 2,
+      "scrapScore": 88,
+      "reviewScore": 123
+    },
+    "company14": {
+      "name": "샌드박스네트워크스튜디오",
+      "address": "서울특별시 강남구 삼성동 554",
+      "group": "IT서비스",
+      "emotionScore": 4,
+      "scrapScore": 132,
+      "reviewScore": 96
+    },
+    "company15": {
+      "name": "넷마블컴패니",
+      "address": "서울특별시 구로구 구로동 188-25",
+      "group": "게임",
+      "emotionScore": 3,
+      "scrapScore": 100,
+      "reviewScore": 112
+    },
+    "company16": {
+      "name": "배달의민족",
+      "address": "서울 송파구 방이동 44-2 장은빌딩 18층",
+      "group": "IT서비스",
+      "emotionScore": 5,
+      "scrapScore": 42,
+      "reviewScore": 72
+    },
+    "company17": {
+      "name": "컴투스1",
+      "address": "서울시 금천구 가상동 371-17",
+      "group": "IT서비스",
+      "emotionScore": 4,
+      "scrapScore": 30,
+      "reviewScore": 96
+    },
+    "company18": {
+      "name": "한빛소프트(주)",
+      "address": "서울 구로구 신도림동 413-9, 코리아빌딩",
+      "group": "IT/통신",
+      "emotionScore": 2,
+      "scrapScore": 88,
+      "reviewScore": 123
     }
   }
 }
