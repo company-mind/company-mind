@@ -12,6 +12,12 @@ const MSegment = styled(Segment)`
 const NewDiv = styled.div`
   padding : 2px;
 `
+const Emoge = styled.div`
+  font-Size: 50px;
+  text-Align: center;
+  margin-top: 25px;
+`
+
 const NewUl = styled.ul`
   list-style: none;
   display: flex;
@@ -37,14 +43,14 @@ export default class CompanyList extends Component {
           <Grid>
             <Grid.Row stretched>
               <NewColumn width={10} style={{marginLeft: '25px'}}>
-                <NewDiv style={{ fontFamily: 'Spoqa-Han-Sans-Bold', fontSize: '1.2rem'}}>{name}</NewDiv>
+                <NewDiv style={{ fontFamily: 'Spoqa-Han-Sans-Bold', fontSize: '1.3rem'}}>{name}</NewDiv>
                 <NewUl>
                   <li><NewDiv>{address}</NewDiv><NewDiv><Icon name='pencil' size='large' />{reviewScore}</NewDiv></li>
-                  <li style={{marginLeft:'20px', textAlign:'center'}}><NewDiv>{group}</NewDiv><NewDiv><Icon name='empty star' size='large' />{scrapScore}</NewDiv></li>
+                  <li style={{marginLeft:'24px', textAlign:'center'}}><NewDiv>{group}</NewDiv><NewDiv><Icon name='empty star' size='large' />{scrapScore}</NewDiv></li>
                 </NewUl>
               </NewColumn>
               <NewColumn width={3}>
-                <NewDiv>{emotionScore}</NewDiv>
+                <Emoge>{emotionScore}</Emoge>
               </NewColumn>
             </Grid.Row>
           </Grid>
