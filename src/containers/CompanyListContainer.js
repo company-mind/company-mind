@@ -22,10 +22,11 @@ class CompanyListContainer extends Component {
   }
 
   render(){
-    const { onMount, redirect, companyObj, ...rest } = this.props;
+    const { onMount, redirect, company, ...rest } = this.props;
+    console.log(company)
     if(redirect){
       return (
-      <Redirect to="/detail" {...companyObj}/>
+      <Redirect to="/detail" {...company}/>
       )
     }
     return(
