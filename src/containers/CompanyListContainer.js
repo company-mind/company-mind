@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import CompanyList from '../components/CompanyList';
-import { fetchCompanyList } from '../ducks/companyList';
+import { fetchCompanyList, fetchCompanyRedirect } from '../ducks/companyList';
 import withLoading from '../hocs/withLoading';
 
 const LoadingcompanyList = withLoading(CompanyList)
@@ -15,10 +16,20 @@ class CompanyListContainer extends Component {
   componentDidMount() {
     this.props.onMount();
   }
+
+  handleCompanyClick = id => {
+    this.props.onCompanyClick(id)
+  }
+
   render(){
-    const { onMount, ...rest } = this.props;
+    const { onMount, redirect, companyObj, ...rest } = this.props;
+    if(redirect){
+      return (
+      <Redirect to="/detail" {...companyObj}/>
+      )
+    }
     return(
-      <LoadingcompanyList {...rest}/>
+      <LoadingcompanyList {...rest} onCompanyClick={this.handleCompanyClick}/>
     )
   }
 }
@@ -27,12 +38,17 @@ export default connect (
   // mapStateToProps
   state => ({
     companies: state.companyList.companies,
+    company: state.companyList.company,
     loading: state.companyList.loading,
+    redirect: state.companyList.redirect,
   }),
   // mapDispatchToProps
   dispatch => ({
     onMount: () => {
       dispatch(fetchCompanyList())
+    },
+    onCompanyClick: (id) => {
+      dispatch(fetchCompanyRedirect(id));
     },
   }),
  )(CompanyListContainer);

@@ -8,6 +8,7 @@ const NewColumn = styled(Grid.Column)`
 
 const MSegment = styled(Segment)`
   margin: 0px !important;
+  cursor: pointer;
 `
 const NewDiv = styled.div`
   padding : 2px;
@@ -30,16 +31,18 @@ export default class CompanyList extends Component {
   static defaultProps = {
     companies: [],
     onMount: () => { },
+    onCompanyClick: () => { },
   }
+
   render() {
-    const { companies } = this.props;
+    const { companies, onCompanyClick } = this.props;
     return (
       <Segment>
         {
           companies.map(({
-        id, name, group, address, scrapScore, reviewScore, emotionScore,
+        id, name, group, address, scrapScore, reviewScore, emotionScore, itemProps = {},
          }) => (
-        <MSegment key={id}>
+        <MSegment key={id} onClick={e => onCompanyClick(id)} {...itemProps}>
           <Grid>
             <Grid.Row stretched>
               <NewColumn width={10} style={{marginLeft: '25px'}}>

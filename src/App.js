@@ -25,6 +25,7 @@ class App extends Component { // router 설정
             <Route path="/" exact />
             <Route path="/login" component={LoginScreenContainer} />
             <Route path="/list" component={CompanyListContainer} />
+            <Route path="/detail" />
           </div>
         </BrowserRouter>
       </Provider>

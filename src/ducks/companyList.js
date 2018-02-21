@@ -2,6 +2,7 @@ import * as firebase from 'firebase';
 
 export const LOADING = 'companyList/LOADING';
 export const SUCCESS = 'companyList/SUCCESS';
+export const REDIRECT = 'companyList/REDIRECT';
 
 export function companyListLoading() {
   return {
@@ -16,9 +17,18 @@ export function companyListSuccess(companies) {
   };
 }
 
+export function companyListRedirect(company) {
+  return {
+    type: REDIRECT,
+    company,
+  };
+}
+
 const initialState = {
   loading: false,
+  redirect: false,
   companies: [],
+  company: '',
 };
 
 export default function (state = initialState, action) {
@@ -32,6 +42,11 @@ export default function (state = initialState, action) {
       return {
         loading: false,
         companies: action.companies,
+      };
+    case REDIRECT:
+      return {
+        redirect: true,
+        company: action.company,
       };
     default:
       return state;
@@ -69,3 +84,10 @@ export const fetchCompanyList = () => async (dispatch) => {
   const reviewSort = scrapScore.sort((x, y) => y.reviewScore - x.reviewScore)
   dispatch(companyListSuccess(reviewSort));
 };
+
+export const fetchCompanyRedirect = (id) => async (dispatch) => {
+  const snapshot = await firebase.database().ref(`company/${id}`).once('value');
+  const companyObj = snapshot.val();
+  companyObj.shortAddress = companyObj.address.split(' ')[1] + "/" + companyObj.address.split(' ')[2]
+  dispatch(companyListRedirect(companyObj))
+}
