@@ -89,5 +89,6 @@ export const fetchCompanyRedirect = (id) => async (dispatch) => {
   const snapshot = await firebase.database().ref(`company/${id}`).once('value');
   const companyObj = snapshot.val();
   companyObj.shortAddress = companyObj.address.split(' ')[1] + "/" + companyObj.address.split(' ')[2]
+  companyObj.id = id
   dispatch(companyListRedirect(companyObj))
 }
