@@ -1,59 +1,62 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react';
+import {
+  Button,
+  Form,
+  Grid,
+  Header,
+  Input,
+  Label,
+  Segment,
+} from 'semantic-ui-react';
 import styled from 'styled-components';
-import * as firebase from 'firebase';
+
+// import withAuth from '../hocs/withAuth';
 
 const FullHeightGrid = styled(Grid)`
   height: 100vh;
 `;
 
+// const StyledLabel = styled(Label)`
+//   margin-top: -1em;
+// `;
+
 export default class NicknameScreen extends Component {
-  state = {
-    nickname: '',
-    redirectToMain: false,
-  };
-
-  handleNicknameChange = e => this.setState({ nickname: e.target.value });
-
-  handleSubmit = async () => {
-    const { uid } = firebase.auth().currentUser;
-    await firebase
-      .database()
-      .ref(`users/${uid}`)
-      .set({
-        nickname: this.state.nickname,
-      });
-    this.setState({ redirectToMain: true });
-  };
-
   render() {
-    if (this.state.redirectToMain) {
-      return <Redirect to="/main" />;
-    }
-    const { nickname } = this.state;
-    const isEnabled = nickname.length >= 4;
+    const {
+      loading,
+      isEnabled,
+      handleNicknameChange,
+      handleSubmit,
+      error,
+    } = this.props;
     return (
       <FullHeightGrid centered verticalAlign="middle">
         <Grid.Column style={{ width: '280px' }}>
           <Segment textAlign="center">
             <Header>반갑습니다!</Header>
             <p style={{ color: 'grey' }}>닉네임을 입력해주세요.</p>
-            <Form style={{ width: '280px' }}>
+            <Form onSubmit={handleSubmit} style={{ width: '280px' }}>
               <Form.Field>
-                <input
+                <Input
+                  loading={loading}
                   placeholder="한글, 영문, 숫자 입력이 가능합니다."
-                  onChange={this.handleNicknameChange}
+                  onChange={handleNicknameChange}
                 />
+                {error ? (
+                  <Label pointing bottom color="red">
+                    {error}
+                  </Label>
+                ) : null}
+                {isEnabled ? (
+                  <Label pointing bottom color="green">
+                    입력 가능한 닉네임입니다.
+                  </Label>
+                ) : null}
               </Form.Field>
-              <Button color="red" type="reset">
-                취소
-              </Button>
               <Button
-                color="green"
+                color={isEnabled ? 'green' : 'grey'}
                 type="submit"
                 disabled={!isEnabled}
-                onClick={this.handleSubmit}
               >
                 결정
               </Button>
