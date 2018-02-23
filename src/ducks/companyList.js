@@ -1,12 +1,20 @@
 import * as firebase from 'firebase';
 
-export const LOADING = 'companyList/LOADING';
 export const SUCCESS = 'companyList/SUCCESS';
-export const REDIRECT = 'companyList/REDIRECT';
+export const HASMORE = 'companyList/HASMORE';
+export const COMPLETE = 'companyList/COMPLETE';
 
-export function companyListLoading() {
+
+export function companyhasmore() {
   return {
-    type: LOADING,
+    type: HASMORE,
+  };
+}
+
+export function companyListComplete(completeList) {
+  return {
+    type: COMPLETE,
+    completeList,
   };
 }
 
@@ -15,42 +23,6 @@ export function companyListSuccess(companies) {
     type: SUCCESS,
     companies,
   };
-}
-
-export function companyListRedirect(company) {
-  return {
-    type: REDIRECT,
-    company,
-  };
-}
-
-const initialState = {
-  loading: false,
-  redirect: false,
-  companies: [],
-  company: '',
-};
-
-export default function (state = initialState, action) {
-  switch (action.type) {
-    case LOADING:
-      return {
-        ...state,
-        loading: true,
-      };
-    case SUCCESS:
-      return {
-        loading: false,
-        companies: action.companies,
-      };
-    case REDIRECT:
-      return {
-        redirect: true,
-        company: action.company,
-      };
-    default:
-      return state;
-  }
 }
 
 const emotion = (score) => {
@@ -67,28 +39,77 @@ const emotion = (score) => {
   }
 }
 
+const initialState = {
+  complete: false,
+  hasmore: false,
+  companies: [],
+  completeList: [],
+};
+
+export default function (state = initialState, action) {
+  switch (action.type) {
+    case HASMORE:
+      return {
+        ...state,
+        hasmore: true,
+      };
+      case SUCCESS:
+      return {
+        ...state,
+        companies: action.companies,
+      };
+      case COMPLETE:
+        return {
+          ...state,
+          complete: true,
+          hasmore: false,
+          completeList: action.completeList,
+        };
+    default:
+      return state;
+  }
+}
+
+
+let listNumber = 0
+
 export const fetchCompanyList = () => async (dispatch) => {
-  dispatch(companyListLoading());
+  listNumber = 0
+  dispatch(companyhasmore());
+}
+
+export const fetchOnCompanyList = ({ complete, hasmore }) => async (dispatch) => {
+  console.log(complete, hasmore)
   const snapshot = await firebase.database().ref('company').once('value');
   const companyObj = snapshot.val();
   const companies = Object.entries(companyObj).map(([id, company]) => ({
     ...company,
     id
   }));
-  const newCompanies = companies.map(({address, emotionScore, ...rest}) => ({
+  const newCompanies = companies.map(({ address, emotionScore, ...rest }) => ({
     ...rest,
     address: address.split(' ')[1] + "/" + address.split(' ')[2],
     emotionScore: emotion(emotionScore)
   }));
-  const scrapScore = newCompanies.sort((x, y) => x.scrapScore - y.scrapScore)
-  const reviewSort = scrapScore.sort((x, y) => y.reviewScore - x.reviewScore)
-  dispatch(companyListSuccess(reviewSort));
-};
+  const scrapSort = newCompanies.sort((x, y) => x.scrapScore - y.scrapScore)
+  const reviewSort = scrapSort.sort((x, y) => y.reviewScore - x.reviewScore)
 
-export const fetchCompanyRedirect = (id) => async (dispatch) => {
-  const snapshot = await firebase.database().ref(`company/${id}`).once('value');
-  const companyObj = snapshot.val();
-  companyObj.shortAddress = companyObj.address.split(' ')[1] + "/" + companyObj.address.split(' ')[2]
-  companyObj.id = id
-  dispatch(companyListRedirect(companyObj))
+  if(complete && hasmore){
+    dispatch(companyListComplete(reviewSort))
+  } else{
+     if(!complete){
+       if ( listNumber <= reviewSort.length ){
+         const slice = reviewSort.slice(0, (listNumber))
+         dispatch(companyListSuccess(slice));
+         listNumber = listNumber + 5
+       } else {
+         const slice = reviewSort.slice(0, (listNumber))
+         dispatch(companyListComplete(slice))
+       }
+     } else {
+       const slice = reviewSort.slice(0, (listNumber))
+       dispatch(companyListComplete(slice))
+       console.log(complete, hasmore)
+    }
+  }
 }

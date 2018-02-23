@@ -55,11 +55,17 @@ export default class CompanyList extends Component {
 
   loadFunc = () => {
     setTimeout(() => {
-      this.props.onHasMore()
+      this.props.onHasMore(this.props)
       this.setState(prevState => {
-        return {
-          companies: [...prevState.companies, ...this.props.companies]
-        };
+        if (!this.props.complete){
+          return {
+            companies: [...this.props.companies]
+          };
+        } else {
+          return{
+            companies: [...this.props.completeList]
+          }
+        }
       });
     }, 500);
   };
@@ -75,8 +81,8 @@ export default class CompanyList extends Component {
           this.state.companies.map(({
         id, name, group, address, scrapScore, reviewScore, emotionScore, itemProps = {},
          }) => (
-        <NewLink to={`/companydetail/${id}`} key={id}>
-          <MSegment {...itemProps} >
+        <NewLink to={`/companydetail/${id}`} >
+          <MSegment {...itemProps} key={id} >
             <Grid>
               <Grid.Row stretched>
                 <NewLColumn width={10}>

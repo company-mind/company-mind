@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
 
 import CompanyList from '../components/CompanyList';
-import { fetchCompanyList, fetchCompanyRedirect } from '../ducks/companyList';
+import { fetchCompanyList, fetchOnCompanyList } from '../ducks/companyList';
 import withLoading from '../hocs/withLoading';
 
-const LoadingcompanyList = withLoading(CompanyList)
+const LoadingcompanyList = withLoading(CompanyList);
+
 
 class CompanyListContainer extends Component {
   static defaultProps = {
@@ -14,21 +14,11 @@ class CompanyListContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.onMount();
-  }
-
-  handleCompanyClick = id => {
-    this.props.onCompanyClick(id)
+    this.props.onMount()
   }
 
   render(){
-    const { onMount, redirect, company, ...rest } = this.props;
-    console.log(company)
-    if(redirect){
-      return (
-      <Redirect to="/detail" {...company}/>
-      )
-    }
+    const { onMount, ...rest } = this.props;
     return(
       <LoadingcompanyList {...rest} onCompanyClick={this.handleCompanyClick}/>
     )
@@ -39,17 +29,17 @@ export default connect (
   // mapStateToProps
   state => ({
     companies: state.companyList.companies,
-    company: state.companyList.company,
-    loading: state.companyList.loading,
-    redirect: state.companyList.redirect,
+    hasmore: state.companyList.hasmore,
+    complete: state.companyList.complete,
+    completeList: state.companyList.completeList,
   }),
   // mapDispatchToProps
   dispatch => ({
     onMount: () => {
       dispatch(fetchCompanyList())
     },
-    onCompanyClick: (id) => {
-      dispatch(fetchCompanyRedirect(id));
+    onHasMore: ({ complete, hasmore }) => {
+      dispatch(fetchOnCompanyList({ complete, hasmore }))
     },
   }),
  )(CompanyListContainer);
