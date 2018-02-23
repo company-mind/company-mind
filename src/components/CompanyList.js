@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { Grid, Icon, Segment } from 'semantic-ui-react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import InfiniteScroll from 'react-infinite-scroller';
 
 const NewColumn = styled(Grid.Column)`
   padding: 0px !important;
+  margin-left: 8px;
+`
+const NewLColumn = styled(Grid.Column)`
+  padding: 0px !important;
+  margin-left: 25px;
 `
 
 const MSegment = styled(Segment)`
@@ -13,10 +20,14 @@ const MSegment = styled(Segment)`
 const NewDiv = styled.div`
   padding : 2px;
 `
+
+const NameDiv = styled.div`
+  padding : 2px;
+  font-family: 'Spoqa-Han-Sans-Bold';
+`
 const Emoge = styled.div`
-  font-Size: 50px;
+  font-Size: 55px;
   text-Align: center;
-  margin-top: 25px;
 `
 
 const NewUl = styled.ul`
@@ -27,39 +38,76 @@ const NewUl = styled.ul`
   margin-left: 4px;
 `
 
+const NewLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+`
+
 export default class CompanyList extends Component {
   static defaultProps = {
     companies: [],
     onMount: () => { },
-    onCompanyClick: () => { },
   }
 
+  state = {
+    companies: [],
+  }
+
+  loadFunc = () => {
+    setTimeout(() => {
+      this.props.onHasMore()
+      this.setState(prevState => {
+        return {
+          companies: [...prevState.companies, ...this.props.companies]
+        };
+      });
+    }, 500);
+  };
+
   render() {
-    const { companies, onCompanyClick } = this.props;
     return (
       <Segment>
+        <InfiniteScroll loadMore={this.loadFunc}
+          hasMore={this.props.hasmore}
+          loader={<div className=" loader " ><Icon loading name='spinner' size='large' color='black' />Loading ... </div>}
+        >
         {
-          companies.map(({
+          this.state.companies.map(({
         id, name, group, address, scrapScore, reviewScore, emotionScore, itemProps = {},
          }) => (
-        <MSegment key={id} onClick={e => onCompanyClick(id)} {...itemProps}>
-          <Grid>
-            <Grid.Row stretched>
-              <NewColumn width={10} style={{marginLeft: '25px'}}>
-                <NewDiv style={{ fontFamily: 'Spoqa-Han-Sans-Bold', fontSize: '1.3rem'}}>{name}</NewDiv>
-                <NewUl>
-                  <li><NewDiv>{address}</NewDiv><NewDiv><Icon name='pencil' size='large' />{reviewScore}</NewDiv></li>
-                  <li style={{marginLeft:'24px', textAlign:'center'}}><NewDiv>{group}</NewDiv><NewDiv><Icon name='empty star' size='large' />{scrapScore}</NewDiv></li>
-                </NewUl>
-              </NewColumn>
-              <NewColumn width={3}>
-                <Emoge>{emotionScore}</Emoge>
-              </NewColumn>
-            </Grid.Row>
-          </Grid>
-        </MSegment>
+        <NewLink to={`/companydetail/${id}`} key={id}>
+          <MSegment {...itemProps} >
+            <Grid>
+              <Grid.Row stretched>
+                <NewLColumn width={10}>
+                  <NameDiv style={{ fontSize: '1.4rem', marginLeft: '10px'}}>{name}</NameDiv>
+                    <Grid>
+                      <Grid.Row>
+                        <NewLColumn width={7}>
+                        <NewDiv>{address}</NewDiv>
+                        </NewLColumn>
+                        <NewColumn width={7}>
+                        <NewDiv>{group}</NewDiv>
+                        </NewColumn>
+                        <NewLColumn width={7}>
+                        <NewDiv><Icon name='pencil' size='large' />{reviewScore}</NewDiv>
+                        </NewLColumn>
+                        <NewColumn width={7}>
+                        <NewDiv><Icon name='empty star' size='large' />{scrapScore}</NewDiv>
+                        </NewColumn>
+                      </Grid.Row>
+                    </Grid>
+                </NewLColumn>
+                <NewLColumn style={{ marginLeft: '-2px' }} width={3}>
+                  <Emoge>{emotionScore}</Emoge>
+                </NewLColumn>
+              </Grid.Row>
+            </Grid>
+          </MSegment>
+        </NewLink>
          ))
         }
+        </InfiniteScroll>
       </Segment>
     )
   }
