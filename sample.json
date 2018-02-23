@@ -1,156 +1,436 @@
 {
   "company": {
-    "company0": {
-      "name": "샌드박스네트워크스튜디오",
-      "address": "서울특별시 강남구 삼성동 554",
-      "group": "IT서비스",
-      "emotionScore": 4,
-      "scrapScore": 192,
-      "reviewScore": 226
-    },
     "company1": {
-      "name": "넷마블컴패니",
-      "address": "서울특별시 구로구 구로동 188-25",
-      "group": "게임",
+      "name": "에이케이아이에스",
+      "address": "서울 금천구 가산동, IT캐슬2차 1701호",
+      "group": "서비스",
       "emotionScore": 3,
-      "scrapScore": 933,
-      "reviewScore": 777
+      "scrapScore": 35,
+      "reviewScore": 33
     },
     "company2": {
-      "name": "배달의민족",
-      "address": "서울 송파구 방이동 44-2 장은빌딩 18층",
-      "group": "IT서비스",
-      "emotionScore": 5,
-      "scrapScore": 439,
-      "reviewScore": 555
+      "name": "㈜영원무역",
+      "address": "서울특별시 중구 만리동2가 171 영원프라자",
+      "group": "도매",
+      "emotionScore": 2,
+      "scrapScore": 24,
+      "reviewScore": 15
     },
     "company3": {
-      "name": "컴투스1",
-      "address": "서울시 금천구 가상동 371-17",
-      "group": "IT서비스",
-      "emotionScore": 4,
-      "scrapScore": 223,
-      "reviewScore": 896
+      "name": "아이에스동서㈜",
+      "address": "서울특별시 강남구 청담동 53-8 은성빌딩",
+      "group": "제조",
+      "emotionScore": 3,
+      "scrapScore": 67,
+      "reviewScore": 43
     },
     "company4": {
-      "name": "한빛소프트(주)",
-      "address": "서울 구로구 신도림동 413-9, 코리아빌딩",
-      "group": "IT/통신",
-      "emotionScore": 2,
-      "scrapScore": 936,
-      "reviewScore": 1473
+      "name": "AJ네트웍스㈜",
+      "address": "서울특별시 송파구 문정동 640-5",
+      "group": "서비스",
+      "emotionScore": 1,
+      "scrapScore": 79,
+      "reviewScore": 60
     },
     "company5": {
-      "name": "샌드박스네트워크스튜디오",
-      "address": "서울특별시 강남구 삼성동 554",
-      "group": "IT서비스",
-      "emotionScore": 4,
-      "scrapScore": 1302,
-      "reviewScore": 1473
+      "name": "아시아나항공㈜",
+      "address": "서울특별시 강서구 오쇠동 47 아시아나항공",
+      "group": "항공/운송",
+      "emotionScore": 2,
+      "scrapScore": 154,
+      "reviewScore": 320
     },
     "company6": {
-      "name": "넷마블컴패니",
-      "address": "서울특별시 구로구 구로동 188-25",
-      "group": "게임",
-      "emotionScore": 3,
-      "scrapScore": 920,
-      "reviewScore": 323
+      "name": "호텔신라",
+      "address": "서울특별시 중구 장충동2가 202 신라호텔",
+      "group": "숙박/서비스",
+      "emotionScore": 2,
+      "scrapScore": 132,
+      "reviewScore": 190
     },
     "company7": {
-      "name": "배달의민족",
-      "address": "서울 송파구 방이동 44-2 장은빌딩 18층",
-      "group": "IT서비스",
-      "emotionScore": 5,
-      "scrapScore": 776,
-      "reviewScore": 556
+      "name": "SK㈜",
+      "address": "서울특별시 종로구 서린동 99 SK빌딩",
+      "group": "IT/통신",
+      "emotionScore": 4,
+      "scrapScore": 320,
+      "reviewScore": 211
     },
     "company8": {
-      "name": "컴투스1",
-      "address": "서울시 금천구 가상동 371-17",
-      "group": "IT서비스",
-      "emotionScore": 4,
-      "scrapScore": 999,
-      "reviewScore": 429
+      "name": "CJ㈜",
+      "address": "서울 중구 동호로 330 쌍림동, 씨제이제일제당센터",
+      "group": "제조/화학",
+      "emotionScore": 3,
+      "scrapScore": 295,
+      "reviewScore": 302
     },
     "company9": {
-      "name": "한빛소프트(주)",
-      "address": "서울 구로구 신도림동 413-9, 코리아빌딩",
-      "group": "IT/통신",
+      "name": "현대백화점",
+      "address": "서울특별시 강남구 압구정동 458",
+      "group": "백화점",
       "emotionScore": 2,
-      "scrapScore": 573,
-      "reviewScore": 833
+      "scrapScore": 196,
+      "reviewScore": 211
     },
     "company10": {
-      "name": "넷마블컴패니",
-      "address": "서울특별시 구로구 구로동 188-25",
-      "group": "게임",
-      "emotionScore": 3,
-      "scrapScore": 720,
-      "reviewScore": 634
+      "name": "대성그룹",
+      "address": "서울특별시 종로구 관훈동 151-4 동덕빌딩  11층",
+      "group": "금융",
+      "emotionScore": 2,
+      "scrapScore": 101,
+      "reviewScore": 92
     },
     "company11": {
-      "name": "배달의민족",
-      "address": "서울 송파구 방이동 44-2 장은빌딩 18층",
-      "group": "IT서비스",
-      "emotionScore": 4,
-      "scrapScore": 142,
-      "reviewScore": 772
+      "name": "교원그룹",
+      "address": "서울 종로구 관철동 258번지",
+      "group": "출판/인쇄",
+      "emotionScore": 2,
+      "scrapScore": 87,
+      "reviewScore": 90
     },
     "company12": {
-      "name": "컴투스1",
-      "address": "서울시 금천구 가상동 371-17",
-      "group": "IT서비스",
-      "emotionScore": 4,
-      "scrapScore": 330,
-      "reviewScore": 796
+      "name": "이투스교육㈜",
+      "address": "서울특별시 강남구 역삼동 649-1",
+      "group": "교육",
+      "emotionScore": 3,
+      "scrapScore": 55,
+      "reviewScore": 35
     },
     "company13": {
-      "name": "한빛소프트(주)",
-      "address": "서울 구로구 신도림동 413-9, 코리아빌딩",
-      "group": "IT/통신",
-      "emotionScore": 2,
-      "scrapScore": 881,
-      "reviewScore": 532
+      "name": "㈜하나투어",
+      "address": "서울 종로구 인사동5길 41 (주)하나투어",
+      "group": "여행/서비스",
+      "emotionScore": 3,
+      "scrapScore": 178,
+      "reviewScore": 96
     },
     "company14": {
-      "name": "샌드박스네트워크스튜디오",
-      "address": "서울특별시 강남구 삼성동 554",
-      "group": "IT서비스",
-      "emotionScore": 4,
-      "scrapScore": 232,
-      "reviewScore": 396
+      "name": "㈜에스디생명공학",
+      "address": "서울특별시 강서구 등촌동 647-26 서울신기술창업센터 C동 301호",
+      "group": "제조",
+      "emotionScore": 2,
+      "scrapScore": 66,
+      "reviewScore": 45
     },
     "company15": {
-      "name": "넷마블컴패니",
-      "address": "서울특별시 구로구 구로동 188-25",
-      "group": "게임",
-      "emotionScore": 3,
-      "scrapScore": 110,
-      "reviewScore": 174
+      "name": "㈜비상교육",
+      "address": "서울특별시 구로구 구로동 170-10 대륭포스트타워7차 19층",
+      "group": "출판/교육",
+      "emotionScore": 2,
+      "scrapScore": 34,
+      "reviewScore": 97
     },
     "company16": {
-      "name": "배달의민족",
-      "address": "서울 송파구 방이동 44-2 장은빌딩 18층",
-      "group": "IT서비스",
-      "emotionScore": 4,
-      "scrapScore": 125,
-      "reviewScore": 69
+      "name": "㈜이씨엠디",
+      "address": "서울특별시 송파구 송파동 185-5 송파씨엠빌딩 이씨엠디빌딩 3층 재무관리팀",
+      "group": "서비스",
+      "emotionScore": 3,
+      "scrapScore": 24,
+      "reviewScore": 30
     },
     "company17": {
-      "name": "컴투스1",
-      "address": "서울시 금천구 가상동 371-17",
-      "group": "IT서비스",
-      "emotionScore": 4,
-      "scrapScore": 73,
-      "reviewScore": 25
+      "name": "남양약품㈜",
+      "address": "서울특별시 영등포구 양평동6가 78",
+      "group": "의약",
+      "emotionScore": 3,
+      "scrapScore": 163,
+      "reviewScore": 78
     },
     "company18": {
-      "name": "한빛소프트(주)",
-      "address": "서울 구로구 신도림동 413-9, 코리아빌딩",
-      "group": "IT/통신",
+      "name": "서브원",
+      "address": "서울특별시 종로구 신문로2가 92 LG광화문빌딩 5층 (주)서브원",
+      "group": "임대",
+      "emotionScore": 3,
+      "scrapScore": 55,
+      "reviewScore": 12
+    },
+    "company19": {
+      "name": "성신양회㈜",
+      "address": "서울특별시 종로구 인사동 194-27 태화빌딩",
+      "group": "제조",
       "emotionScore": 2,
-      "scrapScore": 881,
-      "reviewScore": 1231
+      "scrapScore": 32,
+      "reviewScore": 9
+    },
+    "company20": {
+      "name": "고려신용정보㈜",
+      "address": "서울특별시 서초구 서초동 1688-5 유니온타워",
+      "group": "신용조사",
+      "emotionScore": 1,
+      "scrapScore": 18,
+      "reviewScore": 33
+    },
+    "company21": {
+      "name": "GS네오텍㈜",
+      "address": "서울특별시 구로구 구로동 588 GS네오텍",
+      "group": "건설",
+      "emotionScore": 3,
+      "scrapScore": 110,
+      "reviewScore": 98
+    },
+    "company22": {
+      "name": "㈜헤럴드",
+      "address": "서울 중구 정동 1-17",
+      "group": "신문/인쇄",
+      "emotionScore": 3,
+      "scrapScore": 76,
+      "reviewScore": 80
+    },
+    "company23": {
+      "name": "㈜천재교육",
+      "address": "서울특별시 금천구 가산동 60-28 천재교육",
+      "group": "출판/인쇄",
+      "emotionScore": 3,
+      "scrapScore": 223,
+      "reviewScore": 204
+    },
+    "company24": {
+      "name": "㈜신원",
+      "address": "서울특별시 마포구 도화동 532 신원빌딩",
+      "group": "의류/제조",
+      "emotionScore": 1,
+      "scrapScore": 176,
+      "reviewScore": 102
+    },
+    "company25": {
+      "name": "엔에이치엔고도㈜",
+      "address": "서울 구로구 구로3동 코오롱디지털타워빌란트1차 13층",
+      "group": "솔루션",
+      "emotionScore": 2,
+      "scrapScore": 101,
+      "reviewScore": 78
+    },
+    "company26": {
+      "name": "㈜아이리버",
+      "address": "서울 서초구 방배동 902-5 아이리버하우스",
+      "group": "전기/전자",
+      "emotionScore": 2,
+      "scrapScore": 78,
+      "reviewScore": 270
+    },
+    "company27": {
+      "name": "메트라이프생명보험㈜",
+      "address": "서울특별시 강남구 역삼동 707-5 메트라이프타워",
+      "group": "보험/영업",
+      "emotionScore": 2,
+      "scrapScore": 99,
+      "reviewScore": 64
+    },
+    "company28": {
+      "name": "주식회사 에스엠코어",
+      "address": "서울특별시 마포구 마포동 140 다보빌딩",
+      "group": "제조",
+      "emotionScore": 4,
+      "scrapScore": 99,
+      "reviewScore": 103
+    },
+    "company29": {
+      "name": "대상베스트코",
+      "address": "서울특별시 중랑구 상봉동 107-6 대상빌딩",
+      "group": "식품/도매",
+      "emotionScore": 2,
+      "scrapScore": 29,
+      "reviewScore": 10
+    },
+    "company30": {
+      "name": "도이치모터스㈜",
+      "address": "서울특별시 성동구 성수동2가 19-24",
+      "group": "자동차",
+      "emotionScore": 3,
+      "scrapScore": 79,
+      "reviewScore": 56
+    },
+    "company31": {
+      "name": "동원그룹",
+      "address": "서울특별시 서초구 양재동 275 동원산업빌딩",
+      "group": "외식/프렌차이즈",
+      "emotionScore": 2,
+      "scrapScore": 97,
+      "reviewScore": 70
+    },
+    "company32": {
+      "name": "㈜하이스틸",
+      "address": "서울특별시 중구 충무로3가 57-8 한영빌딩 8층",
+      "group": "제조",
+      "emotionScore": 3,
+      "scrapScore": 110,
+      "reviewScore": 88
+    },
+    "company33": {
+      "name": "㈜GS리테일",
+      "address": "서울특별시 강남구 역삼동 679 GS강남타워",
+      "group": "편의점/프렌차이즈",
+      "emotionScore": 3,
+      "scrapScore": 187,
+      "reviewScore": 110
+    },
+    "company34": {
+      "name": "㈜셀트리온스킨큐어",
+      "address": "서울특별시 서초구 잠원동 21-2 셀트리온스킨큐어빌딩 7층",
+      "group": "화장품/도매",
+      "emotionScore": 3,
+      "scrapScore": 67,
+      "reviewScore": 31
+    },
+    "company35": {
+      "name": "한미글로벌㈜",
+      "address": "서울 강남구 삼성동 159-9 도심공항타워 9층",
+      "group": "건축/설비",
+      "emotionScore": 3,
+      "scrapScore": 100,
+      "reviewScore": 77
+    },
+    "company36": {
+      "name": "㈜하이프라자",
+      "address": "서울특별시 금천구 가산동 219-24 LG전자가산A , 7층",
+      "group": "가전/소매",
+      "emotionScore": 3,
+      "scrapScore": 105,
+      "reviewScore": 97
+    },
+    "company37": {
+      "name": "NICE페이먼츠㈜",
+      "address": "서울특별시 마포구 아현동 686 크레디트센터빌딩 8층",
+      "group": "통신/서비스",
+      "emotionScore": 2,
+      "scrapScore": 201,
+      "reviewScore": 88
+    },
+    "company38": {
+      "name": "㈜이테크건설",
+      "address": "서울특별시 서초구 염곡동 300-4",
+      "group": "건설",
+      "emotionScore": 1,
+      "scrapScore": 69,
+      "reviewScore": 55
+    },
+    "company39": {
+      "name": "㈜케이티엠하우스",
+      "address": "서울특별시 서초구 서초동 1321-11 플래티넘타워 7층",
+      "group": "소프트웨어",
+      "emotionScore": 3,
+      "scrapScore": 98,
+      "reviewScore": 66
+    },
+    "company40": {
+      "name": "㈜재능교육",
+      "address": "서울특별시 동대문구 신설동 92-19",
+      "group": "출판/인쇄",
+      "emotionScore": 3,
+      "scrapScore": 221,
+      "reviewScore": 97
+    },
+    "company41": {
+      "name": "㈜신세계푸드",
+      "address": "서울특별시 성동구 성수동2가 301-51 성수동BY센터 4-7층",
+      "group": "식당",
+      "emotionScore": 2,
+      "scrapScore": 76,
+      "reviewScore": 22
+    },
+    "company42": {
+      "name": "신세계그룹",
+      "address": "서울 중구 충무로1가 52-5 신세계백화점건물",
+      "group": "백화점/유통",
+      "emotionScore": 1,
+      "scrapScore": 360,
+      "reviewScore": 290
+    },
+    "company43": {
+      "name": "포시즌스호텔서울",
+      "address": "서울특별시 종로구 당주동 29",
+      "group": "호텔/여행",
+      "emotionScore": 4,
+      "scrapScore": 203,
+      "reviewScore": 189
+    },
+    "company44": {
+      "name": "아이에스동서㈜",
+      "address": "서울특별시 강남구 청담동 53-8 은성빌딩",
+      "group": "제조",
+      "emotionScore": 3,
+      "scrapScore": 98,
+      "reviewScore": 56
+    },
+    "company45": {
+      "name": "BMW 바바리안모터스",
+      "address": "서울특별시 양천구 목동 405-205",
+      "group": "자동차",
+      "emotionScore": 2,
+      "scrapScore": 101,
+      "reviewScore": 43
+    },
+    "company46": {
+      "name": "㈜인터비즈시스템",
+      "address": "서울 영등포구 여의도동 중소기업중앙회 6층 (주)인터비즈시스템",
+      "group": "인력",
+      "emotionScore": 2,
+      "scrapScore": 21,
+      "reviewScore": 8
+    },
+    "company47": {
+      "name": "㈜영원무역",
+      "address": "서울특별시 중구 만리동2가 171 영원프라자",
+      "group": "도매",
+      "emotionScore": 3,
+      "scrapScore": 83,
+      "reviewScore": 35
+    },
+    "company48": {
+      "name": "㈜티브로드",
+      "address": "서울특별시 중구 충무로2가 64-5 신일빌딩",
+      "group": "방송",
+      "emotionScore": 3,
+      "scrapScore": 109,
+      "reviewScore": 78
+    },
+    "company49": {
+      "name": "성신양회㈜",
+      "address": "서울 종로구 인사동 5길 29",
+      "group": "제조",
+      "emotionScore": 3,
+      "scrapScore": 77,
+      "reviewScore": 30
+    },
+    "company50": {
+      "name": "세종텔레콤㈜",
+      "address": "서울특별시 강동구 상일동 501 세종텔레콤 지식산업센터",
+      "group": "통신",
+      "emotionScore": 2,
+      "scrapScore": 23,
+      "reviewScore": 10
+    },
+    "company51": {
+      "name": "갤럭시아커뮤니케이션즈㈜",
+      "address": "서울특별시 강남구 수서동 715 수서빌딩 15층",
+      "group": "소프트웨어",
+      "emotionScore": 3,
+      "scrapScore": 54,
+      "reviewScore": 30
+    },
+    "company52": {
+      "name": "㈜한국코퍼레이션",
+      "address": "서울특별시 중구 남대문로5가 827 남산트라팰리스 8층",
+      "group": "콜센터/아웃소싱",
+      "emotionScore": 1,
+      "scrapScore": 12,
+      "reviewScore": 9
+    },
+    "company53": {
+      "name": "현대오일뱅크㈜",
+      "address": "서울특별시 중구 남대문로5가 84-11 연세세브란스빌딩 20층",
+      "group": "화학/에너지",
+      "emotionScore": 4,
+      "scrapScore": 280,
+      "reviewScore": 177
+    },
+    "company54": {
+      "name": "현대엔지니어링㈜",
+      "address": "서울특별시 종로구 계동 140-2 현대건설빌딩 8층 현대엔지니어링㈜",
+      "group": "건설/시공",
+      "emotionScore": 3,
+      "scrapScore": 205,
+      "reviewScore": 101
     }
   }
 }
