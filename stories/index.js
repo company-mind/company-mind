@@ -1,3 +1,5 @@
 import 'semantic-ui-css/semantic.min.css';
-import './LoginScreen';
+import './loginScreen';
 import './companyList';
+import './companyArticle';
+import './companyReviewList';
