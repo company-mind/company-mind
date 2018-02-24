@@ -71,15 +71,14 @@ export default function (state = initialState, action) {
 }
 
 
-let listNumber = 0
+let List_Number = 0
 
 export const fetchCompanyList = () => async (dispatch) => {
-  listNumber = 0
+  List_Number = 0
   dispatch(companyhasmore());
 }
 
 export const fetchOnCompanyList = ({ complete, hasmore }) => async (dispatch) => {
-  console.log(complete, hasmore)
   const snapshot = await firebase.database().ref('company').once('value');
   const companyObj = snapshot.val();
   const companies = Object.entries(companyObj).map(([id, company]) => ({
@@ -98,18 +97,17 @@ export const fetchOnCompanyList = ({ complete, hasmore }) => async (dispatch) =>
     dispatch(companyListComplete(reviewSort))
   } else{
      if(!complete){
-       if ( listNumber <= reviewSort.length ){
-         const slice = reviewSort.slice(0, (listNumber))
+       if ( List_Number <= reviewSort.length ){
+         const slice = reviewSort.slice(0, (List_Number))
          dispatch(companyListSuccess(slice));
-         listNumber = listNumber + 5
+         List_Number = List_Number + 5
        } else {
-         const slice = reviewSort.slice(0, (listNumber))
+         const slice = reviewSort.slice(0, (List_Number))
          dispatch(companyListComplete(slice))
        }
      } else {
-       const slice = reviewSort.slice(0, (listNumber))
+       const slice = reviewSort.slice(0, (List_Number))
        dispatch(companyListComplete(slice))
-       console.log(complete, hasmore)
     }
   }
 }
