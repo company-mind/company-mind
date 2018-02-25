@@ -84,6 +84,7 @@ export default class LoginScreenContainer extends Component {
       .set({
         nickname,
       });
+    this.setState({ hasNickname: true });
   };
 
   render() {
@@ -95,8 +96,9 @@ export default class LoginScreenContainer extends Component {
       isNicknameLoading,
       error,
     } = this.state;
+
     if (isLoggedIn && hasNickname) {
-      return <Redirect to="/main" />;
+      return <Redirect to="/list" />;
     } else if (isLoggedIn && !hasNickname) {
       return (
         <NicknameScreen
