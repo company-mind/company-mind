@@ -10,15 +10,10 @@ import {
 } from 'semantic-ui-react';
 import styled from 'styled-components';
 
-// import withAuth from '../hocs/withAuth';
 
 const FullHeightGrid = styled(Grid)`
   height: 100vh;
 `;
-
-// const StyledLabel = styled(Label)`
-//   margin-top: -1em;
-// `;
 
 export default class NicknameScreen extends Component {
   render() {

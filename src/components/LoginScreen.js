@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Icon, Grid, Segment, Header } from 'semantic-ui-react';
+import { Button, Icon, Grid, Segment } from 'semantic-ui-react';
 import styled from 'styled-components';
-
-// Sementic UI(Grid, Button, Header, Segment)
 
 const FullHeightGrid = styled(Grid)`
   height: 100vh;
