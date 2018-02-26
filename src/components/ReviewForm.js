@@ -16,7 +16,7 @@ const StyledList = styled(List)`
 
 export default class ReviewForm extends Component {
   static defaultProps = {
-    errorMassage: '',
+    errorMessage: '',
     onSubmit: () => {},
     creating: false,
   }
@@ -40,7 +40,9 @@ export default class ReviewForm extends Component {
   }
 
   render() {
-    const textCount = this.state.content.length;
+    const { emotion, content } = this.state;
+    const { creating, errorMessage } = this.props;
+    const textCount = content.length;
     return (
       <StyledForm>
         <StyledList horizontal size="massive">
@@ -66,16 +68,18 @@ export default class ReviewForm extends Component {
             : null}
         </Form.Field>
         <Form.Button
+          floated='right'
           color={
             textCount > 140 || textCount < 10 && textCount > 0 ? 'grey'
             : textCount <= 140 && textCount > 120 ? 'red'
             : textCount > 90 && textCount <= 120 ? 'orange'
             : 'green'
           }
-          floated='right'
           disabled={
             textCount > 140 || textCount < 10 && textCount >= 1
           }
+          onClick={this.handleSubmit}
+          loading={creating}
           >
           {
             textCount > 0 ? `${textCount}/140` : '등록'
