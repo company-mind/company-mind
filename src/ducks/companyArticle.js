@@ -46,6 +46,5 @@ export const dispatchCompanyArticle = ({ companyId }) => async (dispatch) => {
     emotionScore: emotion(companyObj.emotionScore),
     shortAddress: companyObj.address.split(' ')[1] + "/" + companyObj.address.split(' ')[2],
   }
-  console.log(companyItem)
   dispatch(companyArticleSuccess(companyItem))
 }
