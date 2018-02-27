@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
 import rootReducer from './ducks'
@@ -11,9 +11,10 @@ import LoginScreenContainer from './containers/LoginScreenContainer';
 import CompanyListContainer from './containers/CompanyListContainer';
 import ReviewFormContainer from './containers/ReviewFormContainer';
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
-  applyMiddleware(thunk),
+  composeEnhancers(applyMiddleware(thunk))
 );
 
 class App extends Component { // router 설정
