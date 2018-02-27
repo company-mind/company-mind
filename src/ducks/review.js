@@ -76,7 +76,7 @@ export default function(state = initialState, action) {
 export const createReview = ({ emotion, content }) => async dispatch => {
   // error handling
   if (!emotion) {
-    dispatch(reviewError('이모지를 선택해주세요.'));
+    dispatch(reviewError('이모지는 반드시 선택하셔야 합니다.'));
     return;
   }
 
@@ -89,28 +89,19 @@ export const createReview = ({ emotion, content }) => async dispatch => {
   // dispatch state to reducer
   dispatch(reviewCreating());
   try {
-    const reviewRef = firebase
+    await firebase
       .database()
       .ref('reviews')
       .push({
-        uid: currentUser.uid,
-        // companyId,
+        reviewer: currentUser.uid,
+        companyId: null,
         time: firebase.database.ServerValue.TIMESTAMP,
-        content,
         emotion,
+        content,
       });
-    const contentPromise = firebase
-      .database()
-      .ref(`reviews/${reviewRef.key}`)
-      .set(content); // save content
-    await Promise.all([reviewRef, contentPromise]);
     dispatch(reviewSuccess());
     dispatch(reviewInitial());
   } catch (e) {
-    dispatch(
-      reviewError(
-        `알 수 없는 에러가 발생했습니다. 다시 시도해 주세요: ${e.message}`
-      )
-    );
+    dispatch(reviewError(`알 수 없는 에러가 발생했습니다. 다시 시도해 주세요: ${e.message}`));
   }
 };
