@@ -28,6 +28,7 @@ const Emoge = styled.div`
 export default class CompanyArticle extends Component {
   static defaultProps = {
     companyItem: {},
+    onMount: () => { },
   }
   render(){
     const { companyItem } = this.props
