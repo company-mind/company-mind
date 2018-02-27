@@ -10,7 +10,6 @@ const NewLColumn = styled(Grid.Column) `
   padding: 0px !important;
   margin-left: 25px;
 `
-
 const MSegment = styled(Segment) `
   margin: 0px !important;
   cursor: pointer;
@@ -18,7 +17,6 @@ const MSegment = styled(Segment) `
 const NewDiv = styled.div`
   padding : 2px;
 `
-
 const NameDiv = styled.div`
   padding : 2px;
   font-family: 'Spoqa-Han-Sans-Bold';
@@ -28,42 +26,38 @@ const Emoge = styled.div`
   text-Align: center;
 `
 
-const NewUl = styled.ul`
-  list-style: none;
-  display: flex;
-  padding : 0px;
-  margin : 0px;
-  margin-left: 4px;
-`
-
 export default class CompanyArticle extends Component {
+  static defaultProps = {
+    companyItem: {},
+    onMount: () => { },
+  }
   render(){
-    const { id, name, group, address, scrapScore, reviewScore, emotionScore, itemProps = {}, } = this.props
+    const { companyItem } = this.props
     return (
-      <MSegment {...itemProps} key={id} >
+      <MSegment key={companyItem.id} >
         <Grid>
           <Grid.Row stretched>
             <NewLColumn width={10}>
-              <NameDiv style={{ fontSize: '1.4rem', marginLeft: '10px' }}>{name}</NameDiv>
+              <NameDiv style={{ fontSize: '1.4rem', marginLeft: '10px' }}>{companyItem.name}</NameDiv>
               <Grid>
                 <Grid.Row>
                   <NewLColumn width={7}>
-                    <NewDiv>{address}</NewDiv>
+                    <NewDiv>{companyItem.shortAddress}</NewDiv>
                   </NewLColumn>
                   <NewColumn width={7}>
-                    <NewDiv>{group}</NewDiv>
+                    <NewDiv>{companyItem.group}</NewDiv>
                   </NewColumn>
                   <NewLColumn width={7}>
-                    <NewDiv><Icon name='pencil' size='large' />{reviewScore}</NewDiv>
+                    <NewDiv><Icon name='pencil' size='large' />{companyItem.reviewScore}</NewDiv>
                   </NewLColumn>
                   <NewColumn width={7}>
-                    <NewDiv><Icon name='empty star' size='large' />{scrapScore}</NewDiv>
+                    <NewDiv><Icon name='empty star' size='large' />{companyItem.scrapScore}</NewDiv>
                   </NewColumn>
                 </Grid.Row>
               </Grid>
             </NewLColumn>
             <NewLColumn style={{ marginLeft: '-2px' }} width={3}>
-              <Emoge>{emotionScore}</Emoge>
+              <Emoge>{companyItem.emotionScore}</Emoge>
             </NewLColumn>
           </Grid.Row>
         </Grid>
