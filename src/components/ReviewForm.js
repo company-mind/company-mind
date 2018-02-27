@@ -8,12 +8,10 @@ const StyledForm = styled(Form)`
   margin-top: 10px;
   width: 340px;
 `
-
 const StyledList = styled(List)`
   margin: 0 auto;
   text-align: center;
 `
-
 export default class ReviewForm extends Component {
   static defaultProps = {
     errorMessage: '',
@@ -22,7 +20,7 @@ export default class ReviewForm extends Component {
   }
 
   state = {
-    emotion: 0,
+    emotion: null,
     content: '',
   }
 
@@ -35,7 +33,7 @@ export default class ReviewForm extends Component {
     this.setState({ content });
   }
 
-  handleSubmit () {
+  handleSubmit = () => {
     this.props.onSubmit(this.state);
   }
 
@@ -46,21 +44,21 @@ export default class ReviewForm extends Component {
     return (
       <StyledForm>
         <StyledList horizontal size="massive">
-          <List.Item link onClick={() => this.handleEmojiClick(1)}>
+          <List.Item onClick={() => this.handleEmojiClick(1)}>
             <span>😡</span>
           </List.Item>
-          <List.Item link onClick={() => this.handleEmojiClick(2)}>
+          <List.Item onClick={() => this.handleEmojiClick(2)}>
             <span>😭</span>
           </List.Item>
-          <List.Item link onClick={() => this.handleEmojiClick(3)}>
+          <List.Item onClick={() => this.handleEmojiClick(3)}>
             <span>😄</span>
           </List.Item>
-          <List.Item link onClick={() => this.handleEmojiClick(4)}>
+          <List.Item onClick={() => this.handleEmojiClick(4)}>
             <span>😍</span>
           </List.Item>
         </StyledList>
         <Form.Field>
-          <TextArea placeholder='리뷰를 남겨주세요. 140자 까지 남길 수 있습니다.' onChange={this.handleChange} />
+          <TextArea placeholder='리뷰를 남겨주세요. 10자 이상 140 이하로 남길 수 있습니다.' onChange={this.handleChange} />
           {textCount > 140 ?
             <Transition.Group animation='shake' duration='500' visible>
               <Label color='red' attached='bottom right'>140자를 넘었습니다.</Label>
@@ -80,7 +78,7 @@ export default class ReviewForm extends Component {
           }
           onClick={this.handleSubmit}
           loading={creating}
-          >
+        >
           {
             textCount > 0 ? `${textCount}/140` : '등록'
           }
