@@ -45,7 +45,7 @@ const initialState = {
   errorMessage: '',
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case CREATING:
       return {
@@ -73,7 +73,7 @@ export default function(state = initialState, action) {
 }
 
 // thunk
-export const createReview = ({ emotion, content }) => async dispatch => {
+export const createReview = ({ emotion, content }) => async (dispatch) => {
   // error handling
   if (!emotion) {
     dispatch(reviewError('이모지는 반드시 선택하셔야 합니다.'));
