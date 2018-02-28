@@ -93,9 +93,9 @@ export const createReview = ({ emotion, content }) => async dispatch => {
       .database()
       .ref('reviews')
       .push({
-        reviewer: currentUser.uid,
-        companyId: null,
-        time: firebase.database.ServerValue.TIMESTAMP,
+        writer: currentUser.uid,
+        companyId: null, // FIXME
+        createdAt: firebase.database.ServerValue.TIMESTAMP,
         emotion,
         content,
       });
