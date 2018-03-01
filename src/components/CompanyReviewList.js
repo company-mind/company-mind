@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Grid, Icon, Segment, Pagination } from 'semantic-ui-react';
+import { Grid, Icon, Segment, Pagination, Button } from 'semantic-ui-react';
+import Dock from 'react-dock';
 
 const NewColumn = styled(Grid.Column) `
   padding: 0px !important;
@@ -11,14 +12,23 @@ const NewRow = styled(Grid.Row) `
 
 export default class CompanyReviewList extends Component {
   handlePaginationChange = (e, { activePage }) => {
-    this.props.onChange(this.props, activePage)
+    this.props.onPaginationChange(this.props, activePage)
+  }
+  handleIsVisibleClick = (reviewId, uid, companyId) => {
+    this.props.onReviewButtonClick(reviewId, uid, companyId)
+  }
+  handlePrevClick = () => {
+    this.props.onPrevButtonClick()
+  }
+  handleDeleteClick = () => {
+    this.props.onDeleteButtonClick(this.props)
   }
   render(){
-    const { reviewItem, page } = this.props;
+    const { reviewItem, pageNumber, isVisible } = this.props;
     return(
       <Segment>
         {
-          reviewItem.map(({ reviewId, author, writer, content, emotion, time, likesForReview, dislikesForReview }) => (
+          reviewItem.map(({ reviewId, author, writer, content, emotion, time, likesForReview, dislikesForReview, uid, companyId }) => (
             <Segment key={reviewId}>
               <Grid columns='equal'>
                 <NewRow>
@@ -46,7 +56,7 @@ export default class CompanyReviewList extends Component {
                     <span><Icon name='thumbs outline down' size='large' />{dislikesForReview.length}</span>
                   </NewColumn>
                   <NewColumn textAlign='right'>
-                    <div><Icon name='warning circle' size='large' /></div>
+                    <div><Icon name='warning circle' size='large' onClick={e => this.handleIsVisibleClick(reviewId, uid, companyId)} /></div>
                   </NewColumn>
                 </NewRow>
               </Grid>
@@ -62,12 +72,17 @@ export default class CompanyReviewList extends Component {
                 lastItem={null}
                 pointing
                 secondary
-                totalPages={3}
+                totalPages={pageNumber}
                 onPageChange={this.handlePaginationChange}
               />
             </NewColumn>
           </NewRow>
         </Grid>
+        <Dock position='bottom' isVisible={isVisible} fluid={true}>
+            <Button fluid>리뷰 수정하기</Button>
+            <Button fluid onClick={this.handleDeleteClick}>리뷰 삭제하기</Button>
+            <Button fluid onClick={this.handlePrevClick}>돌아가기</Button>
+        </Dock>
       </Segment>
     )
   }
