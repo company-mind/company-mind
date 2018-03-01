@@ -2,11 +2,14 @@ import * as firebase from 'firebase';
 
 export const SORTING = 'companyReviewList/SORTING';
 export const SUCCESS = 'companyReviewList/SUCCESS';
+<<<<<<< HEAD
 export const VISIBLENESS = 'companyReviewList/VISIBLENESS'
 export const INVISIBLENESS = 'companyReviewList/INVISIBLENESS'
 export const USERVISIBLENESS = 'companyReviewList/USERVISIBLENESS'
 export const USERINVISIBLENESS = 'companyReviewList/USERINVISIBLENESS'
 export const DELETE = 'companyReviewList/DELETE'
+=======
+>>>>>>> #9 companyReviewContainer, companyReviewList ducks 패턴 구현
 
 export function companyReviewListSorting(reviewSort) {
   return {
@@ -14,11 +17,16 @@ export function companyReviewListSorting(reviewSort) {
     reviewSort,
   };
 }
+<<<<<<< HEAD
 export function companyReviewListSuccess(reviewItem, pageNumber, activePage) {
+=======
+export function companyReviewListSuccess(reviewItem, pageNumber) {
+>>>>>>> #9 companyReviewContainer, companyReviewList ducks 패턴 구현
   return {
     type: SUCCESS,
     reviewItem,
     pageNumber,
+<<<<<<< HEAD
     activePage,
   };
 }
@@ -48,6 +56,8 @@ export function companyReviewListUserInvisibleness() {
 export function companyReviewListDelete() {
   return {
     type: DELETE,
+=======
+>>>>>>> #9 companyReviewContainer, companyReviewList ducks 패턴 구현
   };
 }
 
@@ -55,12 +65,15 @@ const initialState = {
   reviewSort: [],
   reviewItem: [],
   pageNumber: 0,
+<<<<<<< HEAD
   isVisible: false,
   isUserVisible: false,
   delete: false,
   reviewId: [],
   companyId: [],
   activePage: 1,
+=======
+>>>>>>> #9 companyReviewContainer, companyReviewList ducks 패턴 구현
 }
 
 export default function (state = initialState, action) {
@@ -68,7 +81,10 @@ export default function (state = initialState, action) {
     case SORTING:
       return {
         ...state,
+<<<<<<< HEAD
         delet: false,
+=======
+>>>>>>> #9 companyReviewContainer, companyReviewList ducks 패턴 구현
         reviewSort: action.reviewSort,
       }
     case SUCCESS:
@@ -76,6 +92,7 @@ export default function (state = initialState, action) {
         ...state,
         reviewItem: action.reviewItem,
         pageNumber: action.pageNumber,
+<<<<<<< HEAD
         activePage: action.activePage,
       }
     case USERVISIBLENESS:
@@ -110,6 +127,8 @@ export default function (state = initialState, action) {
         delete: true,
         reviewId: [],
         companyId: [],
+=======
+>>>>>>> #9 companyReviewContainer, companyReviewList ducks 패턴 구현
       }
     default:
       return state;

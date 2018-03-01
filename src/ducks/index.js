@@ -12,4 +12,5 @@ export default combineReducers({
   companyReviewList,
   companyDetailButton,
   review,
+  companyReviewList,
 });

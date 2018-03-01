@@ -33,17 +33,21 @@ export default connect(
     reviewSort: state.companyReviewList.reviewSort,
     reviewItem: state.companyReviewList.reviewItem,
     pageNumber: state.companyReviewList.pageNumber,
+<<<<<<< HEAD
     isVisible: state.companyReviewList.isVisible,
     isUserVisible: state.companyReviewList.isUserVisible,
     reviewId: state.companyReviewList.reviewId,
     companyId: state.companyReviewList.companyId,
     activePage: state.companyReviewList.activePage,
+=======
+>>>>>>> #9 companyReviewContainer, companyReviewList ducks 패턴 구현
   }),
   // mapDispatchToProps
   dispatch => ({
     onMount: ({ match }) => {
       dispatch(dispatchCompanyReviewList({ match }))
     },
+<<<<<<< HEAD
     onPaginationChange: ({ reviewSort, pageNumber }, activePage) => {
       dispatch(dispatPagination({ reviewSort, pageNumber }, activePage))
     },
@@ -64,6 +68,10 @@ export default connect(
     },
     onDislikesForReviewClick: ( reviewId, {activePage} ) => {
       dispatch(dispatDislikesForReview( reviewId, {activePage} ))
+=======
+    onChange: ({ reviewSort, pageNumber }, activePage) => {
+      dispatch(dispatPaginationChange({ reviewSort, pageNumber }, activePage))
+>>>>>>> #9 companyReviewContainer, companyReviewList ducks 패턴 구현
     },
   }),
 )(CompanyReviewListContainer)
