@@ -7,15 +7,15 @@ import CompanyDetailButtonContainer from './CompanyDetailButtonContainer';
 import withAuth from '../hocs/withAuth';
 
 class CompanyDetailContainer extends Component {
-  render(){
-    const { ...rest } = this.props
-    return(
+  render() {
+    const { ...rest } = this.props;
+    return (
       <div>
-        <CompanyArticleContainer { ...rest }/>
-        <CompanyDetailButtonContainer { ...rest } />
-        <CompanyReviewListContainer { ...rest }/>
+        <CompanyArticleContainer {...rest} />
+        <CompanyDetailButtonContainer {...rest} />
+        <CompanyReviewListContainer {...rest} />
       </div>
-    )
+    );
   }
 }
 
