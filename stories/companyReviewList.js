@@ -22,7 +22,9 @@ const reviewItem = [
   },
 ]
 
+const page = [1, 2, 3]
+
 storiesOf('CompanyReviewList', module)
   .add('default', () => (
-    <CompanyReviewList reviewItem={reviewItem} />
+    <CompanyReviewList reviewItem={reviewItem} page={page} />
   ));

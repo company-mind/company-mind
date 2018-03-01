@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Grid, Icon, Segment, Button } from 'semantic-ui-react';
+import { Grid, Icon, Segment, Pagination } from 'semantic-ui-react';
 
 const NewColumn = styled(Grid.Column) `
   padding: 0px !important;
@@ -9,19 +9,21 @@ const NewRow = styled(Grid.Row) `
   padding: 0px !important;
 `
 
-
 export default class CompanyReviewList extends Component {
+  handlePaginationChange = (e, { activePage }) => {
+    this.props.onChange(this.props, activePage)
+  }
   render(){
-    const { reviewItem } = this.props;
+    const { reviewItem, page } = this.props;
     return(
       <Segment>
         {
-          reviewItem.map(({ id, nickname, writer, content, emotion, createdAt }) => (
-            <Segment key={id}>
+          reviewItem.map(({ reviewId, author, writer, content, emotion, time, likesForReview, dislikesForReview }) => (
+            <Segment key={reviewId}>
               <Grid columns='equal'>
                 <NewRow>
                   <NewColumn>
-                    <div>{nickname}</div>
+                    <div>{author}</div>
                     <div>{writer}</div>
                   </NewColumn>
                   <NewColumn textAlign='right'>
@@ -30,7 +32,7 @@ export default class CompanyReviewList extends Component {
                 </NewRow>
                 <NewRow>
                   <NewColumn textAlign='right'>
-                    <div>{createdAt}</div>
+                    <div>{time}</div>
                   </NewColumn>
                 </NewRow>
                 <NewRow>
@@ -40,8 +42,8 @@ export default class CompanyReviewList extends Component {
                 </NewRow>
                 <NewRow>
                   <NewColumn>
-                    <span><Icon name='thumbs outline up' size='large' /></span>
-                    <span><Icon name='thumbs outline down' size='large' /></span>
+                    <span><Icon name='thumbs outline up' size='large' />{likesForReview.length}</span>
+                    <span><Icon name='thumbs outline down' size='large' />{dislikesForReview.length}</span>
                   </NewColumn>
                   <NewColumn textAlign='right'>
                     <div><Icon name='warning circle' size='large' /></div>
@@ -54,8 +56,15 @@ export default class CompanyReviewList extends Component {
         <Grid>
           <NewRow>
             <NewColumn textAlign='center'>
-              <Button basic color='grey'><Icon name='angle left' size='large' /></Button>
-              <Button basic color='grey'><Icon name='angle right' size='large' /></Button>
+              <Pagination
+                defaultActivePage={1}
+                firstItem={null}
+                lastItem={null}
+                pointing
+                secondary
+                totalPages={3}
+                onPageChange={this.handlePaginationChange}
+              />
             </NewColumn>
           </NewRow>
         </Grid>
