@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import CompanyReviewList from '../components/CompanyReviewList';
-import { dispatchCompanyReviewList, dispatPaginationChange } from '../ducks/companyReviewList';
+import { dispatchCompanyReviewList, dispatPagination, dispatVisible, dispatInVisible, dispatReviewDelete } from '../ducks/companyReviewList';
 
 class CompanyReviewListContainer extends Component {
 
@@ -24,14 +24,28 @@ export default connect(
     reviewSort: state.companyReviewList.reviewSort,
     reviewItem: state.companyReviewList.reviewItem,
     pageNumber: state.companyReviewList.pageNumber,
+    isVisible: state.companyReviewList.isVisible,
+    reviewId: state.companyReviewList.reviewId,
+    companyId: state.companyReviewList.companyId,
   }),
   // mapDispatchToProps
   dispatch => ({
     onMount: ({ match }) => {
       dispatch(dispatchCompanyReviewList({ match }))
     },
-    onChange: ({ reviewSort, pageNumber }, activePage) => {
-      dispatch(dispatPaginationChange({ reviewSort, pageNumber }, activePage))
+    onPaginationChange: ({ reviewSort, pageNumber }, activePage) => {
+      dispatch(dispatPagination({ reviewSort, pageNumber }, activePage))
+    },
+    onReviewButtonClick: (reviewId, uid, companyId) => {
+      console.log(reviewId, companyId)
+      dispatch(dispatVisible(reviewId, uid, companyId))
+    },
+    onPrevButtonClick: () => {
+      dispatch(dispatInVisible())
+    },
+    onDeleteButtonClick: ({ reviewId, companyId }) => {
+      console.log(reviewId, companyId)
+      dispatch(dispatReviewDelete({ reviewId, companyId }))
     },
   }),
 )(CompanyReviewListContainer)
