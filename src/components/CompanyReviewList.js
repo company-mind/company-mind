@@ -9,6 +9,17 @@ const NewColumn = styled(Grid.Column) `
 const NewRow = styled(Grid.Row) `
   padding: 0px !important;
 `
+const NameDiv = styled.div`
+  padding : 2px;
+  font-family: 'Spoqa-Han-Sans-Bold';
+  font-size: 1.2rem;
+  margin-left: 14px;
+`
+const Emoge = styled.div`
+  font-Size: 40px;
+  margin-top: -8px;
+  margin-right: 14px;
+`
 
 export default class CompanyReviewList extends Component {
   handlePaginationChange = (e, { activePage }) => {
@@ -23,6 +34,9 @@ export default class CompanyReviewList extends Component {
   handleDeleteClick = () => {
     this.props.onDeleteButtonClick(this.props)
   }
+  handlelikesForReviewClick = (reviewId) => {
+    this.props.onlikesForReviewClick(reviewId)
+  }
   render(){
     const { reviewItem, pageNumber, isVisible } = this.props;
     return(
@@ -31,34 +45,30 @@ export default class CompanyReviewList extends Component {
           reviewItem.map(({ reviewId, author, writer, content, emotion, time, likesForReview, dislikesForReview, uid, companyId }) => (
             <Segment key={reviewId}>
               <Grid columns='equal'>
-                <NewRow>
+                <NewRow style={{ marginTop: '10px', padding: '0' }}>
                   <NewColumn>
-                    <div>{author}</div>
-                    <div>{writer}</div>
+                    <NameDiv>{author}</NameDiv>
+                    <div style={{ padding: '0px 2px', marginLeft: '14px' }}>{writer}</div>
                   </NewColumn>
                   <NewColumn textAlign='right'>
-                    {emotion}
-                  </NewColumn>
-                </NewRow>
-                <NewRow>
-                  <NewColumn textAlign='right'>
-                    <div>{time}</div>
+                    <Emoge>{emotion}</Emoge>
                   </NewColumn>
                 </NewRow>
                 <NewRow>
                   <NewColumn>
-                    <div>{content}</div>
+                    <div style={{ padding: '4px 2px', margin: '5px 0 0 14px', fontSize: '1.1rem' }}>{content}</div>
                   </NewColumn>
                 </NewRow>
                 <NewRow>
                   <NewColumn>
-                    <span><Icon name='thumbs outline up' size='large' />{likesForReview.length}</span>
-                    <span><Icon name='thumbs outline down' size='large' />{dislikesForReview.length}</span>
-                  </NewColumn>
-                  <NewColumn textAlign='right'>
-                    <div><Icon name='warning circle' size='large' onClick={e => this.handleIsVisibleClick(reviewId, uid, companyId)} /></div>
+                    <div style={{ paddingRight: '6px', marginLeft: '14px' }}>{time}</div>
                   </NewColumn>
                 </NewRow>
+                <Segment style={{ width: '100%', margin: '0', padding: '0 14px'}}>
+                  <div onClick={e => this.handlelikesForReviewClick(reviewId)} style={{ float: 'left', fontSize: '1.1rem', padding: '5px 5px 5px 0'}}><Icon name='thumbs outline up' size='large' />{likesForReview.length}</div>
+                  <div style={{ float: 'left', marginLeft: '10px', fontSize: '1.1rem', padding: '5px'}}><Icon name='thumbs outline down' size='large' />{dislikesForReview.length}</div>
+                  <div style={{ float: 'right', padding: '5px'}}><Icon name='warning circle' size='large' onClick={e => this.handleIsVisibleClick(reviewId, uid, companyId)} /></div>
+                </Segment>
               </Grid>
             </Segment>
           ))
