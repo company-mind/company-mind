@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import { Card, Form, Image, Input, Label, List, Message, TextArea, Transition } from 'semantic-ui-react';
-import * as firebase from 'firebase';
+import { Form, Label, List, Message, TextArea } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const StyledForm = styled(Form)`
   margin: 0 auto;
   margin-top: 10px;
   width: 340px;
-`
+`;
+
 const StyledList = styled(List)`
   margin: 0 auto;
   text-align: center;
-`
+`;
+
 export default class ReviewForm extends Component {
   static defaultProps = {
     errorMessage: '',
@@ -45,33 +46,29 @@ export default class ReviewForm extends Component {
       <StyledForm>
         <StyledList horizontal size="massive">
           <List.Item onClick={() => this.handleEmojiClick(1)}>
-            <span>😡</span>
+            {'😡'}
           </List.Item>
           <List.Item onClick={() => this.handleEmojiClick(2)}>
-            <span>😭</span>
+            {'😭'}
           </List.Item>
           <List.Item onClick={() => this.handleEmojiClick(3)}>
-            <span>😄</span>
+            {'😄'}
           </List.Item>
           <List.Item onClick={() => this.handleEmojiClick(4)}>
-            <span>😍</span>
+            {'😍'}
           </List.Item>
         </StyledList>
         <Form.Field>
-          <TextArea placeholder='리뷰를 남겨주세요. 10자 이상 140 이하로 남길 수 있습니다.' onChange={this.handleChange} />
-          {textCount > 140 ?
-            <Transition.Group animation='shake' duration='500' visible>
-              <Label color='red' attached='bottom right'>140자를 넘었습니다.</Label>
-            </Transition.Group>
-            : null}
+          <TextArea placeholder="리뷰를 남겨주세요. 10자 이상 140 이하로 남길 수 있습니다." onChange={this.handleChange} />
+          {textCount > 140 ? <Label color="red" attached="bottom right">140자를 넘었습니다.</Label> : null}
         </Form.Field>
         <Form.Button
-          floated='right'
+          floated="right"
           color={
-            textCount > 140 || textCount < 10 && textCount > 0 ? 'grey'
-            : textCount <= 140 && textCount > 120 ? 'red'
-            : textCount > 90 && textCount <= 120 ? 'orange'
-            : 'green'
+            textCount > 140 || textCount < 10 && textCount > 0 ?
+            'grey' : textCount <= 140 && textCount > 120 ?
+            'red' : textCount > 90 && textCount <= 120 ?
+            'orange': 'green'
           }
           disabled={
             textCount > 140 || textCount < 10 && textCount >= 1
