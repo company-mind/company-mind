@@ -12,7 +12,6 @@ const NewLColumn = styled(Grid.Column) `
 `
 const MSegment = styled(Segment) `
   margin: 0px !important;
-  cursor: pointer;
 `
 const NewDiv = styled.div`
   padding : 2px;
@@ -29,7 +28,6 @@ const Emoge = styled.div`
 export default class CompanyArticle extends Component {
   static defaultProps = {
     companyItem: {},
-    onMount: () => { },
   }
   render(){
     const { companyItem } = this.props
