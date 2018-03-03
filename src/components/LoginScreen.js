@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-import { Button, Icon, Grid, Segment, Header } from 'semantic-ui-react';
+import { Button, Icon, Grid, Segment } from 'semantic-ui-react';
 import styled from 'styled-components';
 
-// Sementic UI(Grid, Button, Header, Segment)
-
-const FullHeightGrid = styled(Grid) `
+const FullHeightGrid = styled(Grid)`
   height: 100vh;
 `;
 
 export default class LoginScreen extends Component {
   static defaultProps = {
-    onGoogleLogin: () => { },
-    onTwitterLogin: () => { },
-    onFaceBookLogin: () => { },
-  }
+    onGoogleLogin: () => {},
+    onTwitterLogin: () => {},
+    onFaceBookLogin: () => {},
+  };
+
   render() {
     return (
       <FullHeightGrid centered verticalAlign="middle">
