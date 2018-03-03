@@ -9,6 +9,7 @@ import withAuth from '../src/hocs/withAuth';
 
 import LoginScreenContainer from './containers/LoginScreenContainer';
 import CompanyListContainer from './containers/CompanyListContainer';
+import CompanyDetailContainer from './containers/CompanyDetailContainer';
 
 const store = createStore(
   rootReducer,
@@ -25,6 +26,7 @@ class App extends Component { // router 설정
             <Route path="/login" component={LoginScreenContainer} />
             <Route path="/nickname" component={LoginScreenContainer} />
             <Route path="/list" component={CompanyListContainer} />
+            <Route path="/companyDetail/:companyId" component={CompanyDetailContainer}/>
           </div>
         </BrowserRouter>
       </Provider>

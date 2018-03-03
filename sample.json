@@ -432,5 +432,194 @@
       "scrapScore": 205,
       "reviewScore": 101
     }
+  },
+  "reviews": {
+    "review0": {
+      "uid": "user1",
+      "companyId": "company54",
+      "time": 15,
+      "content": "너무 좋아요.",
+      "emotion": 4,
+      "writer": "직장인"
+    },
+    "review1": {
+      "uid": "user2",
+      "companyId": "company54",
+      "time": 14,
+      "content": "너무 좋아요!!!!!.",
+      "emotion": 3,
+      "writer": "직장인"
+    },
+    "review2": {
+      "uid": "user3",
+      "companyId": "company54",
+      "time": 13,
+      "content": "너무 싫어!!!!!.",
+      "emotion": 1,
+      "writer": "직장인"
+    },
+    "review3": {
+      "uid": "user4",
+      "companyId": "company54",
+      "time": 12,
+      "content": "너무 좋아요ㅅㅅㅅㅅ!!!!!.",
+      "emotion": 4,
+      "writer": "퇴직자"
+    },
+    "review4": {
+      "uid": "user5",
+      "companyId": "company54",
+      "time": 11,
+      "content": "가지마라",
+      "emotion": 1,
+      "writer": "퇴직자"
+    },
+    "review5": {
+      "uid": "user6",
+      "companyId": "company54",
+      "time": 10,
+      "content": "가고싶다....",
+      "emotion": 3,
+      "writer": "구직자"
+    },
+    "review6": {
+      "uid": "user7",
+      "companyId": "company54",
+      "time": 9,
+      "content": "면접봄",
+      "emotion": 3,
+      "writer": "구직자"
+    },
+    "review7": {
+      "uid": "user7",
+      "companyId": "company54",
+      "time": 8,
+      "content": "다닐만함",
+      "emotion": 3,
+      "writer": "퇴직자"
+    },
+    "review8": {
+      "uid": "user8",
+      "companyId": "company54",
+      "time": 7,
+      "content": "ㅇㅇㅇ",
+      "emotion": 1,
+      "writer": "구직자"
+    },
+    "review9": {
+      "uid": "user9",
+      "companyId": "company54",
+      "time": 6,
+      "content": "ㅌㅌㅌ",
+      "emotion": 1,
+      "writer": "구직자"
+    },
+    "review10": {
+      "uid": "user10",
+      "companyId": "company54",
+      "time": 5,
+      "content": "....",
+      "emotion": 2,
+      "writer": "퇴직자"
+    },
+    "review11": {
+      "uid": "user11",
+      "companyId": "company54",
+      "time": 4,
+      "content": "칼퇴",
+      "emotion": 3,
+      "writer": "직장인"
+    },
+    "review12": {
+      "uid": "user12",
+      "companyId": "company54",
+      "time": 3,
+      "content": "으악",
+      "emotion": 1,
+      "writer": "구직자"
+    },
+    "review13": {
+      "uid": "user13",
+      "companyId": "company54",
+      "time": 2,
+      "content": "흐륵",
+      "emotion": 3,
+      "writer": "구직자"
+    },
+    "review14": {
+      "uid": "user14",
+      "companyId": "company54",
+      "time": 1,
+      "content": "가즈아~!!!",
+      "emotion": 3,
+      "writer": "구직자"
+    }
+  },
+  "users": {
+    "user1": {
+      "nickname": "nickname1"
+    },
+    "user2": {
+      "nickname": "nickname2"
+    },
+    "user3": {
+      "nickname": "nickname3"
+    },
+    "user4": {
+      "nickname": "nickname4"
+    },
+    "user5": {
+      "nickname": "nickname5"
+    },
+    "user6": {
+      "nickname": "nickname6"
+    },
+    "user7": {
+      "nickname": "nickname7"
+    },
+    "user8": {
+      "nickname": "nickname8"
+    },
+    "user9": {
+      "nickname": "nickname9"
+    },
+    "user10": {
+      "nickname": "nickname10"
+    },
+    "user11": {
+      "nickname": "nickname11"
+    },
+    "user12": {
+      "nickname": "nickname12"
+    },
+    "user13": {
+      "nickname": "nickname13"
+    },
+    "user14": {
+      "nickname": "nickname14"
+    }
+  },
+  "likesForReview": {
+    "review0": {
+      "user1": true,
+      "user2": true
+    },
+    "review1": {
+      "user3": true,
+      "user4": true,
+      "user5": true,
+      "user6": true
+    }
+  },
+  "dislikesForReview": {
+    "review0": {
+      "user10": true,
+      "user9": true,
+      "user7": true
+    },
+    "review1": {
+      "user1": true,
+      "user2": true
+    }
   }
 }
