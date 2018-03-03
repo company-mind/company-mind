@@ -20,23 +20,52 @@ const Emoge = styled.div`
   margin-top: -8px;
   margin-right: 14px;
 `
+const DockDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+`
+const DockButtonButton = styled(Button)`
+  cursor: pointer;
+  width: 30vh;
+  padding: 20px 15px;
+`
 
 export default class CompanyReviewList extends Component {
+  static defaultProps = {
+    reviewItem: [],
+    pageNumber: 1,
+    onSubstrangermit: () => { },
+    onReviewButtonClick: () => { },
+    onPrevButtonClick: () => { },
+    onDeleteButtonClick: () => { },
+    onlikesForReviewClick: () => { },
+    isVisible: false,
+  }
+
   handlePaginationChange = (e, { activePage }) => {
     this.props.onPaginationChange(this.props, activePage)
   }
+
   handleIsVisibleClick = (reviewId, uid, companyId) => {
     this.props.onReviewButtonClick(reviewId, uid, companyId)
   }
+
   handlePrevClick = () => {
     this.props.onPrevButtonClick()
   }
+
   handleDeleteClick = () => {
     this.props.onDeleteButtonClick(this.props)
   }
+
   handlelikesForReviewClick = (reviewId) => {
     this.props.onlikesForReviewClick(reviewId)
   }
+
   render(){
     const { reviewItem, pageNumber, isVisible } = this.props;
     return(
@@ -65,9 +94,9 @@ export default class CompanyReviewList extends Component {
                   </NewColumn>
                 </NewRow>
                 <Segment style={{ width: '100%', margin: '0', padding: '0 14px'}}>
-                  <div onClick={e => this.handlelikesForReviewClick(reviewId)} style={{ float: 'left', fontSize: '1.1rem', padding: '5px 5px 5px 0'}}><Icon name='thumbs outline up' size='large' />{likesForReview.length}</div>
-                  <div style={{ float: 'left', marginLeft: '10px', fontSize: '1.1rem', padding: '5px'}}><Icon name='thumbs outline down' size='large' />{dislikesForReview.length}</div>
-                  <div style={{ float: 'right', padding: '5px'}}><Icon name='warning circle' size='large' onClick={e => this.handleIsVisibleClick(reviewId, uid, companyId)} /></div>
+                  <div onClick={e => this.handlelikesForReviewClick(reviewId)} style={{ float: 'left', fontSize: '1.1rem', padding: '5px 5px 5px 0', cursor: 'pointer'}}><Icon name='thumbs outline up' size='large' />{likesForReview.length}</div>
+                  <div style={{ float: 'left', marginLeft: '10px', fontSize: '1.1rem', padding: '5px', cursor: 'pointer'}}><Icon name='thumbs outline down' size='large' />{dislikesForReview.length}</div>
+                  <div style={{ float: 'right', padding: '5px', cursor: 'pointer' }}><Icon name='ellipsis horizontal' size='large' onClick={e => this.handleIsVisibleClick(reviewId, uid, companyId)} /></div>
                 </Segment>
               </Grid>
             </Segment>
@@ -88,10 +117,21 @@ export default class CompanyReviewList extends Component {
             </NewColumn>
           </NewRow>
         </Grid>
-        <Dock position='bottom' isVisible={isVisible} fluid={true}>
-            <Button fluid>리뷰 수정하기</Button>
-            <Button fluid onClick={this.handleDeleteClick}>리뷰 삭제하기</Button>
-            <Button fluid onClick={this.handlePrevClick}>돌아가기</Button>
+        <Dock position='bottom' isVisible={isVisible} >
+          <DockDiv>
+            <DockButtonButton basic color='black'>
+              <Icon name='add user' style={{fontSize: '1.2rem'}} />
+                리뷰 수정하기
+            </DockButtonButton>
+            <DockButtonButton onClick={this.handleDeleteClick} basic color='black'>
+              <Icon name='remove user' style={{ fontSize: '1.2rem' }} />
+                리뷰 삭제하기
+            </DockButtonButton>
+            <DockButtonButton onClick={this.handlePrevClick} color='black'>
+              <Icon name='log out' style={{ fontSize: '1.2rem' }} />
+                돌아가기
+            </DockButtonButton>
+          </DockDiv>
         </Dock>
       </Segment>
     )

@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import CompanyReviewList from '../components/CompanyReviewList';
-import { dispatchCompanyReviewList, dispatPagination, dispatVisible, dispatInVisible, dispatReviewDelete } from '../ducks/companyReviewList';
+import { dispatchCompanyReviewList,
+         dispatPagination,
+         dispatVisible,
+         dispatInVisible,
+         dispatReviewDelete,
+         dispatlikesForReview,
+        } from '../ducks/companyReviewList';
 
 class CompanyReviewListContainer extends Component {
 
@@ -37,15 +43,16 @@ export default connect(
       dispatch(dispatPagination({ reviewSort, pageNumber }, activePage))
     },
     onReviewButtonClick: (reviewId, uid, companyId) => {
-      console.log(reviewId, companyId)
       dispatch(dispatVisible(reviewId, uid, companyId))
     },
     onPrevButtonClick: () => {
       dispatch(dispatInVisible())
     },
     onDeleteButtonClick: ({ reviewId, companyId }) => {
-      console.log(reviewId, companyId)
       dispatch(dispatReviewDelete({ reviewId, companyId }))
+    },
+    onlikesForReviewClick: ( reviewId ) => {
+      dispatch(dispatlikesForReview( reviewId ))
     },
   }),
 )(CompanyReviewListContainer)

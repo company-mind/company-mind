@@ -180,7 +180,6 @@ export const dispatInVisible = () => (dispatch) => {
 }
 
 export const dispatReviewDelete = ({ reviewId, companyId }) => async (dispatch) => {
-  console.log(reviewId, companyId)
   const reviewItemDelete = firebase.database().ref(`reviews/${reviewId}`).remove()
   const likesForReviewDelete = firebase.database().ref(`likesForReview/${reviewId}`).remove()
   const dislikesForReviewDelete = firebase.database().ref(`dislikesForReview/${reviewId}`).remove()
@@ -249,3 +248,6 @@ export const dispatReviewDelete = ({ reviewId, companyId }) => async (dispatch) 
   dispatch(companyReviewListSuccess(reviewItem, pageNumber))
 }
 
+export const dispatlikesForReview = (reviewId) => (dispatch) => {
+  dispatch(companyReviewListInvisibleness())
+}
