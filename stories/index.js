@@ -3,3 +3,4 @@ import './loginScreen';
 import './companyList';
 import './companyArticle';
 import './companyReviewList';
+import './companyDetailButton';
