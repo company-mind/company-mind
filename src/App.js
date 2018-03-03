@@ -12,6 +12,7 @@ import CompanyListContainer from './containers/CompanyListContainer';
 import CompanyDetailContainer from './containers/CompanyDetailContainer';
 import ReviewFormContainer from './containers/ReviewFormContainer';
 
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
   rootReducer,
@@ -29,11 +30,8 @@ class App extends Component {
             <Route path="/login" component={LoginScreenContainer} />
             <Route path="/nickname" component={LoginScreenContainer} />
             <Route path="/list" component={CompanyListContainer} />
-            <Route
-              path="/companyDetail/:companyId"
-              component={CompanyDetailContainer}
-            />
-            <Route path="/add-review" component={ReviewFormContainer} />
+            <Route path="/companyDetail/:companyId" component={CompanyDetailContainer}/>
+            <Route path="companyDetail/:companyId/addReview" component={ReviewFormContainer}/>
           </div>
         </BrowserRouter>
       </Provider>
