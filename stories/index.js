@@ -9,3 +9,4 @@ import './companyDetailOnButton';
 import './ReviewForm';
 import './companyArticle';
 import './companyReviewList';
+import './companyDetailButton';
