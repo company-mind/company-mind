@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase';
 import { connect } from 'react-redux';
+
 import CompanyDetailButton from '../components/CompanyDetailButton';
 import CompanyDetailOnButton from '../components/CompanyDetailOnButton';
-
-import { dispatchCompanyDetailButton } from '../ducks/companyDetailButton';
-
-
+import { dispatchCompanyDetailButton, dispatchCompanyDetailOnButton, dispatchCompanyDetailOffButton } from '../ducks/companyDetailButton';
 
 class CompanyDetailButtonContainer extends Component{
   static defaultProps = {
@@ -19,7 +18,6 @@ class CompanyDetailButtonContainer extends Component{
 
   render() {
     const { onMount, scrap, ...rest } = this.props;
-    console.log(rest)
     if(scrap){
       return(
         <CompanyDetailOnButton {...rest}/>
@@ -41,6 +39,12 @@ export default connect(
   dispatch => ({
     onMount: ({ companyId }) => {
       dispatch(dispatchCompanyDetailButton({ companyId }))
+    },
+    onScrapClick: ({ companyId }) => {
+      dispatch(dispatchCompanyDetailOnButton({ companyId }))
+    },
+    offScrapClick: ({ companyId }) => {
+      dispatch(dispatchCompanyDetailOffButton({ companyId }))
     }
   }),
 )(CompanyDetailButtonContainer)

@@ -16,6 +16,9 @@ const NewLink = styled(Link) `
   text-decoration: none;
 `
 export default class CompanyDetailOnButton extends Component {
+  handleScrapButton = () => {
+    this.props.offScrapClick(this.props.match.params)
+  }
   render() {
     return (
       <MSegment>
@@ -28,7 +31,7 @@ export default class CompanyDetailOnButton extends Component {
             </NewLink>
           </NewColumn>
           <NewColumn textAlign='center'>
-            <Segment>
+            <Segment onClick={this.handleScrapButton}>
               <Icon name='star' color='yellow' size='large' />스크랩 하기
             </Segment>
           </NewColumn>

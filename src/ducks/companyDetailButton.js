@@ -35,7 +35,26 @@ export default function (state = initialState, action) {
 }
 
 export const dispatchCompanyDetailButton = ({ companyId }) => async (dispatch) => {
-  // const uid = firebase.auth().currentUser;
-  // const snapshot = await firebase.database().ref('scraps').orderByChild(`${uid}`).equalTo(`${companyId}`).once('value');
-  // const companyObj = snapshot.val();
+  const { uid } = firebase.auth().currentUser;
+  const snapshot = await firebase.database().ref(`scraps/${uid}`).once('value');
+  const companyObj = snapshot.val();
+  if(companyObj[companyId]){
+    dispatch(companyDetailOnScrap())
+  } else {
+    dispatch(companyDetailOffScrap())
+  }
+}
+
+export const dispatchCompanyDetailOnButton = ({ companyId }) => async (dispatch) => {
+  const { uid } = firebase.auth().currentUser;
+  const snapshot = await firebase.database().ref(`scraps/${uid}`).update({
+    [`${companyId}`]: true,
+  });
+    dispatch(companyDetailOnScrap())
+}
+
+export const dispatchCompanyDetailOffButton = ({ companyId }) => async (dispatch) => {
+  const { uid } = firebase.auth().currentUser;
+  const snapshot = await firebase.database().ref(`scraps/${uid}/${companyId}`).remove();
+    dispatch(companyDetailOffScrap())
 }
