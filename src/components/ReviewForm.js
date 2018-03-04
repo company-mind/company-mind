@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Label, List, Message, TextArea } from 'semantic-ui-react';
+import { Form, Label, List, TextArea } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const StyledForm = styled(Form)`
@@ -21,6 +21,7 @@ export default class ReviewForm extends Component {
   }
 
   state = {
+    companyId: this.props.match.params.companyId,
     emotion: null,
     content: '',
   }
@@ -39,8 +40,8 @@ export default class ReviewForm extends Component {
   }
 
   render() {
-    const { emotion, content } = this.state;
-    const { creating, errorMessage } = this.props;
+    const { content } = this.state;
+    const { creating } = this.props;
     const textCount = content.length;
     return (
       <StyledForm>
