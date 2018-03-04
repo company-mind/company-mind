@@ -5,3 +5,4 @@ import './companyList';
 import './companyArticle';
 import './companyReviewList';
 import './companyDetailButton';
+import './companyDetailOnButton';
