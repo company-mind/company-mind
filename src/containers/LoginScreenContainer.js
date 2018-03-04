@@ -59,7 +59,7 @@ export default class LoginScreenContainer extends Component {
     } else {
       this.setState({
         isDuplicateValidated: true,
-      })
+      });
     }
     this.setState({ isNicknameLoading: false });
   }, 500);
@@ -112,7 +112,7 @@ export default class LoginScreenContainer extends Component {
           loading={isNicknameLoading}
           nickname={nickname}
           error={error}
-          isEnabled={ isPatternValidated && isDuplicateValidated}
+          isEnabled={isPatternValidated && isDuplicateValidated}
           handleNicknameChange={this.handleNicknameChange}
           handleSubmit={this.handleSubmit}
         />
