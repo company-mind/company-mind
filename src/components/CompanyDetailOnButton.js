@@ -15,9 +15,9 @@ const NewLink = styled(Link) `
   color: inherit;
   text-decoration: none;
 `
-export default class CompanyDetailButton extends Component {
+export default class CompanyDetailOnButton extends Component {
   render() {
-    return(
+    return (
       <MSegment>
         <Grid columns={2}>
           <NewColumn textAlign='center'>
@@ -25,11 +25,11 @@ export default class CompanyDetailButton extends Component {
               <Segment>
                 <Icon name='pencil' size='large' />리뷰 쓰기
               </Segment>
-             </NewLink>
+            </NewLink>
           </NewColumn>
           <NewColumn textAlign='center'>
             <Segment>
-              <Icon name='empty star' size='large' />스크랩 하기
+              <Icon name='star' color='yellow' size='large' />스크랩 하기
             </Segment>
           </NewColumn>
         </Grid>
