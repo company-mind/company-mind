@@ -10,7 +10,7 @@ class ReviewFormContainer extends Component {
     const { success, ...rest } = this.props;
     if (success) {
       return (
-        <Redirect to="/list" />
+        <Redirect to="/companyDetail/:companyId" />
       );
     }
     return (
