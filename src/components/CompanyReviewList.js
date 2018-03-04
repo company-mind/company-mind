@@ -44,6 +44,7 @@ export default class CompanyReviewList extends Component {
     onDeleteButtonClick: () => { },
     onlikesForReviewClick: () => { },
     isVisible: false,
+    isUserVisible: false,
   }
 
   handlePaginationChange = (e, { activePage }) => {
@@ -52,6 +53,10 @@ export default class CompanyReviewList extends Component {
 
   handleIsVisibleClick = (reviewId, uid, companyId) => {
     this.props.onReviewButtonClick(reviewId, uid, companyId)
+  }
+
+  handleUserPrevClick = () => {
+    this.props.onUserPrevButtonClick()
   }
 
   handlePrevClick = () => {
@@ -67,7 +72,8 @@ export default class CompanyReviewList extends Component {
   }
 
   render(){
-    const { reviewItem, pageNumber, isVisible } = this.props;
+    const { reviewItem, pageNumber, isVisible, isUserVisible } = this.props;
+    console.log(isUserVisible, isVisible)
     return(
       <Segment>
         {
@@ -117,7 +123,7 @@ export default class CompanyReviewList extends Component {
             </NewColumn>
           </NewRow>
         </Grid>
-        <Dock position='bottom' isVisible={isVisible} >
+        <Dock position='bottom' isVisible={isUserVisible} >
           <DockDiv>
             <DockButtonButton basic color='black'>
               <Icon name='add user' style={{fontSize: '1.2rem'}} />
@@ -126,6 +132,18 @@ export default class CompanyReviewList extends Component {
             <DockButtonButton onClick={this.handleDeleteClick} basic color='black'>
               <Icon name='remove user' style={{ fontSize: '1.2rem' }} />
                 리뷰 삭제하기
+            </DockButtonButton>
+            <DockButtonButton onClick={this.handleUserPrevClick} color='black'>
+              <Icon name='log out' style={{ fontSize: '1.2rem' }} />
+                돌아가기
+            </DockButtonButton>
+          </DockDiv>
+        </Dock>
+        <Dock position='bottom' isVisible={isVisible} >
+          <DockDiv>
+            <DockButtonButton basic color='black'>
+              <Icon name='warning circle' style={{fontSize: '1.2rem'}} />
+                신고하기
             </DockButtonButton>
             <DockButtonButton onClick={this.handlePrevClick} color='black'>
               <Icon name='log out' style={{ fontSize: '1.2rem' }} />

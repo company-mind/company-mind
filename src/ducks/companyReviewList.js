@@ -4,6 +4,8 @@ export const SORTING = 'companyReviewList/SORTING';
 export const SUCCESS = 'companyReviewList/SUCCESS';
 export const VISIBLENESS = 'companyReviewList/VISIBLENESS'
 export const INVISIBLENESS = 'companyReviewList/INVISIBLENESS'
+export const USERVISIBLENESS = 'companyReviewList/USERVISIBLENESS'
+export const USERINVISIBLENESS = 'companyReviewList/USERINVISIBLENESS'
 export const DELETE = 'companyReviewList/DELETE'
 
 export function companyReviewListSorting(reviewSort) {
@@ -19,11 +21,9 @@ export function companyReviewListSuccess(reviewItem, pageNumber) {
     pageNumber,
   };
 }
-export function companyReviewListVisibleness(reviewId, companyId) {
+export function companyReviewListVisibleness() {
   return {
     type: VISIBLENESS,
-    reviewId,
-    companyId,
   };
 }
 export function companyReviewListInvisibleness() {
@@ -31,6 +31,19 @@ export function companyReviewListInvisibleness() {
     type: INVISIBLENESS,
   };
 }
+export function companyReviewListUserVisibleness(reviewId, companyId) {
+  return {
+    type: USERVISIBLENESS,
+    reviewId,
+    companyId,
+  };
+}
+export function companyReviewListUserInvisibleness() {
+  return {
+    type: USERINVISIBLENESS,
+  };
+}
+
 export function companyReviewListDelete() {
   return {
     type: DELETE,
@@ -42,6 +55,7 @@ const initialState = {
   reviewItem: [],
   pageNumber: 0,
   isVisible: false,
+  isUserVisible: false,
   delete: false,
   reviewId: [],
   companyId: []
@@ -61,19 +75,31 @@ export default function (state = initialState, action) {
         reviewItem: action.reviewItem,
         pageNumber: action.pageNumber,
       }
+    case USERVISIBLENESS:
+      return {
+        ...state,
+        isUserVisible: true,
+        isVisible: false,
+        reviewId: action.reviewId,
+        companyId: action.companyId,
+      }
+    case USERINVISIBLENESS:
+      return {
+        ...state,
+        isUserVisible: false,
+        reviewId: [],
+        companyId: [],
+      }
     case VISIBLENESS:
       return {
         ...state,
+        isUserVisible: false,
         isVisible: true,
-        reviewId: action.reviewId,
-        companyId: action.companyId,
       }
     case INVISIBLENESS:
       return {
         ...state,
         isVisible: false,
-        reviewId: [],
-        companyId: [],
       }
     case DELETE:
       return {
@@ -105,65 +131,67 @@ export const dispatchCompanyReviewList = ({match}) => async (dispatch) => {
   const companyId = match.params.companyId
   const snapshot = await firebase.database().ref('reviews').orderByChild('companyId').equalTo(`${companyId}`).once('value');
   const reviewObj = snapshot.val();
-  const reviewSort = Object.entries(reviewObj).map(([reviewId, review]) => ({
-    ...review,
-    reviewId,
-  }))
-  const uidSet = new Set(reviewSort.map(reviewSort => reviewSort.uid))
-  const uidObj = {}
-  const nickPs = Array.from(uidSet).map(async uid => {
-    const snapshot = await firebase.database().ref(`users/${uid}/nickname`).once('value')
-    const nickname = snapshot.val();
-    return [uid, nickname]
-  })
-  const nicknameArr = await Promise.all(nickPs)
-  for (const [uid, nickname] of nicknameArr) {
-    uidObj[uid] = nickname
+  if (reviewObj){
+    const reviewSort = Object.entries(reviewObj).map(([reviewId, review]) => ({
+      ...review,
+      reviewId,
+    }))
+    const uidSet = new Set(reviewSort.map(reviewSort => reviewSort.uid))
+    const uidObj = {}
+    const nickPs = Array.from(uidSet).map(async uid => {
+      const snapshot = await firebase.database().ref(`users/${uid}/nickname`).once('value')
+      const nickname = snapshot.val();
+      return [uid, nickname]
+    })
+    const nicknameArr = await Promise.all(nickPs)
+    for (const [uid, nickname] of nicknameArr) {
+      uidObj[uid] = nickname
+    }
+
+    const reviewIdSet = new Set(reviewSort.map(reviewSort => reviewSort.reviewId))
+    const likesReviewIdObj = {}
+    const likePs = Array.from(reviewIdSet).map(async reviewId => {
+      const snapshot = await firebase.database().ref(`likesForReview/${reviewId}`).once('value')
+      const likesForReview = snapshot.val();
+      return [reviewId, likesForReview]
+    })
+    const likesForReviewArr = await Promise.all(likePs)
+    for (const [reviewId, likesForReview] of likesForReviewArr) {
+      likesReviewIdObj[reviewId] = likesForReview
+    }
+
+    const dislikesReviewIdObj = {}
+    const dislikePs = Array.from(reviewIdSet).map(async reviewId => {
+      const snapshot = await firebase.database().ref(`dislikesForReview/${reviewId}`).once('value')
+      const dislikesForReview = snapshot.val();
+      return [reviewId, dislikesForReview]
+    })
+    const dislikesForReviewArr = await Promise.all(dislikePs)
+    for (const [reviewId, dislikesForReview] of dislikesForReviewArr) {
+      dislikesReviewIdObj[reviewId] = dislikesForReview
+    }
+
+    reviewSort.forEach(reviewSort => {
+      reviewSort.author = uidObj[reviewSort.uid];
+      reviewSort.emotion = emotion(reviewSort.emotion)
+      likesReviewIdObj[reviewSort.reviewId] ?
+      reviewSort.likesForReview = Object.keys(likesReviewIdObj[reviewSort.reviewId]) :
+      reviewSort.likesForReview = []
+      dislikesReviewIdObj[reviewSort.reviewId] ?
+      reviewSort.dislikesForReview = Object.keys(dislikesReviewIdObj[reviewSort.reviewId]) :
+      reviewSort.dislikesForReview = []
+    })
+
+    dispatch(companyReviewListSorting(reviewSort))
+
+    let pageNumber = Math.trunc(reviewSort.length / 6);
+    if(pageNumber % 6){
+      pageNumber++
+    }
+
+    const reviewItem = reviewSort.slice(0, 6)
+    dispatch(companyReviewListSuccess(reviewItem, pageNumber))
   }
-
-  const reviewIdSet = new Set(reviewSort.map(reviewSort => reviewSort.reviewId))
-  const likesReviewIdObj = {}
-  const likePs = Array.from(reviewIdSet).map(async reviewId => {
-    const snapshot = await firebase.database().ref(`likesForReview/${reviewId}`).once('value')
-    const likesForReview = snapshot.val();
-    return [reviewId, likesForReview]
-  })
-  const likesForReviewArr = await Promise.all(likePs)
-  for (const [reviewId, likesForReview] of likesForReviewArr) {
-    likesReviewIdObj[reviewId] = likesForReview
-  }
-
-  const dislikesReviewIdObj = {}
-  const dislikePs = Array.from(reviewIdSet).map(async reviewId => {
-    const snapshot = await firebase.database().ref(`dislikesForReview/${reviewId}`).once('value')
-    const dislikesForReview = snapshot.val();
-    return [reviewId, dislikesForReview]
-  })
-  const dislikesForReviewArr = await Promise.all(dislikePs)
-  for (const [reviewId, dislikesForReview] of dislikesForReviewArr) {
-    dislikesReviewIdObj[reviewId] = dislikesForReview
-  }
-
-  reviewSort.forEach(reviewSort => {
-    reviewSort.author = uidObj[reviewSort.uid];
-    reviewSort.emotion = emotion(reviewSort.emotion)
-    likesReviewIdObj[reviewSort.reviewId] ?
-    reviewSort.likesForReview = Object.keys(likesReviewIdObj[reviewSort.reviewId]) :
-    reviewSort.likesForReview = []
-    dislikesReviewIdObj[reviewSort.reviewId] ?
-    reviewSort.dislikesForReview = Object.keys(dislikesReviewIdObj[reviewSort.reviewId]) :
-    reviewSort.dislikesForReview = []
-  })
-
-  dispatch(companyReviewListSorting(reviewSort))
-
-  let pageNumber = Math.trunc(reviewSort.length / 6);
-  if(pageNumber % 6){
-    pageNumber++
-  }
-
-  const reviewItem = reviewSort.slice(0, 6)
-  dispatch(companyReviewListSuccess(reviewItem, pageNumber))
 }
 
 export const dispatPagination = ({ reviewSort, pageNumber }, activePage) => (dispatch) => {
@@ -171,8 +199,18 @@ export const dispatPagination = ({ reviewSort, pageNumber }, activePage) => (dis
   dispatch(companyReviewListSuccess(reviewItem, pageNumber))
 }
 
-export const dispatVisible = (reviewId, uid, companyId) => (dispatch) => {
-  dispatch(companyReviewListVisibleness(reviewId, companyId))
+export const dispatVisible = (reviewId, reviewuid, companyId) => (dispatch) => {
+  const { uid } = firebase.auth().currentUser;
+  console.log(reviewuid, uid, uid === reviewuid)
+  if (uid === reviewuid){
+    dispatch(companyReviewListUserVisibleness(reviewId, companyId))
+  } else {
+    dispatch(companyReviewListVisibleness())
+  }
+}
+
+export const dispatUserInVisible = () => (dispatch) => {
+  dispatch(companyReviewListUserInvisibleness())
 }
 
 export const dispatInVisible = () => (dispatch) => {
@@ -238,7 +276,7 @@ export const dispatReviewDelete = ({ reviewId, companyId }) => async (dispatch) 
       reviewSort.dislikesForReview = []
   })
   dispatch(companyReviewListSorting(reviewSort))
-  dispatch(companyReviewListInvisibleness())
+  dispatch(companyReviewListUserInvisibleness())
   let pageNumber = Math.trunc(reviewSort.length / 6);
   if (pageNumber % 6) {
     pageNumber++

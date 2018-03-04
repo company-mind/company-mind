@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as firebase from 'firebase';
 
 import CompanyReviewList from '../components/CompanyReviewList';
 import { dispatchCompanyReviewList,
@@ -8,6 +9,7 @@ import { dispatchCompanyReviewList,
          dispatInVisible,
          dispatReviewDelete,
          dispatlikesForReview,
+         dispatUserInVisible,
         } from '../ducks/companyReviewList';
 
 class CompanyReviewListContainer extends Component {
@@ -31,6 +33,7 @@ export default connect(
     reviewItem: state.companyReviewList.reviewItem,
     pageNumber: state.companyReviewList.pageNumber,
     isVisible: state.companyReviewList.isVisible,
+    isUserVisible: state.companyReviewList.isUserVisible,
     reviewId: state.companyReviewList.reviewId,
     companyId: state.companyReviewList.companyId,
   }),
@@ -44,6 +47,9 @@ export default connect(
     },
     onReviewButtonClick: (reviewId, uid, companyId) => {
       dispatch(dispatVisible(reviewId, uid, companyId))
+    },
+    onUserPrevButtonClick: () => {
+      dispatch(dispatUserInVisible())
     },
     onPrevButtonClick: () => {
       dispatch(dispatInVisible())
