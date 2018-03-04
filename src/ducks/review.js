@@ -73,7 +73,7 @@ export default function (state = initialState, action) {
 }
 
 // thunk
-export const createReview = ({ emotion, content }) => async (dispatch) => {
+export const createReview = ({ companyId, emotion, content }) => async (dispatch) => {
   // error handling
   if (!emotion) {
     dispatch(reviewError('이모지는 반드시 선택하셔야 합니다.'));
@@ -94,11 +94,19 @@ export const createReview = ({ emotion, content }) => async (dispatch) => {
       .ref('reviews')
       .push({
         writer: currentUser.uid,
-        companyId: null, // FIXME
+        companyId,
         createdAt: firebase.database.ServerValue.TIMESTAMP,
         emotion,
         content,
       });
+    const currentCompanyRef = await firebase.database().ref(`company/${companyId}`);
+    const currentCompanySnapshot = currentCompanyRef.once('value');
+    const currentCompanyObj = currentCompanySnapshot.val();
+    const { reviewScore, emotionScore } = currentCompanyObj;
+    currentCompanyRef.update({
+      reviewScore: reviewScore + 1,
+      emotionScore: ((emotionScore * reviewScore) + emotion) / (reviewScore + 1),
+    });
     dispatch(reviewSuccess());
     dispatch(reviewInitial());
   } catch (e) {
