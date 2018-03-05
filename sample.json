@@ -553,6 +553,14 @@
       "content": "가즈아~!!!",
       "emotion": 3,
       "writer": "구직자"
+    },
+    "review15": {
+      "uid": "UhuPsfrtfFc1ly8GnLi0erH7j6v2",
+      "companyId": "company54",
+      "time": 1234,
+      "content": "가즈아~!!!",
+      "emotion": 3,
+      "writer": "구직자"
     }
   },
   "users": {
@@ -631,7 +639,9 @@
       "company1": true
     },
     "UhuPsfrtfFc1ly8GnLi0erH7j6v2": {
-      "company59": true
+      "company59": true,
+      "company1": true,
+      "company54": true
     }
   }
 }
