@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase';
 
 import CompanyArticleContainer from './CompanyArticleContainer';
 import CompanyReviewListContainer from './CompanyReviewListContainer';
 import CompanyDetailButtonContainer from './CompanyDetailButtonContainer';
+import withAuth from '../hocs/withAuth';
 
-export default class CompanyDetailContainer extends Component {
+class CompanyDetailContainer extends Component {
   render(){
     const { ...rest } = this.props
     return(
@@ -16,3 +18,5 @@ export default class CompanyDetailContainer extends Component {
     )
   }
 }
+
+export default withAuth(CompanyDetailContainer);
