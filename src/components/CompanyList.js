@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Grid, Icon, Segment } from 'semantic-ui-react';
+import { Grid, Icon, Segment, Pagination } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import InfiniteScroll from 'react-infinite-scroller';
 
 const NewColumn = styled(Grid.Column)`
   padding: 0px !important;
@@ -20,7 +19,6 @@ const MSegment = styled(Segment)`
 const NewDiv = styled.div`
   padding : 2px;
 `
-
 const NameDiv = styled.div`
   padding : 2px;
   font-family: 'Spoqa-Han-Sans-Bold';
@@ -29,18 +27,13 @@ const Emoge = styled.div`
   font-Size: 55px;
   text-Align: center;
 `
-
-const NewUl = styled.ul`
-  list-style: none;
-  display: flex;
-  padding : 0px;
-  margin : 0px;
-  margin-left: 4px;
-`
-
 const NewLink = styled(Link)`
   color: inherit;
   text-decoration: none;
+`
+const NewRow = styled(Grid.Row) `
+  padding: 0px !important;
+  margin-top: 15px;
 `
 
 export default class CompanyList extends Component {
@@ -48,41 +41,19 @@ export default class CompanyList extends Component {
     companies: [],
     onMount: () => { },
   }
-
-  state = {
-    companies: [],
+  handlePaginationChange = (e, { activePage }) => {
+    this.props.onPaginationChange({activePage})
   }
-
-  loadFunc = () => {
-    setTimeout(() => {
-      this.props.onHasMore(this.props)
-      this.setState(prevState => {
-        if (!this.props.complete){
-          return {
-            companies: [...this.props.companies]
-          };
-        } else {
-          return{
-            companies: [...this.props.completeList]
-          }
-        }
-      });
-    }, 500);
-  };
-
   render() {
+    const { pageItems, pageNumber } = this.props;
     return (
       <Segment>
-        <InfiniteScroll loadMore={this.loadFunc}
-          hasMore={this.props.hasmore}
-          loader={<div className=" loader " ><Icon loading name='spinner' size='large' color='black' />Loading ... </div>}
-        >
         {
-          this.state.companies.map(({
+          pageItems.map(({
         id, name, group, address, scrapScore, reviewScore, emotionScore, itemProps = {},
          }) => (
-        <NewLink to={`/companydetail/${id}`} >
-          <MSegment {...itemProps} key={id} >
+        <NewLink to={`/companydetail/${id}`} key={id}>
+          <MSegment {...itemProps} >
             <Grid>
               <Grid.Row stretched>
                 <NewLColumn width={10}>
@@ -113,7 +84,21 @@ export default class CompanyList extends Component {
         </NewLink>
          ))
         }
-        </InfiniteScroll>
+        <Grid>
+          <NewRow>
+            <NewColumn textAlign='center'>
+              <Pagination
+                defaultActivePage={1}
+                firstItem={null}
+                lastItem={null}
+                pointing
+                secondary
+                totalPages={pageNumber}
+                onPageChange={this.handlePaginationChange}
+              />
+            </NewColumn>
+          </NewRow>
+        </Grid>
       </Segment>
     )
   }
