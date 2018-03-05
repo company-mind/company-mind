@@ -68,12 +68,15 @@ export default class CompanyReviewList extends Component {
   }
 
   handlelikesForReviewClick = (reviewId) => {
-    this.props.onlikesForReviewClick(reviewId)
+    this.props.onlikesForReviewClick(reviewId, this.props)
+  }
+
+  handleDislikesForReviewClick = (reviewId) => {
+    this.props.onDislikesForReviewClick(reviewId, this.props)
   }
 
   render(){
     const { reviewItem, pageNumber, isVisible, isUserVisible } = this.props;
-    console.log(isUserVisible, isVisible)
     return(
       <Segment>
         {
@@ -101,7 +104,7 @@ export default class CompanyReviewList extends Component {
                 </NewRow>
                 <Segment style={{ width: '100%', margin: '0', padding: '0 14px'}}>
                   <div onClick={e => this.handlelikesForReviewClick(reviewId)} style={{ float: 'left', fontSize: '1.1rem', padding: '5px 5px 5px 0', cursor: 'pointer'}}><Icon name='thumbs outline up' size='large' />{likesForReview.length}</div>
-                  <div style={{ float: 'left', marginLeft: '10px', fontSize: '1.1rem', padding: '5px', cursor: 'pointer'}}><Icon name='thumbs outline down' size='large' />{dislikesForReview.length}</div>
+                  <div onClick={e => this.handleDislikesForReviewClick(reviewId)} style={{ float: 'left', marginLeft: '10px', fontSize: '1.1rem', padding: '5px', cursor: 'pointer'}}><Icon name='thumbs outline down' size='large' />{dislikesForReview.length}</div>
                   <div style={{ float: 'right', padding: '5px', cursor: 'pointer' }}><Icon name='ellipsis horizontal' size='large' onClick={e => this.handleIsVisibleClick(reviewId, uid, companyId)} /></div>
                 </Segment>
               </Grid>

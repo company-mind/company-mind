@@ -10,6 +10,7 @@ import { dispatchCompanyReviewList,
          dispatReviewDelete,
          dispatlikesForReview,
          dispatUserInVisible,
+         dispatDislikesForReview,
         } from '../ducks/companyReviewList';
 
 class CompanyReviewListContainer extends Component {
@@ -36,6 +37,7 @@ export default connect(
     isUserVisible: state.companyReviewList.isUserVisible,
     reviewId: state.companyReviewList.reviewId,
     companyId: state.companyReviewList.companyId,
+    activePage: state.companyReviewList.activePage,
   }),
   // mapDispatchToProps
   dispatch => ({
@@ -57,8 +59,11 @@ export default connect(
     onDeleteButtonClick: ({ reviewId, companyId }) => {
       dispatch(dispatReviewDelete({ reviewId, companyId }))
     },
-    onlikesForReviewClick: ( reviewId ) => {
-      dispatch(dispatlikesForReview( reviewId ))
+    onlikesForReviewClick: ( reviewId, {activePage} ) => {
+      dispatch(dispatlikesForReview( reviewId, {activePage} ))
+    },
+    onDislikesForReviewClick: ( reviewId, {activePage} ) => {
+      dispatch(dispatDislikesForReview( reviewId, {activePage} ))
     },
   }),
 )(CompanyReviewListContainer)
