@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import CompanyList from '../components/CompanyList';
-import { fetchCompanyList, fetchOnCompanyList } from '../ducks/companyList';
+import { fetchCompanyList, fetchPagination } from '../ducks/companyList';
 import withLoading from '../hocs/withLoading';
 
 const LoadingcompanyList = withLoading(CompanyList);
@@ -28,18 +28,17 @@ class CompanyListContainer extends Component {
 export default connect (
   // mapStateToProps
   state => ({
-    companies: state.companyList.companies,
-    hasmore: state.companyList.hasmore,
-    complete: state.companyList.complete,
-    completeList: state.companyList.completeList,
+    companyItems: state.companyList.companyItems,
+    pageItems: state.companyList.pageItems,
+    pageNumber: state.companyList.pageNumber,
   }),
   // mapDispatchToProps
   dispatch => ({
     onMount: () => {
       dispatch(fetchCompanyList())
     },
-    onHasMore: ({ complete, hasmore }) => {
-      dispatch(fetchOnCompanyList({ complete, hasmore }))
+    onPaginationChange: ({ activePage }) => {
+      dispatch(fetchPagination({ activePage }))
     },
   }),
  )(CompanyListContainer);

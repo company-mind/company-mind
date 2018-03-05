@@ -1,27 +1,20 @@
 import * as firebase from 'firebase';
 
 export const SUCCESS = 'companyList/SUCCESS';
-export const HASMORE = 'companyList/HASMORE';
-export const COMPLETE = 'companyList/COMPLETE';
+export const PAGINATION = 'companyList/PAGINATION';
 
-
-export function companyhasmore() {
+export function companyListPagination(pageItems, pageNumber) {
   return {
-    type: HASMORE,
+    type: PAGINATION,
+    pageItems,
+    pageNumber,
   };
 }
 
-export function companyListComplete(completeList) {
-  return {
-    type: COMPLETE,
-    completeList,
-  };
-}
-
-export function companyListSuccess(companies) {
+export function companyListSuccess(companyItems) {
   return {
     type: SUCCESS,
-    companies,
+    companyItems,
   };
 }
 
@@ -40,45 +33,31 @@ const emotion = (score) => {
 }
 
 const initialState = {
-  complete: false,
-  hasmore: false,
-  companies: [],
-  completeList: [],
+  companyItems: [],
+  pageItems: [],
+  pageNumber: 1,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case HASMORE:
-      return {
-        ...state,
-        hasmore: true,
-      };
       case SUCCESS:
       return {
         ...state,
-        companies: action.companies,
+        companyItems: action.companyItems,
       };
-      case COMPLETE:
-        return {
-          ...state,
-          complete: true,
-          hasmore: false,
-          completeList: action.completeList,
-        };
+      case PAGINATION:
+      return {
+        ...state,
+        pageItems: action.pageItems,
+        pageNumber: action.pageNumber,
+      };
     default:
       return state;
   }
 }
 
 
-let List_Number = 0
-
 export const fetchCompanyList = () => async (dispatch) => {
-  List_Number = 0
-  dispatch(companyhasmore());
-}
-
-export const fetchOnCompanyList = ({ complete, hasmore }) => async (dispatch) => {
   const snapshot = await firebase.database().ref('company').once('value');
   const companyObj = snapshot.val();
   const companies = Object.entries(companyObj).map(([id, company]) => ({
@@ -92,22 +71,20 @@ export const fetchOnCompanyList = ({ complete, hasmore }) => async (dispatch) =>
   }));
   const scrapSort = newCompanies.sort((x, y) => x.scrapScore - y.scrapScore)
   const reviewSort = scrapSort.sort((x, y) => y.reviewScore - x.reviewScore)
-
-  if(complete && hasmore){
-    dispatch(companyListComplete(reviewSort))
-  } else{
-     if(!complete){
-       if ( List_Number <= reviewSort.length ){
-         const slice = reviewSort.slice(0, (List_Number))
-         dispatch(companyListSuccess(slice));
-         List_Number = List_Number + 5
-       } else {
-         const slice = reviewSort.slice(0, (List_Number))
-         dispatch(companyListComplete(slice))
-       }
-     } else {
-       const slice = reviewSort.slice(0, (List_Number))
-       dispatch(companyListComplete(slice))
-    }
+  dispatch(companyListSuccess(reviewSort))
+  let pageNumber = Math.trunc(reviewSort.length / 8);
+  if (pageNumber % 8) {
+    pageNumber++
   }
+  const pageItems = reviewSort.slice(0, 8)
+  dispatch(companyListPagination(pageItems, pageNumber))
 }
+
+export const fetchPagination = ({ activePage }) => async (dispatch, getState) => {
+  const stateItems = getState()
+  const companyItems = stateItems.companyList.companyItems
+  const pageNumber = stateItems.companyList.pageNumber
+  const pageItems = companyItems.slice((8 * (activePage - 1)), (8 * activePage))
+  dispatch(companyListPagination(pageItems, pageNumber))
+}
+
