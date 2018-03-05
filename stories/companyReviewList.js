@@ -10,7 +10,7 @@ const reviewItem = [
     writer: '퇴사자',
     content: '이회사 너무 좋아요',
     emotion: 4,
-    createdAt: "2017.02.24",
+    createdAt: '2017.02.24',
   },
   {
     id: 'review1',
@@ -18,13 +18,12 @@ const reviewItem = [
     writer: '직장인',
     content: '죽을맛',
     emotion: 1,
-    createdAt: "2017.02.25",
+    createdAt: '2017.02.25',
   },
-]
+];
 
-const page = [1, 2, 3]
+const page = [1, 2, 3];
 
-storiesOf('CompanyReviewList', module)
-  .add('default', () => (
-    <CompanyReviewList reviewItem={reviewItem} page={page} />
-  ));
+storiesOf('CompanyReviewList', module).add('default', () => (
+  <CompanyReviewList reviewItem={reviewItem} page={page} />
+));

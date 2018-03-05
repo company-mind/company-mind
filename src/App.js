@@ -12,12 +12,8 @@ import CompanyListContainer from './containers/CompanyListContainer';
 import CompanyDetailContainer from './containers/CompanyDetailContainer';
 import ReviewFormContainer from './containers/ReviewFormContainer';
 
-
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
-);
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
 class App extends Component {
   // router 설정
