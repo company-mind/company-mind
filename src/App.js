@@ -16,13 +16,17 @@ const store = createStore(
   applyMiddleware(thunk),
 );
 
+const Home = withAuth(() => (
+  <Redirect to="list" />
+));
+
 class App extends Component { // router 설정
   render() {
     return (
       <Provider store={store}>
         <BrowserRouter>
           <div>
-            <Route path="/" exact />
+            <Route path="/" exact component={Home} />
             <Route path="/login" component={LoginScreenContainer} />
             <Route path="/nickname" component={LoginScreenContainer} />
             <Route path="/list" component={CompanyListContainer} />
