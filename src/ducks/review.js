@@ -73,7 +73,9 @@ export default function (state = initialState, action) {
 }
 
 // thunk
-export const createReview = ({ companyId, emotion, content }) => async (dispatch) => {
+export const createReview = ({
+  companyId, writer, emotion, content,
+}) => async (dispatch) => {
   // error handling
   if (!emotion) {
     dispatch(reviewError('이모지는 반드시 선택하셔야 합니다.'));
@@ -93,9 +95,10 @@ export const createReview = ({ companyId, emotion, content }) => async (dispatch
       .database()
       .ref('reviews')
       .push({
-        writer: currentUser.uid,
+        uid: currentUser.uid,
         companyId,
-        createdAt: firebase.database.ServerValue.TIMESTAMP,
+        time: firebase.database.ServerValue.TIMESTAMP,
+        writer,
         emotion,
         content,
       });
@@ -105,10 +108,10 @@ export const createReview = ({ companyId, emotion, content }) => async (dispatch
     const { reviewScore, emotionScore } = currentCompanyObj;
     currentCompanyRef.update({
       reviewScore: reviewScore + 1,
-      emotionScore: ((emotionScore * reviewScore) + emotion) / (reviewScore + 1),
+      emotionScore: (emotionScore * reviewScore + emotion) / (reviewScore + 1),
     });
     dispatch(reviewSuccess());
-    dispatch(reviewInitial());
+    // dispatch(reviewInitial());
   } catch (e) {
     dispatch(reviewError(`알 수 없는 에러가 발생했습니다. 다시 시도해 주세요: ${e.message}`));
   }

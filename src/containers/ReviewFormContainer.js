@@ -2,20 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-import ReviewForm from '../components/ReviewForm';
 import { createReview } from '../ducks/review';
+
+import ReviewForm from '../components/ReviewForm';
+// import CompanyArticleContainer from '../containers/CompanyArticleContainer';
+// import CompanyDetailButtonContainer from '../containers/CompanyDetailButtonContainer';
+// import CompanyReviewListContainer from '../containers/CompanyReviewListContainer';
 
 class ReviewFormContainer extends Component {
   render() {
+    const { companyId } = this.props.match.params;
     const { success, ...rest } = this.props;
     if (success) {
-      return (
-        <Redirect to="/companyDetail/:companyId" />
-      );
+      return <Redirect to={`/companyDetail/${companyId}`} />;
     }
-    return (
-      <ReviewForm {...rest} />
-    );
+    return <ReviewForm {...rest} />;
   }
 }
 
@@ -28,8 +29,15 @@ export default connect(
   }),
   // mapDispatchToProps
   dispatch => ({
-    onSubmit: ({ emotion, content }) => {
-      dispatch(createReview({ emotion, content }));
+    onSubmit: ({
+      companyId, writer, emotion, content,
+    }) => {
+      dispatch(createReview({
+        companyId,
+        writer,
+        emotion,
+        content,
+      }));
     },
   }),
 )(ReviewFormContainer);
