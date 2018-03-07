@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { Form, Label, List, TextArea } from 'semantic-ui-react';
+import { Form, Image, Label, List, Segment, TextArea } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const StyledForm = styled(Form)`
   margin: 0 auto;
   margin-top: 10px;
-  width: 340px;
+  margin-bottom: 10px;
+  padding: 10px;
 `;
 
-const StyledList = styled(List)`
-  margin: 0 auto;
+const Emoji = styled(Segment)`
   text-align: center;
 `;
 
@@ -51,17 +51,13 @@ export default class ReviewForm extends Component {
     const textCount = content.length;
     return (
       <StyledForm>
-        <StyledList horizontal size="massive">
-          <List.Item onClick={() => this.handleEmojiClick(1)}>😡</List.Item>
-          <List.Item onClick={() => this.handleEmojiClick(2)}>😭</List.Item>
-          <List.Item onClick={() => this.handleEmojiClick(3)}>😄</List.Item>
-          <List.Item onClick={() => this.handleEmojiClick(4)}>😍</List.Item>
-        </StyledList>
-        <Form.Field
-          control="select"
-          value={this.state.writer}
-          onChange={this.handleWriterChange}
-        >
+        <Segment.Group horizontal>
+          <Emoji onClick={() => this.handleEmojiClick(1)}><span style={{ fontSize: '48px' }}>😡</span></Emoji>
+          <Emoji onClick={() => this.handleEmojiClick(2)}><span style={{ fontSize: '48px' }}>😭</span></Emoji>
+          <Emoji onClick={() => this.handleEmojiClick(3)}><span style={{ fontSize: '48px' }}>😄</span></Emoji>
+          <Emoji onClick={() => this.handleEmojiClick(4)}><span style={{ fontSize: '48px' }}>😍</span></Emoji>
+        </Segment.Group>
+        <Form.Field control="select" value={this.state.writer} onChange={this.handleWriterChange}>
           <option value="재직자">재직자</option>
           <option value="퇴사자">퇴사자</option>
           <option value="구직자">구직자</option>
