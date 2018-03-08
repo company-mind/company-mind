@@ -18,7 +18,7 @@ export default class ReviewForm extends Component {
 
   state = {
     companyId: this.props.match.params.companyId,
-    writer: '재직자',
+    writer: '다니고 있어요',
     emotion: null,
     clickedEmoji: null,
     content: '',
