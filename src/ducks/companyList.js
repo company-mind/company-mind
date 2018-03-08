@@ -43,18 +43,17 @@ export function companyListSearchSuccess(results) {
 }
 
 const emotion = (score) => {
-  if(score > 0 && score <= 1){
-    return '😡'
-  } else if (score > 1 && score <= 2){
-    return '😭'
-  } else if (score > 2 && score <= 3){
-    return '😄'
-  } else if (score > 3 && score <= 4){
-    return '😍'
-  } else{
-    return '❔'
+  if (score > 0 && score <= 1) {
+    return '😡';
+  } else if (score > 1 && score <= 2) {
+    return '😭';
+  } else if (score > 2 && score <= 3) {
+    return '😄';
+  } else if (score > 3 && score <= 4) {
+    return '😍';
   }
-}
+  return '❔';
+};
 
 const initialState = {
   loading: false,
@@ -102,19 +101,18 @@ export default function (state = initialState, action) {
   }
 }
 
-
 export const fetchCompanyList = () => async (dispatch, getState) => {
   dispatch(companyListLoading())
   const snapshot = await firebase.database().ref('company').once('value');
   const companyObj = snapshot.val();
   const companies = Object.entries(companyObj).map(([id, company]) => ({
     ...company,
-    id
+    id,
   }));
   const newCompanies = companies.map(({ address, emotionScore, ...rest }) => ({
     ...rest,
-    address: address.split(' ')[1] + "/" + address.split(' ')[2],
-    emotionScore: emotion(emotionScore)
+    address: `${address.split(' ')[1]}/${address.split(' ')[2]}`,
+    emotionScore: emotion(emotionScore),
   }));
   const companyItems = newCompanies.sort((x, y) => {
     if(x.reviewScore > y.reviewScore){
@@ -135,7 +133,7 @@ export const fetchCompanyList = () => async (dispatch, getState) => {
   dispatch(companyListSuccess(companyItems))
   let pageNumber = Math.trunc(companyItems.length / 8);
   if (pageNumber % 8) {
-    pageNumber++
+    pageNumber++;
   }
   const pageItems = companyItems.slice(0, 8)
   dispatch(companyListPagination(pageItems, pageNumber))
@@ -178,4 +176,3 @@ export const fetchResultSelect = ({ result }) => async (dispatch, getState) => {
     dispatch(companyListPagination(pageItems, 1))
   }, 505)
 }
-

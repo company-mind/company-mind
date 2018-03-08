@@ -11,32 +11,31 @@ export function companyArticleSuccess(companyItem) {
 
 const initialState = {
   companyItem: [],
-}
+};
 
 export default function (state = initialState, action) {
-  switch(action.type){
+  switch (action.type) {
     case SUCCESS:
-      return{
+      return {
         companyItem: action.companyItem,
-      }
+      };
     default:
       return state;
   }
 }
 
 const emotion = (score) => {
-  if(score > 0 && score <= 1){
-    return '😡'
-  } else if (score > 1 && score <= 2){
-    return '😭'
-  } else if (score > 2 && score <= 3){
-    return '😄'
-  } else if (score > 3 && score <= 4){
-    return '😍'
-  } else{
-    return '❔'
+  if (score > 0 && score <= 1) {
+    return '😡';
+  } else if (score > 1 && score <= 2) {
+    return '😭';
+  } else if (score > 2 && score <= 3) {
+    return '😄';
+  } else if (score > 3 && score <= 4) {
+    return '😍';
   }
-}
+  return '❔';
+};
 
 export const dispatchCompanyArticle = ({ companyId }) => async (dispatch) => {
   const snapshot = await firebase.database().ref(`company/${companyId}`).once('value');
@@ -44,7 +43,7 @@ export const dispatchCompanyArticle = ({ companyId }) => async (dispatch) => {
   const companyItem = {
     ...companyObj,
     emotionScore: emotion(companyObj.emotionScore),
-    shortAddress: companyObj.address.split(' ')[1] + "/" + companyObj.address.split(' ')[2],
-  }
-  dispatch(companyArticleSuccess(companyItem))
-}
+    shortAddress: `${companyObj.address.split(' ')[1]}/${companyObj.address.split(' ')[2]}`,
+  };
+  dispatch(companyArticleSuccess(companyItem));
+};
