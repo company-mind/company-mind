@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { createReview } from '../ducks/review';
 
 import ReviewForm from '../components/ReviewForm';
-// import CompanyArticleContainer from '../containers/CompanyArticleContainer';
-// import CompanyDetailButtonContainer from '../containers/CompanyDetailButtonContainer';
-// import CompanyReviewListContainer from '../containers/CompanyReviewListContainer';
+import CompanyArticleContainer from '../containers/CompanyArticleContainer';
+import CompanyDetailButtonContainer from '../containers/CompanyDetailButtonContainer';
+import CompanyReviewListContainer from '../containers/CompanyReviewListContainer';
 
 class ReviewFormContainer extends Component {
   render() {
@@ -16,7 +16,13 @@ class ReviewFormContainer extends Component {
     if (success) {
       return <Redirect to={`/companyDetail/${companyId}`} />;
     }
-    return <ReviewForm {...rest} />;
+    return (
+      <Fragment>
+        <CompanyArticleContainer {...rest} />
+        <ReviewForm {...rest} />
+        <CompanyReviewListContainer {...rest} />
+      </Fragment>
+    );
   }
 }
 
