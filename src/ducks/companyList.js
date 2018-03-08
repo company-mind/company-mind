@@ -2,17 +2,10 @@ import * as firebase from 'firebase';
 import _ from 'lodash'
 
 export const LOADING = 'companyList/LOADING';
-export const SEARCHINIT = 'companyList/LOADING';
 export const SEARCHLOADING = 'companyList/SEARCHLOADING';
 export const SUCCESS = 'companyList/SUCCESS';
 export const SEARCHSUCCESS = 'companyList/SEARCHSUCCESS';
 export const PAGINATION = 'companyList/PAGINATION';
-
-export function companyListSearchInit() {
-  return {
-    type: SEARCHINIT,
-  };
-}
 
 export function companyListLoading() {
   return {
@@ -80,37 +73,30 @@ export default function (state = initialState, action) {
       ...state,
       loading: true,
     };
-      case SEARCHINIT:
-      return {
-        ...state,
-        searchLoading: false,
-        value: '',
-        results: [],
-      };
-      case SEARCHLOADING:
-      return {
-        ...state,
-        searchLoading: true,
-        value: action.value,
-      };
-      case SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        companyItems: action.companyItems,
-      };
-      case SEARCHSUCCESS:
-      return {
-        ...state,
-        searchLoading: false,
-        results: action.results,
-      };
-      case PAGINATION:
-      return {
-        ...state,
-        pageItems: action.pageItems,
-        pageNumber: action.pageNumber,
-      };
+    case SEARCHLOADING:
+    return {
+      ...state,
+      searchLoading: true,
+      value: action.value,
+    };
+    case SUCCESS:
+    return {
+      ...state,
+      loading: false,
+      companyItems: action.companyItems,
+    };
+    case SEARCHSUCCESS:
+    return {
+      ...state,
+      searchLoading: false,
+      results: action.results,
+    };
+    case PAGINATION:
+    return {
+      ...state,
+      pageItems: action.pageItems,
+      pageNumber: action.pageNumber,
+    };
     default:
       return state;
   }
@@ -130,14 +116,28 @@ export const fetchCompanyList = () => async (dispatch, getState) => {
     address: address.split(' ')[1] + "/" + address.split(' ')[2],
     emotionScore: emotion(emotionScore)
   }));
-  const scrapSort = newCompanies.sort((x, y) => x.scrapScore - y.scrapScore)
-  const reviewSort = scrapSort.sort((x, y) => y.reviewScore - x.reviewScore)
-  dispatch(companyListSuccess(reviewSort))
-  let pageNumber = Math.trunc(reviewSort.length / 8);
+  const companyItems = newCompanies.sort((x, y) => {
+    if(x.reviewScore > y.reviewScore){
+      return -1;
+    } else if (x.reviewScore < y.reviewScore){
+      return 1;
+    } else {
+      if (x.scrapScore > y.scrapScore){
+        return -1;
+      } else if (x.scrapScore < y.scrapScore){
+        return 1;
+      } else {
+        return 0
+      }
+    }
+  })
+
+  dispatch(companyListSuccess(companyItems))
+  let pageNumber = Math.trunc(companyItems.length / 8);
   if (pageNumber % 8) {
     pageNumber++
   }
-  const pageItems = reviewSort.slice(0, 8)
+  const pageItems = companyItems.slice(0, 8)
   dispatch(companyListPagination(pageItems, pageNumber))
 }
 
