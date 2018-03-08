@@ -102,16 +102,21 @@ export const createReview = ({
         emotion,
         content,
       });
-    const currentCompanyRef = await firebase.database().ref(`company/${companyId}`);
-    const currentCompanySnapshot = currentCompanyRef.once('value');
+    const currentCompanySnapshot = await firebase
+      .database()
+      .ref(`company/${companyId}`)
+      .once('value');
     const currentCompanyObj = currentCompanySnapshot.val();
     const { reviewScore, emotionScore } = currentCompanyObj;
-    currentCompanyRef.update({
-      reviewScore: reviewScore + 1,
-      emotionScore: (emotionScore * reviewScore + emotion) / (reviewScore + 1),
-    });
+    await firebase
+      .database()
+      .ref(`company/${companyId}`)
+      .update({
+        reviewScore: reviewScore + 1,
+        emotionScore: (emotionScore * reviewScore + emotion) / (reviewScore + 1),
+      });
     dispatch(reviewSuccess());
-    // dispatch(reviewInitial());
+    dispatch(reviewInitial());
   } catch (e) {
     dispatch(reviewError(`알 수 없는 에러가 발생했습니다. 다시 시도해 주세요: ${e.message}`));
   }
