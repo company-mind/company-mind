@@ -20,11 +20,12 @@ export default class CompanyDetailButton extends Component {
     this.props.onScrapClick(this.props.match.params);
   };
   render() {
+    const { companyId } = this.props.match.params;
     return (
       <MSegment>
         <Grid columns={2}>
           <NewColumn textAlign="center">
-            <NewLink to="/companydetail">
+            <NewLink to={`/companydetail/${companyId}/addReview`}>
               <Segment>
                 <Icon name="pencil" size="large" />리뷰 쓰기
               </Segment>
