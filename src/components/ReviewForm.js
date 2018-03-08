@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Image, Label, List, Segment, TextArea } from 'semantic-ui-react';
+import { Form, Header, Label, Segment, TextArea } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const StyledForm = styled(Form)`
@@ -7,10 +7,6 @@ const StyledForm = styled(Form)`
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 10px;
-`;
-
-const Emoji = styled(Segment)`
-  text-align: center;
 `;
 
 export default class ReviewForm extends Component {
