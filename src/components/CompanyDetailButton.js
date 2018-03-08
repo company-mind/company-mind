@@ -25,7 +25,7 @@ export default class CompanyDetailButton extends Component {
       <MSegment>
         <Grid columns={2}>
           <NewColumn textAlign="center">
-            <NewLink to={`/companydetail/${companyId}/addReview`}>
+            <NewLink to={`/companyDetail/${companyId}/addReview`}>
               <Segment>
                 <Icon name="pencil" size="large" />리뷰 쓰기
               </Segment>
