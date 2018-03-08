@@ -58,13 +58,14 @@ export default class CompanyList extends Component {
     return (
       <MSegment>
         <Search
-          style={{width: "100%"}}
+          style={{ marginBottom: "15px", marginLeft: "40px"}}
           loading={searchLoading}
           onResultSelect={this.handleResultSelect}
           onSearchChange={this.handleSearchChange}
           results={results}
           value={value}
           resultRenderer={resultRenderer}
+          size="huge"
         />
         {
           pageItems.map(({
