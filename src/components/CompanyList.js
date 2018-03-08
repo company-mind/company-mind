@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Icon, Segment, Pagination } from 'semantic-ui-react';
+import { Grid, Icon, Segment, Pagination, Search, Input } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -33,7 +33,10 @@ const NewLink = styled(Link)`
 `
 const NewRow = styled(Grid.Row) `
   padding: 0px !important;
-  margin-top: 15px;
+  margin-top: 10px;
+`
+const NewSearch = styled(Search)`
+  width: 100%;
 `
 
 export default class CompanyList extends Component {
@@ -44,10 +47,25 @@ export default class CompanyList extends Component {
   handlePaginationChange = (e, { activePage }) => {
     this.props.onPaginationChange({activePage})
   }
+  handleResultSelect = (e, { result }) => {
+    this.props.onResultSelect({ result })
+  }
+  handleSearchChange = (e, { value }) => {
+    this.props.onSearchChange({ value })
+  }
   render() {
-    const { pageItems, pageNumber } = this.props;
+    const { pageItems, pageNumber, resultRenderer, searchLoading, value, results } = this.props;
     return (
-      <Segment>
+      <MSegment>
+        <Search
+          style={{width: "100%"}}
+          loading={searchLoading}
+          onResultSelect={this.handleResultSelect}
+          onSearchChange={this.handleSearchChange}
+          results={results}
+          value={value}
+          resultRenderer={resultRenderer}
+        />
         {
           pageItems.map(({
         id, name, group, address, scrapScore, reviewScore, emotionScore, itemProps = {},
@@ -99,7 +117,7 @@ export default class CompanyList extends Component {
             </NewColumn>
           </NewRow>
         </Grid>
-      </Segment>
+      </MSegment>
     )
   }
 }

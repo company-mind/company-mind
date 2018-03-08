@@ -1,7 +1,31 @@
 import * as firebase from 'firebase';
+import _ from 'lodash'
 
+export const LOADING = 'companyList/LOADING';
+export const SEARCHINIT = 'companyList/LOADING';
+export const SEARCHLOADING = 'companyList/SEARCHLOADING';
 export const SUCCESS = 'companyList/SUCCESS';
+export const SEARCHSUCCESS = 'companyList/SEARCHSUCCESS';
 export const PAGINATION = 'companyList/PAGINATION';
+
+export function companyListSearchInit() {
+  return {
+    type: SEARCHINIT,
+  };
+}
+
+export function companyListLoading() {
+  return {
+    type: LOADING,
+  };
+}
+
+export function companyListSearchLoading(value) {
+  return {
+    type: SEARCHLOADING,
+    value,
+  };
+}
 
 export function companyListPagination(pageItems, pageNumber) {
   return {
@@ -15,6 +39,13 @@ export function companyListSuccess(companyItems) {
   return {
     type: SUCCESS,
     companyItems,
+  };
+}
+
+export function companyListSearchSuccess(results) {
+  return {
+    type: SEARCHSUCCESS,
+    results,
   };
 }
 
@@ -33,17 +64,46 @@ const emotion = (score) => {
 }
 
 const initialState = {
+  loading: false,
+  searchLoading: false,
+  value: '',
   companyItems: [],
+  results: [],
   pageItems: [],
   pageNumber: 1,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case LOADING:
+    return {
+      ...state,
+      loading: true,
+    };
+      case SEARCHINIT:
+      return {
+        ...state,
+        searchLoading: false,
+        value: '',
+        results: [],
+      };
+      case SEARCHLOADING:
+      return {
+        ...state,
+        searchLoading: true,
+        value: action.value,
+      };
       case SUCCESS:
       return {
         ...state,
+        loading: false,
         companyItems: action.companyItems,
+      };
+      case SEARCHSUCCESS:
+      return {
+        ...state,
+        searchLoading: false,
+        results: action.results,
       };
       case PAGINATION:
       return {
@@ -57,7 +117,8 @@ export default function (state = initialState, action) {
 }
 
 
-export const fetchCompanyList = () => async (dispatch) => {
+export const fetchCompanyList = () => async (dispatch, getState) => {
+  dispatch(companyListLoading())
   const snapshot = await firebase.database().ref('company').once('value');
   const companyObj = snapshot.val();
   const companies = Object.entries(companyObj).map(([id, company]) => ({
@@ -86,5 +147,35 @@ export const fetchPagination = ({ activePage }) => async (dispatch, getState) =>
   const pageNumber = stateItems.companyList.pageNumber
   const pageItems = companyItems.slice((8 * (activePage - 1)), (8 * activePage))
   dispatch(companyListPagination(pageItems, pageNumber))
+}
+
+export const fetchSearch = ({ value }) => async (dispatch, getState) => {
+  dispatch(companyListSearchLoading(value))
+  const stateItems = getState()
+  const source = stateItems.companyList.companyItems
+  setTimeout(() => {
+    const re = new RegExp(_.escapeRegExp(value), 'i')
+    const isMatch = result => re.test(result.name)
+    const results = ({
+      result: _.filter(source, isMatch)
+    })
+    dispatch(companyListSearchSuccess(results.result))
+
+    let pageNumber = Math.trunc(results.result.length / 8);
+    if (pageNumber % 8) {
+      pageNumber++
+    }
+    const pageItems = results.result.slice(0, 8)
+    dispatch(companyListPagination(pageItems, pageNumber))
+  }, 500)
+}
+
+export const fetchResultSelect = ({ result }) => async (dispatch, getState) => {
+  setTimeout(() => {
+    dispatch(companyListSearchLoading(result.name))
+    dispatch(companyListSearchSuccess([result]))
+    const pageItems = [result]
+    dispatch(companyListPagination(pageItems, 1))
+  }, 505)
 }
 
