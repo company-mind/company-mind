@@ -437,7 +437,7 @@
     "review0": {
       "uid": "user1",
       "companyId": "company54",
-      "time": 15,
+      "time": 1520270371,
       "content": "너무 좋아요.",
       "emotion": 4,
       "writer": "직장인"
@@ -445,7 +445,7 @@
     "review1": {
       "uid": "user2",
       "companyId": "company54",
-      "time": 14,
+      "time": 1520270371,
       "content": "너무 좋아요!!!!!.",
       "emotion": 3,
       "writer": "직장인"
@@ -453,7 +453,7 @@
     "review2": {
       "uid": "user3",
       "companyId": "company54",
-      "time": 13,
+      "time": 1520245171,
       "content": "너무 싫어!!!!!.",
       "emotion": 1,
       "writer": "직장인"
@@ -461,7 +461,7 @@
     "review3": {
       "uid": "user4",
       "companyId": "company54",
-      "time": 12,
+      "time": 1520245171,
       "content": "너무 좋아요ㅅㅅㅅㅅ!!!!!.",
       "emotion": 4,
       "writer": "퇴직자"
@@ -469,7 +469,7 @@
     "review4": {
       "uid": "user5",
       "companyId": "company54",
-      "time": 11,
+      "time": 1520245171,
       "content": "가지마라",
       "emotion": 1,
       "writer": "퇴직자"
@@ -477,7 +477,7 @@
     "review5": {
       "uid": "user6",
       "companyId": "company54",
-      "time": 10,
+      "time": 1520245171,
       "content": "가고싶다....",
       "emotion": 3,
       "writer": "구직자"
@@ -485,7 +485,7 @@
     "review6": {
       "uid": "user7",
       "companyId": "company54",
-      "time": 9,
+      "time": 1520504371,
       "content": "면접봄",
       "emotion": 3,
       "writer": "구직자"
@@ -493,7 +493,7 @@
     "review7": {
       "uid": "user7",
       "companyId": "company54",
-      "time": 8,
+      "time": 1520504371,
       "content": "다닐만함",
       "emotion": 3,
       "writer": "퇴직자"
@@ -503,13 +503,13 @@
       "companyId": "company54",
       "time": 7,
       "content": "ㅇㅇㅇ",
-      "emotion": 1,
+      "emotion": 1520504371,
       "writer": "구직자"
     },
     "review9": {
       "uid": "user9",
       "companyId": "company54",
-      "time": 6,
+      "time": 1520518771,
       "content": "ㅌㅌㅌ",
       "emotion": 1,
       "writer": "구직자"
@@ -517,7 +517,7 @@
     "review10": {
       "uid": "user10",
       "companyId": "company54",
-      "time": 5,
+      "time": 1520518771,
       "content": "....",
       "emotion": 2,
       "writer": "퇴직자"
@@ -525,7 +525,7 @@
     "review11": {
       "uid": "user11",
       "companyId": "company54",
-      "time": 4,
+      "time": 1520518771,
       "content": "칼퇴",
       "emotion": 3,
       "writer": "직장인"
@@ -533,7 +533,7 @@
     "review12": {
       "uid": "user12",
       "companyId": "company54",
-      "time": 3,
+      "time": 1520518771,
       "content": "으악",
       "emotion": 1,
       "writer": "구직자"
@@ -541,7 +541,7 @@
     "review13": {
       "uid": "user13",
       "companyId": "company54",
-      "time": 2,
+      "time": 1520518771,
       "content": "흐륵",
       "emotion": 3,
       "writer": "구직자"
@@ -549,7 +549,7 @@
     "review14": {
       "uid": "user14",
       "companyId": "company54",
-      "time": 1,
+      "time": 1520518771,
       "content": "가즈아~!!!",
       "emotion": 3,
       "writer": "구직자"
@@ -557,7 +557,7 @@
     "review15": {
       "uid": "UhuPsfrtfFc1ly8GnLi0erH7j6v2",
       "companyId": "company54",
-      "time": 1234,
+      "time": 1520518771,
       "content": "가즈아~!!!",
       "emotion": 3,
       "writer": "구직자"
