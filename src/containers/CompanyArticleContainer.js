@@ -6,31 +6,31 @@ import { dispatchCompanyArticle } from '../ducks/companyArticle';
 
 class CompanyArticleContainer extends Component {
   static defaultProps = {
-    onMount: () => { },
+    onMount: () => {},
     companyItem: [],
   }
 
   componentDidMount() {
-    this.props.onMount(this.props.match.params)
+    this.props.onMount(this.props.match.params);
   }
 
-  render(){
-    const { onMount, ...rest } = this.props
+  render() {
+    const { onMount, ...rest } = this.props;
     return (
       <CompanyArticle {...rest} />
-    )
+    );
   }
 }
 
-export default connect (
+export default connect(
   // mapStateToProps
   state => ({
-    companyItem: state.companyArticle.companyItem
+    companyItem: state.companyArticle.companyItem,
   }),
   // mapDispatchToProps
   dispatch => ({
-    onMount: ({companyId}) => {
-      dispatch(dispatchCompanyArticle({ companyId }))
-    }
+    onMount: ({ companyId }) => {
+      dispatch(dispatchCompanyArticle({ companyId }));
+    },
   }),
-)(CompanyArticleContainer)
+)(CompanyArticleContainer);

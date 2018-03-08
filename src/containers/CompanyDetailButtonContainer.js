@@ -4,29 +4,28 @@ import { connect } from 'react-redux';
 
 import CompanyDetailButton from '../components/CompanyDetailButton';
 import CompanyDetailOnButton from '../components/CompanyDetailOnButton';
-import { dispatchCompanyDetailButton, dispatchCompanyDetailOnButton, dispatchCompanyDetailOffButton } from '../ducks/companyDetailButton';
+import {
+  dispatchCompanyDetailButton,
+  dispatchCompanyDetailOnButton,
+  dispatchCompanyDetailOffButton,
+} from '../ducks/companyDetailButton';
 
-class CompanyDetailButtonContainer extends Component{
+class CompanyDetailButtonContainer extends Component {
   static defaultProps = {
-    onMount: () => { },
+    onMount: () => {},
     scrap: false,
-  }
+  };
 
   componentDidMount() {
-    this.props.onMount(this.props.match.params)
+    this.props.onMount(this.props.match.params);
   }
 
   render() {
     const { onMount, scrap, ...rest } = this.props;
-    if(scrap){
-      return(
-        <CompanyDetailOnButton {...rest}/>
-      )
-    } else {
-      return(
-        <CompanyDetailButton {...rest} />
-      )
+    if (scrap) {
+      return <CompanyDetailOnButton {...rest} />;
     }
+    return <CompanyDetailButton {...rest} />;
   }
 }
 
@@ -38,13 +37,13 @@ export default connect(
   // mapDispatchToProps
   dispatch => ({
     onMount: ({ companyId }) => {
-      dispatch(dispatchCompanyDetailButton({ companyId }))
+      dispatch(dispatchCompanyDetailButton({ companyId }));
     },
     onScrapClick: ({ companyId }) => {
-      dispatch(dispatchCompanyDetailOnButton({ companyId }))
+      dispatch(dispatchCompanyDetailOnButton({ companyId }));
     },
     offScrapClick: ({ companyId }) => {
-      dispatch(dispatchCompanyDetailOffButton({ companyId }))
-    }
+      dispatch(dispatchCompanyDetailOffButton({ companyId }));
+    },
   }),
-)(CompanyDetailButtonContainer)
+)(CompanyDetailButtonContainer);
