@@ -15,14 +15,17 @@ import ReviewFormContainer from './containers/ReviewFormContainer';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
-class App extends Component {
-  // router 설정
+const Home = withAuth(() => (
+  <Redirect to="list" />
+));
+
+class App extends Component { // router 설정
   render() {
     return (
       <Provider store={store}>
         <BrowserRouter>
           <div>
-            <Route path="/" exact />
+            <Route path="/" exact component={Home} />
             <Route path="/login" component={LoginScreenContainer} />
             <Route path="/nickname" component={LoginScreenContainer} />
             <Route path="/list" component={CompanyListContainer} />
