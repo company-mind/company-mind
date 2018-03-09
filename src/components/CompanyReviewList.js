@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Grid, Icon, Segment, Pagination, Button } from 'semantic-ui-react';
 import Dock from 'react-dock';
-import moment from 'moment';
+import * as moment from 'moment';
 import 'moment/locale/ko';
-
-moment.locale('ko');
 
 const NewColumn = styled(Grid.Column)`
   padding: 0px !important;
@@ -117,7 +115,7 @@ export default class CompanyReviewList extends Component {
                 </NewRow>
                 <NewRow>
                   <NewColumn>
-                    <div style={{ paddingRight: '6px', marginLeft: '14px' }}>{moment(time).fromNow()}</div>
+                    <div style={{ paddingRight: '6px', marginLeft: '14px' }}>{moment(time).local('ko').fromNow()}</div>
                   </NewColumn>
                 </NewRow>
                 <Segment style={{ width: '100%', margin: '0', padding: '0 14px' }}>
