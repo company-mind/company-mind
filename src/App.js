@@ -28,9 +28,9 @@ class App extends Component {
             <Route path="/login" component={LoginScreenContainer} />
             <Route path="/nickname" component={LoginScreenContainer} />
             <Route path="/list" component={CompanyListContainer} />
-            <Route path="/companyDetail/:companyId" exact component={CompanyDetailContainer} />
+            <Route path="/companydetail/:companyId" exact component={CompanyDetailContainer} />
             <Route
-              path="/companyDetail/:companyId/addReview"
+              path="/companydetail/:companyId/addreview"
               exact
               component={ReviewFormContainer}
             />

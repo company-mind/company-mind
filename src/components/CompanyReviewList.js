@@ -120,7 +120,7 @@ export default class CompanyReviewList extends Component {
                 </NewRow>
                 <Segment style={{ width: '100%', margin: '0', padding: '0 14px' }}>
                   <div
-                    onClick={e => this.handlelikesForReviewClick(reviewId)}
+                    onClick={() => this.handlelikesForReviewClick(reviewId)}
                     style={{
                       float: 'left',
                       fontSize: '1.1rem',
@@ -132,7 +132,7 @@ export default class CompanyReviewList extends Component {
                     {likesForReview.length}
                   </div>
                   <div
-                    onClick={e => this.handleDislikesForReviewClick(reviewId)}
+                    onClick={() => this.handleDislikesForReviewClick(reviewId)}
                     style={{
                       float: 'left',
                       marginLeft: '10px',
@@ -148,7 +148,7 @@ export default class CompanyReviewList extends Component {
                     <Icon
                       name="ellipsis horizontal"
                       size="large"
-                      onClick={e => this.handleIsVisibleClick(reviewId, uid, companyId)}
+                      onClick={() => this.handleIsVisibleClick(reviewId, uid, companyId)}
                     />
                   </div>
                 </Segment>
