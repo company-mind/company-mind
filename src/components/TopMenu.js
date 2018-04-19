@@ -1,20 +1,27 @@
 import React, { Component } from 'react';
 import { Button, Menu, Icon } from 'semantic-ui-react';
-import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export default class TopMenu extends Component {
+  handleLogOutButton = () => {
+    this.props.onLogOutClick();
+  };
   render() {
     return (
-      <Menu color='blue' inverted secondary >
+      <Menu color="blue" inverted secondary >
         <Menu.Item>
-          <Icon name='home' size='big' />
+          <Link to="/">
+            <Icon name="home" size="big" />
+          </Link>
         </Menu.Item>
         <Menu.Menu position="right">
           <Menu.Item>
-            <Button inverted>MyPage</Button>
+            <Link to="/mypage">
+              <Button inverted>MyPage</Button>
+            </Link>
           </Menu.Item>
           <Menu.Item>
-            <Button inverted>Log-out</Button>
+            <Button inverted onClick={this.handleLogOutButton}>Log-out</Button>
           </Menu.Item>
         </Menu.Menu>
       </Menu>

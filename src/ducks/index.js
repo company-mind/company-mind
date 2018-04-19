@@ -5,6 +5,7 @@ import companyArticle from './companyArticle';
 import companyReviewList from './companyReviewList';
 import companyDetailButton from './companyDetailButton';
 import review from './review';
+import topMenu from './topMenu';
 
 export default combineReducers({
   companyList,
@@ -12,4 +13,5 @@ export default combineReducers({
   companyReviewList,
   companyDetailButton,
   review,
+  topMenu,
 });
