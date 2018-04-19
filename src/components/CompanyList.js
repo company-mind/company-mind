@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Icon, Segment, Pagination, Search } from 'semantic-ui-react';
+import { Grid, Icon, Segment, Pagination, Input } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -13,6 +13,7 @@ const NewLColumn = styled(Grid.Column)`
 `;
 const MSegment = styled(Segment)`
   margin: 0px !important;
+  padding: 10px !important;
   cursor: pointer;
 `;
 const NewDiv = styled.div`
@@ -54,21 +55,14 @@ export default class CompanyList extends Component {
   }
   render() {
     const {
-      pageItems, pageNumber, resultRenderer, searchLoading, value, results,
+      pageItems, pageNumber, searchLoading,
     } = this.props;
     return (
-      <MSegment>
+      <div>
         <MinDiv>
-          <Search
-            style={{ marginBottom: '15px', marginLeft: '40px' }}
-            loading={searchLoading}
-            onResultSelect={this.handleResultSelect}
-            onSearchChange={this.handleSearchChange}
-            results={results}
-            value={value}
-            resultRenderer={resultRenderer}
-            size="huge"
-          />
+          <div style={{ padding: '10px' }}>
+            <Input fluid icon='search' placeholder='회사 검색...' onChange={this.handleSearchChange} loading={searchLoading} />
+          </div>
           {
           pageItems.map(({
         id, name, group, address, scrapScore, reviewScore, emotionScore, itemProps = {},
@@ -121,7 +115,7 @@ export default class CompanyList extends Component {
             </NewColumn>
           </NewRow>
         </Grid>
-      </MSegment>
+      </div>
     );
   }
 }

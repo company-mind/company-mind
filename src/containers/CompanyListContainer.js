@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Label } from 'semantic-ui-react'
+import { Label } from 'semantic-ui-react';
 
 import CompanyList from '../components/CompanyList';
 import { fetchCompanyList, fetchPagination, fetchSearch, fetchResultSelect } from '../ducks/companyList';
@@ -15,19 +15,18 @@ class CompanyListContainer extends Component {
   }
 
   componentDidMount() {
-    this.props.onMount()
+    this.props.onMount();
   }
 
-  render(){
+  render() {
     const { onMount, ...rest } = this.props;
-    const resultRenderer = ({ name }) => <Label content={name} />
-    return(
-      <LoadingcompanyList {...rest} onCompanyClick={this.handleCompanyClick} resultRenderer={resultRenderer}/>
-    )
+    return (
+      <LoadingcompanyList {...rest} onCompanyClick={this.handleCompanyClick} />
+    );
   }
 }
 
-export default connect (
+export default connect(
   // mapStateToProps
   state => ({
     loading: state.companyList.loading,
@@ -41,16 +40,16 @@ export default connect (
   // mapDispatchToProps
   dispatch => ({
     onMount: () => {
-      dispatch(fetchCompanyList())
+      dispatch(fetchCompanyList());
     },
     onPaginationChange: ({ activePage }) => {
-      dispatch(fetchPagination({ activePage }))
+      dispatch(fetchPagination({ activePage }));
     },
     onSearchChange: ({ value }) => {
-      dispatch(fetchSearch({ value }))
+      dispatch(fetchSearch({ value }));
     },
     onResultSelect: ({ result }) => {
-      dispatch(fetchResultSelect({ result }))
+      dispatch(fetchResultSelect({ result }));
     },
   }),
- )(CompanyListContainer);
+)(CompanyListContainer);
