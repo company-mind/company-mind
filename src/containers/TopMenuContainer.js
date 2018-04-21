@@ -16,12 +16,15 @@ class TopMenuContainer extends Component {
 export default connect(
   // mapStateToProps
   state => ({
-    logOut: state.TopMenu.logOut,
+    logOut: state.topMenu.logOut,
   }),
   // mapDispatchToProps
   dispatch => ({
-    onLogOutClick: () => {
-      dispatch(dispatchTopMenu());
+    onLogOutClick: (name) => {
+      dispatch(dispatchTopMenu(name));
+    },
+    onActiveItemClick: (name) => {
+      dispatch(dispatchTopMenu(name));
     },
   }),
 )(TopMenuContainer);

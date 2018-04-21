@@ -1,30 +1,45 @@
 import React, { Component } from 'react';
-import { Button, Menu, Icon } from 'semantic-ui-react';
+import { Menu, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const NewIcon = styled(Icon)`
+  margin: 0px !important;
+`;
+const NewMenu = styled(Menu)`
+  margin: 0px !important;
+`;
+const NewMenuItem = styled(Menu.Item)`
+  margin: 0px !important;
+`;
 
 export default class TopMenu extends Component {
-  handleLogOutButton = () => {
-    this.props.onLogOutClick();
+  handleActiveItem = (e, { name }) => {
+    this.props.onActiveItemClick(name);
+  }
+  handleLogOut = (e, { name }) => {
+    this.props.onLogOutClick(name);
   };
   render() {
+    const { activeItem } = this.props;
     return (
-      <Menu color="blue" inverted secondary >
-        <Menu.Item>
+      <NewMenu color="blue" inverted secondary >
+        <NewMenuItem name='home' active={activeItem === 'home'} onClick={this.handleActiveItem}>
           <Link to="/">
-            <Icon name="home" size="big" />
+            <NewIcon name="home" size="big" />
           </Link>
-        </Menu.Item>
+        </NewMenuItem>
         <Menu.Menu position="right">
-          <Menu.Item>
+          <NewMenuItem name='mypage' active={activeItem === 'mypage'} onClick={this.handleActiveItem}>
             <Link to="/mypage">
-              <Button inverted>MyPage</Button>
+              <NewIcon name="user" size="big" />
             </Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Button inverted onClick={this.handleLogOutButton}>Log-out</Button>
-          </Menu.Item>
+          </NewMenuItem>
+          <NewMenuItem name='logout' active={activeItem === 'logout'} onClick={this.handleLogOut}>
+            <NewIcon name="sign out" size="big" />
+          </NewMenuItem>
         </Menu.Menu>
-      </Menu>
+      </NewMenu>
     );
   }
 }

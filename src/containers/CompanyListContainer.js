@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Label } from 'semantic-ui-react';
 
 import CompanyList from '../components/CompanyList';
+import TopMenuContainer from './TopMenuContainer';
 import { fetchCompanyList, fetchPagination, fetchSearch, fetchResultSelect } from '../ducks/companyList';
 import withLoading from '../hocs/withLoading';
 
@@ -21,7 +21,10 @@ class CompanyListContainer extends Component {
   render() {
     const { onMount, ...rest } = this.props;
     return (
-      <LoadingcompanyList {...rest} onCompanyClick={this.handleCompanyClick} />
+      <div>
+        <TopMenuContainer {...rest} />
+        <LoadingcompanyList {...rest} onCompanyClick={this.handleCompanyClick} />
+      </div>
     );
   }
 }
