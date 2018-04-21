@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Menu, Icon } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NewIcon = styled(Icon)`
@@ -18,24 +18,29 @@ export default class TopMenu extends Component {
     this.props.onActiveItemClick(name);
   }
   handleLogOut = (e, { name }) => {
-    this.props.onLogOutClick(name);
+    this.props.onLogOutClick(e, { name });
   };
   render() {
-    const { activeItem } = this.props;
+    const { activeItem, logOut } = this.props;
+    if (logOut) {
+      return (
+        <Redirect to="/login" />
+      );
+    }
     return (
       <NewMenu color="blue" inverted secondary >
-        <NewMenuItem name='home' active={activeItem === 'home'} onClick={this.handleActiveItem}>
+        <NewMenuItem name="home" active={activeItem === 'home'} onClick={this.handleActiveItem}>
           <Link to="/">
             <NewIcon name="home" size="big" />
           </Link>
         </NewMenuItem>
         <Menu.Menu position="right">
-          <NewMenuItem name='mypage' active={activeItem === 'mypage'} onClick={this.handleActiveItem}>
+          <NewMenuItem name="mypage" active={activeItem === 'mypage'} onClick={this.handleActiveItem}>
             <Link to="/mypage">
               <NewIcon name="user" size="big" />
             </Link>
           </NewMenuItem>
-          <NewMenuItem name='logout' active={activeItem === 'logout'} onClick={this.handleLogOut}>
+          <NewMenuItem name="logout" active={activeItem === 'logout'} onClick={this.handleLogOut}>
             <NewIcon name="sign out" size="big" />
           </NewMenuItem>
         </Menu.Menu>

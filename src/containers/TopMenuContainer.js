@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import TopMenu from '../components/TopMenu';
-import { dispatchTopMenu } from '../ducks/topMenu';
+import { dispatchTopMenu, dispatchTopMenuLogOut, dispatchTopMenuRead } from '../ducks/topMenu';
 
 class TopMenuContainer extends Component {
+  componentDidMount() {
+    this.props.onMount();
+  }
+
   render() {
-    const { ...rest } = this.props;
+    const { onMount, ...rest } = this.props;
     return (
       <TopMenu {...rest} />
     );
@@ -20,8 +24,11 @@ export default connect(
   }),
   // mapDispatchToProps
   dispatch => ({
-    onLogOutClick: (name) => {
-      dispatch(dispatchTopMenu(name));
+    onMount: () => {
+      dispatch(dispatchTopMenuRead());
+    },
+    onLogOutClick: (e, { name }) => {
+      dispatch(dispatchTopMenuLogOut(e, { name }));
     },
     onActiveItemClick: (name) => {
       dispatch(dispatchTopMenu(name));
