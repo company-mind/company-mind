@@ -227,7 +227,7 @@ export const fetchCompanyReviewList = ({ match }) => async (dispatch) => {
     dispatch(companyReviewListSorting(reviewSort));
 
     let pageNumber = Math.trunc(reviewSort.length / 6);
-    if (pageNumber % 6) {
+    if (reviewSort.length % 6) {
       pageNumber++;
     }
 
@@ -295,11 +295,10 @@ export const fetReviewDelete = ({ reviewId, companyId }) => async (dispatch, get
       reviewSort.splice(i, 1);
     }
   }
-  console.log(reviewSort);
   dispatch(companyReviewListSorting(reviewSort));
 
   let pageNumber = Math.trunc(reviewSort.length / 6);
-  if (pageNumber % 6) {
+  if (reviewSort.length % 6) {
     pageNumber++;
   }
   const reviewItem = reviewSort.slice(6 * (activePage - 1), 6 * activePage);
@@ -384,7 +383,7 @@ export const fetDislikesForReview = (reviewid, { activePage }) => async (dispatc
   dispatch(companyReviewListSorting(reviewSort));
 
   let pageNumber = Math.trunc(reviewSort.length / 6);
-  if (pageNumber % 6) {
+  if (reviewSort.length % 6) {
     pageNumber++;
   }
   const reviewItem = reviewSort.slice(6 * (activePage - 1), 6 * activePage);
