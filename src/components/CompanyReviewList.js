@@ -5,6 +5,9 @@ import Dock from 'react-dock';
 import * as moment from 'moment';
 import 'moment/locale/ko';
 
+const MinDiv = styled.div`
+  min-height: 35rem;
+`;
 const NewColumn = styled(Grid.Column)`
   padding: 0px !important;
 `;
@@ -81,81 +84,97 @@ export default class CompanyReviewList extends Component {
     const {
       reviewItem, pageNumber, isVisible, isUserVisible,
     } = this.props;
+    console.log(reviewItem);
+    if (reviewItem.length === 0) {
+      return (
+        <Segment textAlign="center">
+          <MinDiv>
+            <p>리뷰가 없습니다.</p>
+            <p>리뷰를 남겨주세요!!!</p>
+            <div style={{ fontSize: '30px' }}>😭</div>
+          </MinDiv>
+        </Segment>
+      );
+    }
     return (
       <Segment>
-        {reviewItem.map(({
-            reviewId,
-            author,
-            writer,
-            content,
-            emotion,
-            time,
-            likesForReview,
-            dislikesForReview,
-            uid,
-            companyId,
-          }) => (
-            <Segment key={reviewId}>
-              <Grid columns="equal">
-                <NewRow style={{ marginTop: '10px', padding: '0' }}>
-                  <NewColumn>
-                    <NameDiv>{author}</NameDiv>
-                    <div style={{ padding: '0px 2px', marginLeft: '14px' }}>{writer}</div>
-                  </NewColumn>
-                  <NewColumn textAlign="right">
-                    <Emoge>{emotion}</Emoge>
-                  </NewColumn>
-                </NewRow>
-                <NewRow>
-                  <NewColumn>
-                    <div style={{ padding: '4px 2px', margin: '5px 0 0 14px', fontSize: '1.1rem' }}>
-                      {content}
+        <MinDiv>
+          {
+            reviewItem.map(({
+              reviewId,
+              author,
+              writer,
+              content,
+              emotion,
+              time,
+              likesForReview,
+              dislikesForReview,
+              uid,
+              companyId,
+            }) => (
+              <Segment key={reviewId}>
+                <Grid columns="equal">
+                  <NewRow style={{ marginTop: '10px', padding: '0' }}>
+                    <NewColumn>
+                      <NameDiv>{author}</NameDiv>
+                      <div style={{ padding: '0px 2px', marginLeft: '14px' }}>{writer}</div>
+                    </NewColumn>
+                    <NewColumn textAlign="right">
+                      <Emoge>{emotion}</Emoge>
+                    </NewColumn>
+                  </NewRow>
+                  <NewRow>
+                    <NewColumn>
+                      <div style={{ padding: '4px 2px', margin: '5px 0 0 14px', fontSize: '1.1rem' }}>
+                        {content}
+                      </div>
+                    </NewColumn>
+                  </NewRow>
+                  <NewRow>
+                    <NewColumn>
+                      <div style={{ paddingRight: '6px', marginLeft: '14px' }}>{moment(time).local('ko').fromNow()}</div>
+                    </NewColumn>
+                  </NewRow>
+                  <Segment style={{ width: '100%', margin: '0', padding: '0 14px' }}>
+                    <div
+                      onClick={() => this.handlelikesForReviewClick(reviewId)}
+                      style={{
+                        float: 'left',
+                        fontSize: '1.1rem',
+                        padding: '5px 5px 5px 0',
+                        cursor: 'pointer',
+                        }}
+                    >
+                      <Icon name="thumbs outline up" size="large" />
+                      {likesForReview.length}
                     </div>
-                  </NewColumn>
-                </NewRow>
-                <NewRow>
-                  <NewColumn>
-                    <div style={{ paddingRight: '6px', marginLeft: '14px' }}>{moment(time).local('ko').fromNow()}</div>
-                  </NewColumn>
-                </NewRow>
-                <Segment style={{ width: '100%', margin: '0', padding: '0 14px' }}>
-                  <div
-                    onClick={() => this.handlelikesForReviewClick(reviewId)}
-                    style={{
-                      float: 'left',
-                      fontSize: '1.1rem',
-                      padding: '5px 5px 5px 0',
-                      cursor: 'pointer',
+                    <div
+                      onClick={() => this.handleDislikesForReviewClick(reviewId)}
+                      style={{
+                        float: 'left',
+                        marginLeft: '10px',
+                        fontSize: '1.1rem',
+                        padding: '5px',
+                        cursor: 'pointer',
                       }}
                     >
-                    <Icon name="thumbs outline up" size="large" />
-                    {likesForReview.length}
-                  </div>
-                  <div
-                    onClick={() => this.handleDislikesForReviewClick(reviewId)}
-                    style={{
-                      float: 'left',
-                      marginLeft: '10px',
-                      fontSize: '1.1rem',
-                      padding: '5px',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    <Icon name="thumbs outline down" size="large" />
-                    {dislikesForReview.length}
-                  </div>
-                  <div style={{ float: 'right', padding: '5px', cursor: 'pointer' }}>
-                    <Icon
-                      name="ellipsis horizontal"
-                      size="large"
-                      onClick={() => this.handleIsVisibleClick(reviewId, uid, companyId)}
-                    />
-                  </div>
-                </Segment>
-              </Grid>
-            </Segment>
-          ))}
-        <Grid>
+                      <Icon name="thumbs outline down" size="large" />
+                      {dislikesForReview.length}
+                    </div>
+                    <div style={{ float: 'right', padding: '5px', cursor: 'pointer' }}>
+                      <Icon
+                        name="ellipsis horizontal"
+                        size="large"
+                        onClick={() => this.handleIsVisibleClick(reviewId, uid, companyId)}
+                      />
+                    </div>
+                  </Segment>
+                </Grid>
+              </Segment>
+            ))
+          }
+        </MinDiv>
+        <Grid style={{marginTop: "5px"}}>
           <NewRow>
             <NewColumn textAlign="center">
               <Pagination
