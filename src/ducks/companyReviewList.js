@@ -1,5 +1,9 @@
 import * as firebase from 'firebase';
 
+import { companyArticleSuccess } from './companyArticle';
+
+export const LOADING = 'companyReviewList/LOADING';
+export const READ = 'companyReviewList/READ';
 export const SORTING = 'companyReviewList/SORTING';
 export const SUCCESS = 'companyReviewList/SUCCESS';
 export const VISIBLENESS = 'companyReviewList/VISIBLENESS';
@@ -8,6 +12,16 @@ export const USERVISIBLENESS = 'companyReviewList/USERVISIBLENESS';
 export const USERINVISIBLENESS = 'companyReviewList/USERINVISIBLENESS';
 export const DELETE = 'companyReviewList/DELETE';
 
+export function companyReviewLoading() {
+  return {
+    type: LOADING,
+  };
+}
+export function companyReviewListRead() {
+  return {
+    type: READ,
+  };
+}
 export function companyReviewListSorting(reviewSort) {
   return {
     type: SORTING,
@@ -52,6 +66,7 @@ export function companyReviewListDelete() {
 }
 
 const initialState = {
+  loading: false,
   reviewSort: [],
   reviewItem: [],
   pageNumber: 0,
@@ -65,6 +80,14 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case LOADING:
+      return {
+        loading: true,
+      };
+    case READ:
+      return {
+        ...initialState,
+      };
     case SORTING:
       return {
         ...state,
@@ -77,6 +100,7 @@ export default function (state = initialState, action) {
         reviewItem: action.reviewItem,
         pageNumber: action.pageNumber,
         activePage: action.activePage,
+        loading: false,
       };
     case USERVISIBLENESS:
       return {
@@ -129,7 +153,9 @@ const emotion = (score) => {
   return '❔';
 };
 
-export const dispatchCompanyReviewList = ({ match }) => async (dispatch) => {
+export const fetchCompanyReviewList = ({ match }) => async (dispatch) => {
+  dispatch(companyReviewListRead());
+  dispatch(companyReviewLoading());
   const companyId = match.params.companyId;
   const snapshot = await firebase
     .database()
@@ -210,12 +236,12 @@ export const dispatchCompanyReviewList = ({ match }) => async (dispatch) => {
   }
 };
 
-export const dispatPagination = ({ reviewSort, pageNumber }, activePage) => (dispatch) => {
+export const fetPagination = ({ reviewSort, pageNumber }, activePage) => (dispatch) => {
   const reviewItem = reviewSort.slice(6 * (activePage - 1), 6 * activePage);
   dispatch(companyReviewListSuccess(reviewItem, pageNumber, activePage));
 };
 
-export const dispatVisible = (reviewId, reviewuid, companyId) => (dispatch) => {
+export const fetVisible = (reviewId, reviewuid, companyId) => (dispatch) => {
   const { uid } = firebase.auth().currentUser;
   if (uid === reviewuid) {
     dispatch(companyReviewListUserVisibleness(reviewId, companyId));
@@ -224,15 +250,15 @@ export const dispatVisible = (reviewId, reviewuid, companyId) => (dispatch) => {
   }
 };
 
-export const dispatUserInVisible = () => (dispatch) => {
+export const fetUserInVisible = () => (dispatch) => {
   dispatch(companyReviewListUserInvisibleness());
 };
 
-export const dispatInVisible = () => (dispatch) => {
+export const fetInVisible = () => (dispatch) => {
   dispatch(companyReviewListInvisibleness());
 };
 
-export const dispatReviewDelete = ({ reviewId, companyId }) => async (dispatch, getState) => {
+export const fetReviewDelete = ({ reviewId, companyId }) => async (dispatch, getState) => {
   const reviewItemDelete = firebase
     .database()
     .ref(`reviews/${reviewId}`)
@@ -251,11 +277,25 @@ export const dispatReviewDelete = ({ reviewId, companyId }) => async (dispatch, 
   const stateItem = getState();
   const reviewSort = stateItem.companyReviewList.reviewSort;
   const activePage = stateItem.companyReviewList.activePage;
+  const companyItem = stateItem.companyArticle.companyItem;
+
+  await firebase
+    .database().ref(`company/${companyId}`)
+    .update({
+      reviewScore: companyItem.reviewScore - 1,
+    });
+  const companyUpdateItem = {
+    ...companyItem,
+    reviewScore: companyItem.reviewScore - 1,
+  };
+  dispatch(companyArticleSuccess(companyUpdateItem));
+
   for (let i = 0; i < reviewSort.length; i++) {
     if (reviewSort[i].reviewId === reviewId) {
-      reviewSort.splice(i, i - 1);
+      reviewSort.splice(i, 1);
     }
   }
+  console.log(reviewSort);
   dispatch(companyReviewListSorting(reviewSort));
 
   let pageNumber = Math.trunc(reviewSort.length / 6);
@@ -267,7 +307,7 @@ export const dispatReviewDelete = ({ reviewId, companyId }) => async (dispatch, 
   dispatch(companyReviewListUserInvisibleness());
 };
 
-export const dispatlikesForReview = (reviewid, { activePage }) => async (dispatch, getState) => {
+export const fetlikesForReview = (reviewid, { activePage }) => async (dispatch, getState) => {
   const { uid } = firebase.auth().currentUser;
   const snapshot3 = await firebase
     .database()
@@ -309,7 +349,7 @@ export const dispatlikesForReview = (reviewid, { activePage }) => async (dispatc
   dispatch(companyReviewListSuccess(reviewItem, pageNumber, activePage));
 };
 
-export const dispatDislikesForReview = (reviewid, { activePage }) => async (dispatch, getState) => {
+export const fetDislikesForReview = (reviewid, { activePage }) => async (dispatch, getState) => {
   const { uid } = firebase.auth().currentUser;
   const snapshot3 = await firebase
     .database()

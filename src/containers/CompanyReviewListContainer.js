@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as firebase from 'firebase';
 
 import CompanyReviewList from '../components/CompanyReviewList';
 import {
-  dispatchCompanyReviewList,
-  dispatPagination,
-  dispatVisible,
-  dispatInVisible,
-  dispatReviewDelete,
-  dispatlikesForReview,
-  dispatUserInVisible,
-  dispatDislikesForReview,
+  fetchCompanyReviewList,
+  fetPagination,
+  fetVisible,
+  fetInVisible,
+  fetReviewDelete,
+  fetlikesForReview,
+  fetUserInVisible,
+  fetDislikesForReview,
 } from '../ducks/companyReviewList';
+// import withLoading from '../hocs/withLoading';
+
+// const LoadingCompanyReviewList = withLoading(CompanyReviewList);
 
 class CompanyReviewListContainer extends Component {
   componentDidMount() {
@@ -28,6 +30,7 @@ class CompanyReviewListContainer extends Component {
 export default connect(
   // mapStateToProps
   state => ({
+    loading: state.companyReviewList.loading,
     reviewSort: state.companyReviewList.reviewSort,
     reviewItem: state.companyReviewList.reviewItem,
     pageNumber: state.companyReviewList.pageNumber,
@@ -40,28 +43,28 @@ export default connect(
   // mapDispatchToProps
   dispatch => ({
     onMount: ({ match }) => {
-      dispatch(dispatchCompanyReviewList({ match }));
+      dispatch(fetchCompanyReviewList({ match }));
     },
     onPaginationChange: ({ reviewSort, pageNumber }, activePage) => {
-      dispatch(dispatPagination({ reviewSort, pageNumber }, activePage));
+      dispatch(fetPagination({ reviewSort, pageNumber }, activePage));
     },
     onReviewButtonClick: (reviewId, uid, companyId) => {
-      dispatch(dispatVisible(reviewId, uid, companyId));
+      dispatch(fetVisible(reviewId, uid, companyId));
     },
     onUserPrevButtonClick: () => {
-      dispatch(dispatUserInVisible());
+      dispatch(fetUserInVisible());
     },
     onPrevButtonClick: () => {
-      dispatch(dispatInVisible());
+      dispatch(fetInVisible());
     },
     onDeleteButtonClick: ({ reviewId, companyId }) => {
-      dispatch(dispatReviewDelete({ reviewId, companyId }));
+      dispatch(fetReviewDelete({ reviewId, companyId }));
     },
     onlikesForReviewClick: (reviewId, { activePage }) => {
-      dispatch(dispatlikesForReview(reviewId, { activePage }));
+      dispatch(fetlikesForReview(reviewId, { activePage }));
     },
     onDislikesForReviewClick: (reviewId, { activePage }) => {
-      dispatch(dispatDislikesForReview(reviewId, { activePage }));
+      dispatch(fetDislikesForReview(reviewId, { activePage }));
     },
   }),
 )(CompanyReviewListContainer);

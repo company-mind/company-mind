@@ -126,8 +126,8 @@ export default class CompanyReviewList extends Component {
                       fontSize: '1.1rem',
                       padding: '5px 5px 5px 0',
                       cursor: 'pointer',
-                    }}
-                  >
+                      }}
+                    >
                     <Icon name="thumbs outline up" size="large" />
                     {likesForReview.length}
                   </div>
