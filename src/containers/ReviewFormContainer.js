@@ -6,7 +6,6 @@ import { createReview } from '../ducks/review';
 
 import ReviewForm from '../components/ReviewForm';
 import CompanyArticleContainer from '../containers/CompanyArticleContainer';
-import CompanyDetailButtonContainer from '../containers/CompanyDetailButtonContainer';
 import CompanyReviewListContainer from '../containers/CompanyReviewListContainer';
 
 class ReviewFormContainer extends Component {
@@ -14,7 +13,7 @@ class ReviewFormContainer extends Component {
     const { companyId } = this.props.match.params;
     const { success, ...rest } = this.props;
     if (success) {
-      return <Redirect to={`/companyDetail/${companyId}`} />;
+      return <Redirect to={`/companydetail/${companyId}`} />;
     }
     return (
       <Fragment>
