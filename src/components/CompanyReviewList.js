@@ -84,7 +84,6 @@ export default class CompanyReviewList extends Component {
     const {
       reviewItem, pageNumber, isVisible, isUserVisible,
     } = this.props;
-    console.log(reviewItem);
     if (reviewItem.length === 0) {
       return (
         <Segment textAlign="center">
