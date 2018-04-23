@@ -2,7 +2,6 @@ import * as firebase from 'firebase';
 
 import { companyArticleSuccess } from './companyArticle';
 
-export const LOADING = 'companyReviewList/LOADING';
 export const READ = 'companyReviewList/READ';
 export const SORTING = 'companyReviewList/SORTING';
 export const SUCCESS = 'companyReviewList/SUCCESS';
@@ -12,11 +11,6 @@ export const USERVISIBLENESS = 'companyReviewList/USERVISIBLENESS';
 export const USERINVISIBLENESS = 'companyReviewList/USERINVISIBLENESS';
 export const DELETE = 'companyReviewList/DELETE';
 
-export function companyReviewLoading() {
-  return {
-    type: LOADING,
-  };
-}
 export function companyReviewListRead() {
   return {
     type: READ,
@@ -80,10 +74,6 @@ const initialState = {
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case LOADING:
-      return {
-        loading: true,
-      };
     case READ:
       return {
         ...initialState,
@@ -100,7 +90,6 @@ export default function (state = initialState, action) {
         reviewItem: action.reviewItem,
         pageNumber: action.pageNumber,
         activePage: action.activePage,
-        loading: false,
       };
     case USERVISIBLENESS:
       return {
@@ -155,7 +144,6 @@ const emotion = (score) => {
 
 export const fetchCompanyReviewList = ({ match }) => async (dispatch) => {
   dispatch(companyReviewListRead());
-  dispatch(companyReviewLoading());
   const companyId = match.params.companyId;
   const snapshot = await firebase
     .database()

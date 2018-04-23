@@ -12,9 +12,6 @@ import {
   fetUserInVisible,
   fetDislikesForReview,
 } from '../ducks/companyReviewList';
-// import withLoading from '../hocs/withLoading';
-
-// const LoadingCompanyReviewList = withLoading(CompanyReviewList);
 
 class CompanyReviewListContainer extends Component {
   componentDidMount() {
