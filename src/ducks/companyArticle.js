@@ -1,7 +1,13 @@
 import * as firebase from 'firebase';
 
+export const LOADING = 'companyDetail/LOADING';
 export const SUCCESS = 'companyArticle/SUCCESS';
 
+export function companyArticleLoading() {
+  return {
+    type: LOADING,
+  };
+}
 export function companyArticleSuccess(companyItem) {
   return {
     type: SUCCESS,
@@ -11,13 +17,19 @@ export function companyArticleSuccess(companyItem) {
 
 const initialState = {
   companyItem: [],
+  loading: false,
 };
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case LOADING:
+      return {
+        loading: true,
+      };
     case SUCCESS:
       return {
         companyItem: action.companyItem,
+        loading: false,
       };
     default:
       return state;
@@ -38,6 +50,7 @@ const emotion = (score) => {
 };
 
 export const dispatchCompanyArticle = ({ companyId }) => async (dispatch) => {
+  dispatch(companyArticleLoading());
   const snapshot = await firebase.database().ref(`company/${companyId}`).once('value');
   const companyObj = snapshot.val();
   const companyItem = {
