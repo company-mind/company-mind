@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 
 import CompanyArticle from '../components/CompanyArticle';
 import { dispatchCompanyArticle } from '../ducks/companyArticle';
+import withLoading from '../hocs/withLoading';
+
+const CompanyArticleLoading = withLoading(CompanyArticle);
 
 class CompanyArticleContainer extends Component {
   static defaultProps = {
@@ -17,7 +20,7 @@ class CompanyArticleContainer extends Component {
   render() {
     const { onMount, ...rest } = this.props;
     return (
-      <CompanyArticle {...rest} />
+      <CompanyArticleLoading {...rest} />
     );
   }
 }
@@ -26,6 +29,7 @@ export default connect(
   // mapStateToProps
   state => ({
     companyItem: state.companyArticle.companyItem,
+    loading: state.companyArticle.loading,
   }),
   // mapDispatchToProps
   dispatch => ({
