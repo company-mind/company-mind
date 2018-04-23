@@ -12,6 +12,9 @@ import {
   fetUserInVisible,
   fetDislikesForReview,
 } from '../ducks/companyReviewList';
+import withLoading from '../hocs/withLoading';
+
+const CompanyReviewListLoading = withLoading(CompanyReviewList);
 
 class CompanyReviewListContainer extends Component {
   componentDidMount() {
@@ -20,7 +23,7 @@ class CompanyReviewListContainer extends Component {
 
   render() {
     const { onMount, ...rest } = this.props;
-    return <CompanyReviewList {...rest} />;
+    return (<CompanyReviewListLoading {...rest} />);
   }
 }
 

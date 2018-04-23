@@ -1,7 +1,9 @@
 import * as firebase from 'firebase';
 
 import { companyArticleSuccess } from './companyArticle';
+// import { companyDetailSuccess } from './companyDetail';
 
+export const LOADING = 'companyReviewList/LOADING';
 export const READ = 'companyReviewList/READ';
 export const SORTING = 'companyReviewList/SORTING';
 export const SUCCESS = 'companyReviewList/SUCCESS';
@@ -11,6 +13,11 @@ export const USERVISIBLENESS = 'companyReviewList/USERVISIBLENESS';
 export const USERINVISIBLENESS = 'companyReviewList/USERINVISIBLENESS';
 export const DELETE = 'companyReviewList/DELETE';
 
+export function companyReviewListLoading() {
+  return {
+    type: LOADING,
+  };
+}
 export function companyReviewListRead() {
   return {
     type: READ,
@@ -78,6 +85,11 @@ export default function (state = initialState, action) {
       return {
         ...initialState,
       };
+    case LOADING:
+      return {
+        ...state,
+        loading: true,
+      };
     case SORTING:
       return {
         ...state,
@@ -90,6 +102,7 @@ export default function (state = initialState, action) {
         reviewItem: action.reviewItem,
         pageNumber: action.pageNumber,
         activePage: action.activePage,
+        loading: false,
       };
     case USERVISIBLENESS:
       return {
@@ -144,6 +157,7 @@ const emotion = (score) => {
 
 export const fetchCompanyReviewList = ({ match }) => async (dispatch) => {
   dispatch(companyReviewListRead());
+  dispatch(companyReviewListLoading());
   const companyId = match.params.companyId;
   const snapshot = await firebase
     .database()
@@ -151,7 +165,7 @@ export const fetchCompanyReviewList = ({ match }) => async (dispatch) => {
     .orderByChild('companyId')
     .equalTo(`${companyId}`)
     .once('value');
-  const reviewObj = snapshot.val();
+  const reviewObj = snapshot.val() || [];
   if (reviewObj) {
     const reviewSort = Object.entries(reviewObj).map(([reviewId, review]) => ({
       ...review,
@@ -211,7 +225,6 @@ export const fetchCompanyReviewList = ({ match }) => async (dispatch) => {
         ? (reviewSort.dislikesForReview = Object.keys(dislikesReviewIdObj[reviewSort.reviewId]))
         : (reviewSort.dislikesForReview = []);
     });
-
     dispatch(companyReviewListSorting(reviewSort));
 
     let pageNumber = Math.trunc(reviewSort.length / 6);
