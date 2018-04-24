@@ -6,11 +6,15 @@ import thunk from 'redux-thunk';
 
 import rootReducer from './ducks';
 import withAuth from '../src/hocs/withAuth';
+import withLoading from '../src/hocs/withLoading';
 
 import LoginScreenContainer from './containers/LoginScreenContainer';
 import CompanyListContainer from './containers/CompanyListContainer';
 import CompanyDetailContainer from './containers/CompanyDetailContainer';
 import ReviewFormContainer from './containers/ReviewFormContainer';
+
+import MyPageContainer from './containers/MyPageContainer';
+import NicknameScreen from './components/NicknameScreen';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
@@ -34,6 +38,7 @@ class App extends Component {
               exact
               component={ReviewFormContainer}
             />
+            <Route path="/mypage" component={MyPageContainer} />
           </div>
         </BrowserRouter>
       </Provider>
