@@ -28,11 +28,13 @@ const MyPageHeader = props => (
         onClick={props.handleReviewButtonClick}
         name="내가 쓴 리뷰"
         active={props.isReviewMode}
+        color="blue"
       />
       <Menu.Item
         onClick={props.handleScrapButtonClick}
         name="스크랩한 회사"
         active={!props.isReviewMode}
+        color="blue"
       />
     </MyPageMenu>
   </Fragment>
