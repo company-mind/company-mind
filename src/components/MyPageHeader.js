@@ -19,20 +19,17 @@ const MyPageMenu = styled(Menu)`
 
 const MyPageHeader = props => (
   <Fragment>
-    <MyPageStyledHeader>
-      <MyIcon name="user" />
-      {props.nickname}님의 마이페이지
-    </MyPageStyledHeader>
+    <MyPageStyledHeader>👤{props.nickname}님의 마이페이지</MyPageStyledHeader>
     <MyPageMenu pointing secondary>
       <Menu.Item
         onClick={props.handleReviewButtonClick}
-        name="내가 쓴 리뷰"
+        name="내가 쓴 리뷰🖋"
         active={props.isReviewMode}
         color="blue"
       />
       <Menu.Item
         onClick={props.handleScrapButtonClick}
-        name="스크랩한 회사"
+        name="스크랩한 회사📍"
         active={!props.isReviewMode}
         color="blue"
       />
