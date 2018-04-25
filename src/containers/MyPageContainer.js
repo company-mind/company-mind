@@ -115,7 +115,6 @@ class MyPageContainer extends Component {
         />
         {this.state.isReviewMode ? (
           <MyReviewList
-            handleReviewItemClick={this.handleReviewItemClick}
             myReviews={this.state.userReviews}
           />
         ) : (

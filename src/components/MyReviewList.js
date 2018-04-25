@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { Divider, Grid } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Emotion from './Emotion';
@@ -47,18 +48,20 @@ const EmojiScore = styled.div`
 const MyReviewList = props => (
   <Fragment>
     {props.myReviews.map(review => (
-      <Fragment key={review.time}>
-        <ReviewGrid>
-          <Grid.Row>
-            <ReviewHeader>{review.companyName}</ReviewHeader>
-            <ReviewText>{review.content}</ReviewText>
-            <EmojiScore>
-              <Emotion score={review.emotion} />
-            </EmojiScore>
-          </Grid.Row>
-        </ReviewGrid>
-        <ReviewDivider />
-      </Fragment>
+      <Link to={`/companydetail/${review.companyId}`}>
+        <Fragment key={review.time}>
+          <ReviewGrid>
+            <Grid.Row>
+              <ReviewHeader>{review.companyName}</ReviewHeader>
+              <ReviewText>{review.content}</ReviewText>
+              <EmojiScore>
+                <Emotion score={review.emotion} />
+              </EmojiScore>
+            </Grid.Row>
+          </ReviewGrid>
+          <ReviewDivider />
+        </Fragment>
+      </Link>
     ))}
   </Fragment>
 );
