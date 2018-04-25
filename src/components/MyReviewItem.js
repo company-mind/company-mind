@@ -69,7 +69,6 @@ const EmojiScore = styled.div`
 
 const MyReviewItem = props => (
   <ReviewGrid>
-    {console.log(props)}
     <ReviewHeader>
       {props.review.companyName}
       <ReviewHeaderSpan>에 리뷰를 남겼습니다.</ReviewHeaderSpan>
