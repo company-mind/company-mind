@@ -39,7 +39,7 @@ export default function (state = initialState, action) {
 export const dispatchCompanyDetailButton = ({ companyId }) => async (dispatch) => {
   const { uid } = firebase.auth().currentUser;
   const snapshot = await firebase.database().ref(`scraps/${uid}`).once('value');
-  const companyObj = snapshot.val();
+  const companyObj = snapshot.val() || [];
   if (companyObj[companyId]) {
     dispatch(companyDetailOnScrap());
   } else {
