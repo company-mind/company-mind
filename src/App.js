@@ -12,6 +12,8 @@ import CompanyListContainer from './containers/CompanyListContainer';
 import CompanyDetailContainer from './containers/CompanyDetailContainer';
 import ReviewFormContainer from './containers/ReviewFormContainer';
 
+import MyPageContainer from './containers/MyPageContainer';
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
 
@@ -34,6 +36,7 @@ class App extends Component {
               exact
               component={ReviewFormContainer}
             />
+            <Route path="/mypage" component={MyPageContainer} />
           </div>
         </BrowserRouter>
       </Provider>
