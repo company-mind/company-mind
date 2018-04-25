@@ -1,14 +1,10 @@
 import React, { Fragment } from 'react';
-import { Header, Icon, Menu } from 'semantic-ui-react';
+import { Header, Menu } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const MyPageStyledHeader = styled(Header)`
   text-align: center !important;
   margin-left: -10px !important;
-`;
-
-const MyIcon = styled(Icon)`
-  margin-right: -3px !important;
 `;
 
 const MyPageMenu = styled(Menu)`
