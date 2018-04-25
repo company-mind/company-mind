@@ -45,11 +45,11 @@ class MyPageContainer extends Component {
       .once('value');
     const reviewsResults = snapshot.val();
     if (reviewsResults) {
-      const reviewKeys = Object.keys(reviewsResults);
-      const pendingReviews = reviewKeys.map(async (reviewKey) => {
+      const reviewIds = Object.keys(reviewsResults);
+      const pendingReviews = reviewIds.map(async (reviewId) => {
         const companyIdSnapshot = await firebase
           .database()
-          .ref(`reviews/${reviewKey}/companyId`)
+          .ref(`reviews/${reviewId}/companyId`)
           .once('value');
         const companyId = companyIdSnapshot.val();
         const companyNameSnapshot = await firebase
@@ -59,11 +59,12 @@ class MyPageContainer extends Component {
         const companyName = companyNameSnapshot.val();
         const reviewSnapshot = await firebase
           .database()
-          .ref(`reviews/${reviewKey}`)
+          .ref(`reviews/${reviewId}`)
           .once('value');
         const review = reviewSnapshot.val();
         return {
           companyName,
+          reviewId,
           ...review,
         };
       });
@@ -114,7 +115,10 @@ class MyPageContainer extends Component {
           isReviewMode={this.state.isReviewMode}
         />
         {this.state.isReviewMode ? (
-          <MyReviewList myReviews={this.state.userReviews} />
+          <MyReviewList
+            handleReviewItemClick={this.handleReviewItemClick}
+            myReviews={this.state.userReviews}
+          />
         ) : (
           <MyScrapList myScraps={this.state.userScraps} />
         )}
