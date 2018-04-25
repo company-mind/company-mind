@@ -1,14 +1,10 @@
 import React, { Fragment } from 'react';
-import { Header, Icon, Menu } from 'semantic-ui-react';
+import { Header, Menu } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const MyPageStyledHeader = styled(Header)`
   text-align: center !important;
   margin-left: -10px !important;
-`;
-
-const MyIcon = styled(Icon)`
-  margin-right: -3px !important;
 `;
 
 const MyPageMenu = styled(Menu)`
@@ -19,20 +15,17 @@ const MyPageMenu = styled(Menu)`
 
 const MyPageHeader = props => (
   <Fragment>
-    <MyPageStyledHeader>
-      <MyIcon name="user" />
-      {props.nickname}님의 마이페이지
-    </MyPageStyledHeader>
+    <MyPageStyledHeader>👤{props.nickname}님의 마이페이지</MyPageStyledHeader>
     <MyPageMenu pointing secondary>
       <Menu.Item
         onClick={props.handleReviewButtonClick}
-        name="내가 쓴 리뷰"
+        name="내가 쓴 리뷰🖋"
         active={props.isReviewMode}
         color="blue"
       />
       <Menu.Item
         onClick={props.handleScrapButtonClick}
-        name="스크랩한 회사"
+        name="스크랩한 회사📍"
         active={!props.isReviewMode}
         color="blue"
       />

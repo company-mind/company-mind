@@ -2,14 +2,11 @@ import React, { Component, Fragment } from 'react';
 import * as firebase from 'firebase';
 
 import withAuth from '../hocs/withAuth';
-import withLoading from '../hocs/withLoading';
 
 import TopMenuContainer from '../containers/TopMenuContainer';
 import MyPageHeader from '../components/MyPageHeader';
 import MyReviewList from '../components/MyReviewList';
 import MyScrapList from '../components/MyScrapList';
-
-const MyPageHeaderWithLoading = withLoading(MyPageHeader);
 
 class MyPageContainer extends Component {
   state = {
@@ -107,16 +104,14 @@ class MyPageContainer extends Component {
     return (
       <Fragment>
         <TopMenuContainer />
-        <MyPageHeaderWithLoading
+        <MyPageHeader
           handleReviewButtonClick={this.handleReviewButtonClick}
           handleScrapButtonClick={this.handleScrapButtonClick}
           nickname={this.state.userInfo.nickname}
           isReviewMode={this.state.isReviewMode}
         />
         {this.state.isReviewMode ? (
-          <MyReviewList
-            myReviews={this.state.userReviews}
-          />
+          <MyReviewList myReviews={this.state.userReviews} />
         ) : (
           <MyScrapList myScraps={this.state.userScraps} />
         )}
