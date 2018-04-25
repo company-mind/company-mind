@@ -30,7 +30,7 @@ const EmojiScore = styled.div`
 const MyScrapList = props => (
   <Fragment>
     {props.myScraps.map(scrap => (
-      <Fragment key={scrap.scrapKey}>
+      <Fragment key={scrap.companyId}>
         <ReviewGrid>
           <Grid.Row>
             <ScrapHeader>{scrap.name}</ScrapHeader>

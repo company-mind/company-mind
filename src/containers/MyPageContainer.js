@@ -37,13 +37,13 @@ class MyPageContainer extends Component {
 
   getUserReviews = async () => {
     const { uid } = await firebase.auth().currentUser;
-    const snapshot = await firebase
+    const reviewsSnapshot = await firebase
       .database()
       .ref('reviews')
       .orderByChild('uid')
       .equalTo(uid)
       .once('value');
-    const reviewsResults = snapshot.val();
+    const reviewsResults = reviewsSnapshot.val();
     if (reviewsResults) {
       const reviewIds = Object.keys(reviewsResults);
       const pendingReviews = reviewIds.map(async (reviewId) => {
@@ -75,23 +75,22 @@ class MyPageContainer extends Component {
 
   getUserScraps = async () => {
     const { uid } = await firebase.auth().currentUser;
-    const scrapSnapshot = await firebase
+    const scrapsSnapshot = await firebase
       .database()
       .ref(`scraps/${uid}`)
       .once('value');
-    const scraps = scrapSnapshot.val();
-
+    const scraps = scrapsSnapshot.val();
     if (scraps) {
-      const scrapKeys = Object.keys(scraps);
-      const pendingCompanyLists = scrapKeys.map(async (scrapKey) => {
+      const scrappedCompanyIds = Object.keys(scraps);
+      const pendingScraps = scrappedCompanyIds.map(async (companyId) => {
         const companyListSnapshot = await firebase
           .database()
-          .ref(`company/${scrapKey}`)
+          .ref(`company/${companyId}`)
           .once('value');
         const companyList = companyListSnapshot.val();
-        return { scrapKey, ...companyList };
+        return { companyId, ...companyList };
       });
-      const userScraps = await Promise.all(pendingCompanyLists);
+      const userScraps = await Promise.all(pendingScraps);
       this.setState({ userScraps });
     }
   };
