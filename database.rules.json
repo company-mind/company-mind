@@ -1,0 +1,42 @@
+{
+  "rules": {
+    ".read": true,
+    "reviews": {
+      "$reviewId": {
+        ".write": "auth != null && auth.uid === newData.child('uid')"
+      }
+    },
+    "users": {
+      "$uid": {
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    "company": {
+      "$companyId": {
+        ".write": true // FIXME
+      }
+    },
+    "likesForReview": {
+      "$reviewId": {
+        "$uid": {
+          ".write": "auth != null && auth.uid === $uid"
+        }
+      }
+    },
+    "dislikesForReview": {
+      "$reviewId": {
+        "$uid": {
+          ".write": "auth != null && auth.uid === $uid"
+        }
+      }
+    },
+    "scraps": {
+      "$uid": {
+        ".write": "auth != null && auth.uid === $uid"
+      }
+    },
+    "$other": {
+      ".validate": false
+    }
+  }
+}
