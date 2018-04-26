@@ -5,6 +5,10 @@ import Dock from 'react-dock';
 import * as moment from 'moment';
 import 'moment/locale/ko';
 
+const MSegment = styled(Segment) `
+  margin: 0px !important;
+`;
+
 const MinDiv = styled.div`
   min-height: 35rem;
 `;
@@ -96,7 +100,7 @@ export default class CompanyReviewList extends Component {
       );
     }
     return (
-      <Segment>
+      <MSegment>
         <MinDiv>
           {
             reviewItem.map(({
@@ -216,7 +220,7 @@ export default class CompanyReviewList extends Component {
             </DockButtonButton>
           </DockDiv>
         </Dock>
-      </Segment>
+      </MSegment>
     );
   }
 }
