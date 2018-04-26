@@ -5,7 +5,7 @@ import Dock from 'react-dock';
 import * as moment from 'moment';
 import 'moment/locale/ko';
 
-const MSegment = styled(Segment) `
+const MSegment = styled(Segment)`
   margin: 0px !important;
 `;
 
@@ -90,13 +90,13 @@ export default class CompanyReviewList extends Component {
     } = this.props;
     if (reviewItem.length === 0) {
       return (
-        <Segment textAlign="center">
+        <MSegment textAlign="center">
           <MinDiv>
             <p>리뷰가 없습니다.</p>
             <p>리뷰를 남겨주세요!!!</p>
             <div style={{ fontSize: '30px' }}>😭</div>
           </MinDiv>
-        </Segment>
+        </MSegment>
       );
     }
     return (
