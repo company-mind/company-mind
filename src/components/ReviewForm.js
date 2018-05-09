@@ -10,10 +10,9 @@ const StyledForm = styled(Form)`
 `;
 
 const options = [
-  { key: '1', text: '다니고 있어요', value: '다니고 있어요' },
-  { key: '2', text: '다니고 나왔어요', value: '다니고 나왔어요' },
-  { key: '3', text: '다니고 싶어요', value: '다니고 싶어요' },
-  { key: '4', text: '관심있어요', value: '관심있어요' },
+  { key: '1', text: '직장인', value: '직장인' },
+  { key: '2', text: '퇴사인', value: '퇴사자' },
+  { key: '3', text: '구직인', value: '다니고 싶어요' },
 ];
 
 export default class ReviewForm extends Component {
@@ -36,7 +35,6 @@ export default class ReviewForm extends Component {
   };
 
   handleWriterChange = (e, { value }) => {
-    console.log(value);
     const writer = value;
     this.setState({ writer });
   };
