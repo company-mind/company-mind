@@ -7,6 +7,7 @@ import { createReview } from '../ducks/review';
 import ReviewForm from '../components/ReviewForm';
 import CompanyArticleContainer from '../containers/CompanyArticleContainer';
 import CompanyReviewListContainer from '../containers/CompanyReviewListContainer';
+import TopMenuComtainer from './TopMenuContainer';
 
 class ReviewFormContainer extends Component {
   render() {
@@ -17,6 +18,7 @@ class ReviewFormContainer extends Component {
     }
     return (
       <Fragment>
+        <TopMenuComtainer {...rest} />
         <CompanyArticleContainer {...rest} />
         <ReviewForm {...rest} />
         <CompanyReviewListContainer {...rest} />

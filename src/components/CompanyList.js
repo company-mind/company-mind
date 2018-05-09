@@ -111,6 +111,7 @@ export default class CompanyList extends Component {
                 secondary
                 totalPages={pageNumber}
                 onPageChange={this.handlePaginationChange}
+                style={{ marginTop: "3px" }}
               />
             </NewColumn>
           </NewRow>
