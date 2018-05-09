@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as firebase from 'firebase';
 import { connect } from 'react-redux';
 
 import CompanyDetailButton from '../components/CompanyDetailButton';

@@ -315,14 +315,14 @@ export const fetlikesForReview = (reviewid, { activePage }) => async (dispatch, 
     .once('value');
   const likesForReviewUid = snapshot3.val();
   if (likesForReviewUid == null) {
-    const snapshot = await firebase
+    await firebase
       .database()
       .ref(`likesForReview/${reviewid}`)
       .update({
         [`${uid}`]: true,
       });
   } else if (likesForReviewUid) {
-    const snapshot = await firebase
+    await firebase
       .database()
       .ref(`likesForReview/${reviewid}/${uid}`)
       .remove();
@@ -357,14 +357,14 @@ export const fetDislikesForReview = (reviewid, { activePage }) => async (dispatc
     .once('value');
   const dislikesForReviewUid = snapshot3.val();
   if (dislikesForReviewUid == null) {
-    const snapshot = await firebase
+    await firebase
       .database()
       .ref(`dislikesForReview/${reviewid}`)
       .update({
         [`${uid}`]: true,
       });
   } else if (dislikesForReviewUid) {
-    const snapshot = await firebase
+    await firebase
       .database()
       .ref(`dislikesForReview/${reviewid}/${uid}`)
       .remove();
