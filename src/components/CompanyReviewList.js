@@ -128,14 +128,14 @@ export default class CompanyReviewList extends Component {
                   </NewRow>
                   <NewRow>
                     <NewColumn>
-                      <div style={{ padding: '4px 2px', margin: '5px 0 0 14px', fontSize: '1.1rem' }}>
+                      <div style={{ padding: '4px 2px', margin: '3px 0 0 13px', fontSize: '1.1rem' }}>
                         {content}
                       </div>
                     </NewColumn>
                   </NewRow>
                   <NewRow>
                     <NewColumn>
-                      <div style={{ paddingRight: '6px', marginLeft: '14px' }}>{moment(time).local('ko').fromNow()}</div>
+                      <div style={{ paddingRight: '6px', margin: '0px 0px 2px 16px' }}>{moment(time).local('ko').fromNow()}</div>
                     </NewColumn>
                   </NewRow>
                   <Segment style={{ width: '100%', margin: '0', padding: '0 14px' }}>
