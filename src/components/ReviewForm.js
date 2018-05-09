@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Header, Label, Segment, TextArea } from 'semantic-ui-react';
+import { Form, Header, Label, Segment, TextArea, Select } from 'semantic-ui-react';
 import styled from 'styled-components';
 
 const StyledForm = styled(Form)`
@@ -8,6 +8,13 @@ const StyledForm = styled(Form)`
   margin-bottom: 40px;
   padding: 10px;
 `;
+
+const options = [
+  { key: '1', text: '다니고 있어요', value: '다니고 있어요' },
+  { key: '2', text: '다니고 나왔어요', value: '다니고 나왔어요' },
+  { key: '3', text: '다니고 싶어요', value: '다니고 싶어요' },
+  { key: '4', text: '관심있어요', value: '관심있어요' },
+];
 
 export default class ReviewForm extends Component {
   static defaultProps = {
@@ -84,12 +91,7 @@ export default class ReviewForm extends Component {
           </Segment>
         </Segment.Group>
         <Header size="small">🤔 이 회사랑 무슨 사이인가요?</Header>
-        <Form.Field control="select" value={this.state.writer} onChange={this.handleWriterChange}>
-          <option value="다니고 있어요">다니고 있어요</option>
-          <option value="다니다가 나왔어요">다니다가 나왔어요</option>
-          <option value="들어가고 싶어요">들어가고 싶어요</option>
-          <option value="관심있어요">관심있어요</option>
-        </Form.Field>
+        <Form.Field control={Select} placeholder="이 회사랑 무슨 사이인가요?" options={options} value={this.state.value} onChange={this.handleWriterChange} />
         <Header size="small">✏️ 짤막 리뷰 남기기</Header>
         <Form.Field>
           <TextArea
