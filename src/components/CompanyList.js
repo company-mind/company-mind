@@ -109,6 +109,8 @@ export default class CompanyList extends Component {
             defaultActivePage={1}
             firstItem={null}
             lastItem={null}
+            prevItem={null}
+            nextItem={null}
             pointing
             secondary
             totalPages={pageNumber}
