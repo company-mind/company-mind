@@ -16,6 +16,10 @@ const MSegment = styled(Segment)`
   padding: 10px !important;
   cursor: pointer;
 `;
+const CSegment = styled(Segment)`
+  margin: 0px !important;
+  padding: 0px !important;
+`;
 const NewDiv = styled.div`
   padding : 2px;
 `;
@@ -61,7 +65,7 @@ export default class CompanyList extends Component {
       <div>
         <MinDiv>
           <div style={{ padding: '10px' }}>
-            <Input fluid icon='search' placeholder='회사 검색...' onChange={this.handleSearchChange} loading={searchLoading} />
+            <Input fluid icon="search" placeholder="회사 검색..." onChange={this.handleSearchChange} loading={searchLoading} />
           </div>
           {
           pageItems.map(({
@@ -100,22 +104,18 @@ export default class CompanyList extends Component {
          ))
         }
         </MinDiv>
-        <Grid>
-          <NewRow>
-            <NewColumn textAlign="center">
-              <Pagination
-                defaultActivePage={1}
-                firstItem={null}
-                lastItem={null}
-                pointing
-                secondary
-                totalPages={pageNumber}
-                onPageChange={this.handlePaginationChange}
-                style={{ marginTop: "3px" }}
-              />
-            </NewColumn>
-          </NewRow>
-        </Grid>
+        <CSegment textAlign="center">
+          <Pagination
+            defaultActivePage={1}
+            firstItem={null}
+            lastItem={null}
+            pointing
+            secondary
+            totalPages={pageNumber}
+            onPageChange={this.handlePaginationChange}
+            style={{ marginTop: '3px' }}
+          />
+        </CSegment>
       </div>
     );
   }
