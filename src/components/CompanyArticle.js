@@ -42,19 +42,19 @@ export default class CompanyArticle extends Component {
               </NameDiv>
               <Grid>
                 <Grid.Row>
-                  <NewLColumn width={7}>
+                  <NewLColumn width={6}>
                     <NewDiv>{companyItem.shortAddress}</NewDiv>
                   </NewLColumn>
-                  <NewColumn width={7}>
+                  <NewColumn width={6}>
                     <NewDiv>{companyItem.group}</NewDiv>
                   </NewColumn>
-                  <NewLColumn width={7}>
+                  <NewLColumn width={6}>
                     <NewDiv>
                       <Icon name="pencil" size="large" />
                       {companyItem.reviewScore}
                     </NewDiv>
                   </NewLColumn>
-                  <NewColumn width={7}>
+                  <NewColumn width={6}>
                     <NewDiv>
                       <Icon name="empty star" size="large" />
                       {companyItem.scrapScore}
