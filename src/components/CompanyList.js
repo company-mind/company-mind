@@ -75,16 +75,16 @@ export default class CompanyList extends Component {
                      <NameDiv style={{ fontSize: '1.4rem', marginLeft: '10px' }}>{name}</NameDiv>
                      <Grid>
                        <Grid.Row>
-                         <NewLColumn width={7}>
+                         <NewLColumn width={6}>
                            <NewDiv>{address}</NewDiv>
                          </NewLColumn>
-                         <NewColumn width={7}>
+                         <NewColumn width={6}>
                            <NewDiv>{group}</NewDiv>
                          </NewColumn>
-                         <NewLColumn width={7}>
+                         <NewLColumn width={6}>
                            <NewDiv><Icon name="pencil" size="large" />{reviewScore}</NewDiv>
                          </NewLColumn>
-                         <NewColumn width={7}>
+                         <NewColumn width={6}>
                            <NewDiv><Icon name="empty star" size="large" />{scrapScore}</NewDiv>
                          </NewColumn>
                        </Grid.Row>
